@@ -1,0 +1,254 @@
+@use 'sass:math';
+@import 'fonts';
+@import 'config';
+@import 'utilities';
+@import 'mobile';
+
+.navbar {
+	height: 3rem;
+	padding: 1rem;
+
+	.navbar-items {
+		display: flex;
+		justify-content: center;
+
+		i {
+			margin-right: 1rem;
+		}
+
+		.navbar-item {
+			display: inline-flex;
+			align-items: center;
+			margin-left: 2rem;
+			padding: 1rem 2rem;
+			transition: all 250ms ease;
+			border: 1px solid transparent;
+			border-radius: 0.5rem;
+			text-decoration: none;
+			color: #fff;
+
+			&:hover,
+			&.active {
+				background-color: rgba($light-color, 0.3);
+				cursor: pointer;
+				border-color: #fff5;
+			}
+
+			&:hover {
+				@include set-shadows(rgba($dark-color, 0.2), rgba($dark-color, 0.2));
+			}
+		}
+	}
+}
+
+.profile {
+	height: 100%;
+	width: 100%;
+	padding: 1rem;
+
+	> div {
+		display: flex;
+		height: 100%;
+		flex-direction: row;
+	}
+
+	.home {
+		justify-content: center;
+		align-items: center;
+		text-align: left;
+
+		.large {
+			font-size: 2rem;
+		}
+
+		.profile-pic {
+			display: inline-flex;
+			align-items: center;
+		}
+
+		.profile-info {
+			margin-left: 2rem;
+			color: $light-color;
+
+			.name {
+				font-weight: 800;
+			}
+		}
+	}
+
+	.buttons {
+		display: flex;
+	}
+
+	.btn {
+		width: 10rem;
+		height: 3rem;
+		border: $border;
+		margin: 0 0.2rem;
+		font-family: 'Raleway';
+		font-size: 1rem;
+
+		&:hover {
+			cursor: pointer;
+			@include set-shadows(rgba($dark-color, 0.2), rgba($dark-color, 0.2));
+		}
+	}
+
+	.about-me {
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		text-align: center;
+
+		p {
+			width: 50%;
+		}
+
+		.buttons {
+			margin-top: 2rem;
+		}
+
+		.social-media {
+			margin-top: 2rem;
+			font-size: 2rem;
+
+			i {
+				color: rgba($light-color, 0.7);
+				transition: all 250ms ease;
+
+				&:hover {
+					color: $light-color;
+				}
+			}
+		}
+	}
+
+	.skills {
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;
+
+		.skill-type {
+			display: flex;
+			width: 50%;
+
+			.skill-name {
+				margin-right: 1rem;
+				line-height: 1rem;
+				width: 20%;
+				font-size: 1rem;
+			}
+
+			.skill-progress {
+				width: 80%;
+
+				> div > div {
+					border: $border;
+				}
+			}
+		}
+	}
+
+	.contact {
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
+		text-align: center;
+
+		a {
+			color: rgba($light-color, 0.7);
+			transition: all 250ms ease;
+
+			&:hover {
+				color: $light-color;
+			}
+		}
+
+		p,
+		a {
+			width: 100%;
+			text-align: left;
+
+			i {
+				width: 2rem;
+			}
+			span {
+				width: 5rem;
+			}
+		}
+
+		a {
+			display: inline-flex;
+			justify-content: center;
+			align-items: center;
+		}
+	}
+
+	.github-repos {
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
+		text-align: center;
+
+		.repo-list {
+			padding: 1rem;
+			height: 25rem;
+			overflow-y: scroll;
+			mask-image: linear-gradient(
+				transparent 0%,
+				#000000 20%,
+				#000000 90%,
+				transparent
+			);
+		}
+
+		.repo-item {
+			border: $border;
+			border-radius: 1rem;
+			margin-top: 1rem;
+			padding: 1rem;
+			transition: 250ms ease;
+			opacity: 0;
+
+			@for $i from 1 to 9 {
+				$delay: ($i * 100) + 250;
+				&.animate-#{$i} {
+					animation-delay: #{$delay}ms;
+					animation-duration: 1s;
+					animation-name: scale;
+					animation-fill-mode: forwards;
+				}
+			}
+
+			&:hover {
+				background-color: rgba($light-color, 0.4);
+			}
+		}
+
+		a {
+			color: $light-color;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+
+			.repo-info {
+				width: 50%;
+				text-align: left;
+
+				.lead {
+					font-weight: 600;
+				}
+			}
+
+			.repo-stats {
+				display: flex;
+
+				.stats-item,
+				i {
+					margin-left: 0.5rem;
+					margin-right: 0.5rem;
+				}
+			}
+		}
+	}
+}

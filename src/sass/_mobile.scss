@@ -1,0 +1,176 @@
+@media only screen and (max-width: 1024px) {
+	.container {
+		@include size(80%, 90%);
+	}
+
+	.x-large {
+		font-size: 2rem;
+	}
+
+	.large {
+		font-size: 1.5rem;
+	}
+
+	.lead {
+		font-size: 1rem;
+	}
+
+	.d {
+		&-1 {
+			transform: translate(10%, -120%) !important;
+		}
+
+		&-2 {
+			transform: translate(-150%, -350%) !important;
+		}
+
+		&-3 {
+			transform: translate(-300%, 500%) !important;
+		}
+
+		&-4 {
+			transform: translate(-100%, 100%) !important;
+		}
+	}
+
+	.avatar {
+		@include size(150px, 150px);
+	}
+
+	.home {
+		flex-direction: column !important;
+		text-align: center !important;
+
+		.profile-pic {
+			margin-bottom: 1rem;
+		}
+
+		.profile-info {
+			margin-left: unset !important;
+
+			.buttons {
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+
+				.btn {
+					margin-bottom: 0.5rem;
+				}
+			}
+		}
+	}
+
+	.about-me {
+		p {
+			width: 100% !important;
+		}
+	}
+
+	.skill-type {
+		width: 90% !important;
+
+		.skill-name {
+			width: 40% !important;
+		}
+
+		.skill-progress {
+			width: 60% !important;
+		}
+	}
+
+	.github-repos {
+		a {
+			flex-direction: column;
+
+			.repo-info {
+				width: auto !important;
+				text-align: center !important;
+				margin-bottom: 1rem;
+			}
+		}
+	}
+
+	@media (prefers-color-scheme: dark) {
+		.navbar-items {
+			background-color: rgba($dark-color, 0.4) !important;
+		}
+	}
+
+	.navbar-items {
+		position: absolute;
+		width: auto;
+		z-index: 2;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		background-color: rgba($light-color, 0.3);
+		border: $border;
+		border-radius: 1rem;
+		margin-top: 1rem;
+		@include set-shadows(rgba($dark-color, 0.1), rgba($dark-color, 0.2));
+		opacity: 0;
+		transition: all 250ms ease;
+		transform: translateY(-10px);
+		pointer-events: none;
+
+		> div,
+		.navbar-item {
+			width: 100%;
+		}
+
+		&.show {
+			opacity: 1;
+			transform: unset;
+			pointer-events: auto;
+		}
+
+		.navbar-item {
+			margin-left: 0 !important;
+			border: none !important;
+			border-bottom: 1px solid #fff4 !important;
+			border-radius: unset !important;
+
+			&:hover,
+			&.active {
+				&.first-item {
+					border-top-left-radius: 1rem !important;
+					border-top-right-radius: 1rem !important;
+				}
+				&.last-item {
+					border-bottom-left-radius: 1rem !important;
+					border-bottom-right-radius: 1rem !important;
+				}
+				cursor: pointer;
+				border-color: #fff4 !important;
+			}
+
+			&:hover {
+				box-shadow: unset !important;
+			}
+		}
+
+		.no-border {
+			border-bottom: unset !important;
+		}
+	}
+}
+
+@media only screen and (max-width: 400px) {
+	.about-me {
+		mask-image: linear-gradient(
+			transparent 0%,
+			#000000 15%,
+			#000000 85%,
+			transparent
+		);
+		padding: 10rem 0 2rem;
+		height: 90% !important;
+		overflow-y: scroll;
+	}
+}
+
+@media only screen and (max-width: 360px) {
+	.repo-list {
+		height: 20rem !important;
+	}
+}

@@ -17,10 +17,11 @@ const AboutMe = () => {
 						stuff for fun.
 					</p>
 					<br />
+					<p>I Love making UI for softwares and websites. </p>
+					<br />
 					<p>
-						I Love making UI for Softwares and Websites, have a keen interest in
-						making the best possible, beautiful, functional and intuitive UI to
-						make people fall in Love!
+						I have a keen interest in making the best possible, beautiful,
+						functional and intuitive UI to make people fall in Love!
 					</p>
 					<div className='buttons'>
 						<a href='./CV.pdf'>

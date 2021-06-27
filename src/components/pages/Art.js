@@ -23,15 +23,18 @@ const Art = () => {
 				<div className='art'>
 					<h1 className='x-large'>My Art</h1>
 					<div className='art-list'>
-						{images.map((image, index) => {
-							return (
-								<div key={image.default} className='art-item'>
-									<a href={image.default}>
-										<img src={image.default} alt={index} />
-									</a>
-								</div>
-							);
-						})}
+						{images
+							.slice(0)
+							.reverse()
+							.map((image, index) => {
+								return (
+									<div key={image.default} className='art-item'>
+										<a href={image.default}>
+											<img src={image.default} alt={index} />
+										</a>
+									</div>
+								);
+							})}
 					</div>
 				</div>
 			</div>

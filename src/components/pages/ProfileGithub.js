@@ -12,7 +12,7 @@ const ProfileGithub = () => {
 			const response = await github.get('/repos', {
 				params: {
 					per_page: '10',
-					sort: 'created:asc',
+					sort: 'updated:asc',
 					client_id: CLIENT_ID,
 					client_secret: CLIENT_SECRET
 				}

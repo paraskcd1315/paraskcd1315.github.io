@@ -13,15 +13,15 @@ const AboutMe = () => {
 				<div className='about-me'>
 					<h1 className='x-large'>About me</h1>
 					<p className='lead'>
-						I'm a creative Web Developer, UI/UX Designer and an Artist designing
+						I'm a creative Web Developer, UI/UX Designer and an artist designing
 						stuff for fun.
 					</p>
 					<br />
-					<p>I Love making UI for softwares and websites. </p>
+					<p>I love making UI for softwares and websites. </p>
 					<br />
 					<p>
 						I have a keen interest in making the best possible, beautiful,
-						functional and intuitive UI to make people fall in Love!
+						functional and intuitive UI to make people fall in love!
 					</p>
 					<div className='buttons'>
 						<a href='./CV.pdf'>

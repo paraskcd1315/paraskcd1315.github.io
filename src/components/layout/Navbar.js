@@ -19,8 +19,8 @@ const Navbar = ({ windowWidth }) => {
 	};
 
 	return (
-		<nav className={windowWidth < 1024 ? 'navbar mobile' : 'navbar'}>
-			{windowWidth < 1024 ? (
+		<nav className={windowWidth <= 1024 ? 'navbar mobile' : 'navbar'}>
+			{windowWidth <= 1024 ? (
 				<button
 					onClick={(e) => openMenu(e)}
 					className={
@@ -37,7 +37,7 @@ const Navbar = ({ windowWidth }) => {
 			)}
 			<div
 				className={
-					windowWidth < 1024
+					windowWidth <= 1024
 						? menuOpened
 							? 'navbar-items blur show'
 							: 'navbar-items blur'

@@ -212,6 +212,12 @@
 				margin-bottom: 2rem;
 				border-radius: 1rem;
 				@include set-shadows(rgba($dark-color, 0.2), rgba($dark-color, 0.2));
+				transition: all 250ms ease;
+
+				&:hover {
+					width: 18rem;
+					height: 13rem;
+				}
 			}
 		}
 	}

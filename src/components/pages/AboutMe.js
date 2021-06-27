@@ -28,10 +28,10 @@ const AboutMe = () => {
 						</a>
 					</div>
 					<div className='social-media'>
-						<a href='https://www.facebook.com/paras.theloveable'>
+						<a href='https://www.facebook.com/ParasKCD.Designs/'>
 							<i class='fab fa-facebook mx-1'></i>
 						</a>
-						<a href='https://www.instagram.com/paraskcd/'>
+						<a href='https://www.instagram.com/kcd.designs/'>
 							<i class='fab fa-instagram mx-1'></i>
 						</a>
 						<a href='https://in.linkedin.com/in/parakcd'>

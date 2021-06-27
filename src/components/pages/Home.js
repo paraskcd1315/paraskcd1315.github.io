@@ -1,9 +1,8 @@
 import React, { Fragment, useState, useEffect } from 'react';
-import { isMobile, isTablet } from 'react-device-detect';
 import avatar from '../../resources/images/profile.jpg';
 import DelayLink from 'react-delay-link';
 
-const Home = () => {
+const Home = ({ windowWidth }) => {
 	const [show, setShow] = useState(false);
 	useEffect(() => {
 		setTimeout(() => {
@@ -18,7 +17,7 @@ const Home = () => {
 						<img className='avatar' src={avatar} alt='avatar' />
 					</div>
 					<div className='profile-info'>
-						{isMobile || isTablet || window.innerWidth < 1024 ? (
+						{windowWidth < 1024 ? (
 							''
 						) : (
 							<>
@@ -29,7 +28,8 @@ const Home = () => {
 						<br />
 						<span className='large name'>Paras Khanchandani</span>
 						<br />
-						<span className={isMobile ? 'lead role py-1' : 'lead role'}>
+						<span
+							className={windowWidth < 1024 ? 'lead role py-1' : 'lead role'}>
 							Web Developer
 						</span>
 						<br />
@@ -42,14 +42,6 @@ const Home = () => {
 									More about me
 								</div>
 							</DelayLink>
-							{!isMobile || !isTablet || window.innerWidth > 1024 ? (
-								''
-							) : (
-								<>
-									<br />
-									<br />
-								</>
-							)}
 							<a href='./CV.pdf'>
 								<div className='btn btn-light-opacity opacity-3'>Resume</div>
 							</a>

@@ -184,6 +184,38 @@
 		}
 	}
 
+	.art {
+		align-items: center;
+		flex-direction: column;
+		justify-content: center;
+		text-align: center;
+
+		.art-list {
+			display: grid;
+			align-items: center;
+			grid-template-columns: 1fr 1fr 1fr;
+			height: 25rem;
+			overflow: auto;
+			grid-gap: 2rem;
+			padding: 2rem;
+			mask-image: linear-gradient(
+				transparent 0%,
+				#000000 15%,
+				#000000 85%,
+				transparent
+			);
+
+			img {
+				width: 15rem;
+				height: 10rem;
+				object-fit: cover;
+				margin-bottom: 2rem;
+				border-radius: 1rem;
+				@include set-shadows(rgba($dark-color, 0.2), rgba($dark-color, 0.2));
+			}
+		}
+	}
+
 	.github-repos {
 		align-items: center;
 		justify-content: center;

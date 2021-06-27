@@ -78,6 +78,28 @@
 		}
 	}
 
+	.art-list {
+		display: flex !important;
+		flex-direction: column;
+		align-items: center;
+		height: 25rem !important;
+		overflow: auto;
+		padding: 2rem;
+		mask-image: linear-gradient(
+			transparent 0%,
+			#000000 15%,
+			#000000 85%,
+			transparent
+		);
+
+		img {
+			flex: 1 0 auto !important;
+			width: 15rem !important;
+			margin-bottom: 2rem !important;
+			border-radius: 1rem !important;
+		}
+	}
+
 	.github-repos {
 		a {
 			flex-direction: column;
@@ -175,6 +197,10 @@
 
 @media only screen and (max-width: 360px) {
 	.repo-list {
+		height: 20rem !important;
+	}
+
+	.art-list {
 		height: 20rem !important;
 	}
 }

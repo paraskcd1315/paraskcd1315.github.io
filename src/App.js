@@ -8,6 +8,7 @@ import AboutMe from './components/pages/AboutMe';
 import Skills from './components/pages/Skills';
 import Contact from './components/pages/Contact';
 import ProfileGithub from './components/pages/ProfileGithub';
+import Art from './components/pages/Art';
 
 const App = () => {
 	const [width, setWidth] = useState(0);
@@ -30,6 +31,7 @@ const App = () => {
 						<Route exact path='/aboutme' component={AboutMe} />
 						<Route exact path='/skills' component={Skills} />
 						<Route exact path='/contact' component={Contact} />
+						<Route exact path='/art' component={Art} />
 						<Route exact path='/github' component={ProfileGithub} />
 					</Switch>
 				</section>

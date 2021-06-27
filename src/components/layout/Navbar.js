@@ -112,6 +112,23 @@ const Navbar = ({ windowWidth }) => {
 					</div>
 				</DelayLink>
 				<DelayLink
+					to='/art'
+					delay={500}
+					clickAction={() => {
+						if (location.pathname !== '/art') {
+							onDelayStart();
+						}
+					}}>
+					<div
+						className={
+							location.pathname === '/art'
+								? 'navbar-item active'
+								: 'navbar-item'
+						}>
+						<i class='fas fa-paint-brush'></i>Art
+					</div>
+				</DelayLink>
+				<DelayLink
 					to='/github'
 					delay={500}
 					clickAction={() => {

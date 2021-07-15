@@ -30,7 +30,7 @@ const Home = ({ windowWidth }) => {
 						<br />
 						<span
 							className={windowWidth < 1024 ? 'lead role py-1' : 'lead role'}>
-							Web Developer
+							Web Developer | UI/UX Designer
 						</span>
 						<br />
 						<div className='buttons'>

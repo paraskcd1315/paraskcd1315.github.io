@@ -1,5 +1,4 @@
 import React, { Fragment, useState, useEffect } from 'react';
-import ProgressBar from '@ramonak/react-progress-bar';
 
 const Skills = () => {
 	const [show, setShow] = useState(false);
@@ -21,16 +20,14 @@ const Skills = () => {
 	const allSkills = skills.map((skill) => {
 		return (
 			<div key={skill.name} className='skill-type'>
-				<span className='skill-name lead'>{skill.name}</span>
-				<ProgressBar
-					completed={skill.level}
-					bgColor={'#fff4'}
-					baseBgColor={'#fff2'}
-					labelAlignment={'left'}
-					className={'skill-progress'}
-					transitionTimingFunction={'ease-in-out'}
-					transitionDuration={'1s'}
-				/>
+				<span className='skill-name'>{skill.name}</span>
+				<span className='skill-level'>
+					{skill.level < 70
+						? 'Intermediate'
+						: skill.level < 80
+						? 'Advanced'
+						: 'Expert'}
+				</span>
 			</div>
 		);
 	});

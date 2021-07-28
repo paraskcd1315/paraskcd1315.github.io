@@ -99,6 +99,17 @@
 		justify-content: center;
 		align-items: center;
 		text-align: center;
+		height: 50vh;
+		margin-top: 5vh;
+		margin-bottom: 10vh;
+		padding: 20vh 0vh 10vh;
+		overflow: auto;
+		mask-image: linear-gradient(
+			transparent 0%,
+			#000000 15%,
+			#000000 85%,
+			transparent
+		);
 
 		p {
 			width: 50%;
@@ -127,6 +138,21 @@
 		justify-content: center;
 		align-items: center;
 		flex-direction: column;
+		height: 50vh;
+		margin-top: 5vh;
+		margin-bottom: 10vh;
+		padding: 20vh 0vh 10vh;
+		overflow: auto;
+		mask-image: linear-gradient(
+			transparent 0%,
+			#000000 15%,
+			#000000 85%,
+			transparent
+		);
+
+		h1 {
+			margin-top: 20vh;
+		}
 
 		.skill-type {
 			display: flex;

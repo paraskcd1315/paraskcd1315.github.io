@@ -1,6 +1,5 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import github from '../../apis/github';
-import { CLIENT_ID, CLIENT_SECRET } from '../../apis/config';
 
 const ProfileGithub = () => {
 	const [githubRepos, setRepos] = useState([]);
@@ -12,9 +11,7 @@ const ProfileGithub = () => {
 			const response = await github.get('/repos', {
 				params: {
 					per_page: '10',
-					sort: 'updated:asc',
-					client_id: CLIENT_ID,
-					client_secret: CLIENT_SECRET
+					sort: 'updated:asc'
 				}
 			});
 			setRepos(response.data);

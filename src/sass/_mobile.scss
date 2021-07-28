@@ -35,6 +35,14 @@
 	}
 }
 
+@media only screen and (max-width: 768px) {
+	.about-me {
+		p {
+			width: 100% !important;
+		}
+	}
+}
+
 @media only screen and (max-width: 1024px) {
 	.container {
 		@include size(80%, 90%);
@@ -98,9 +106,8 @@
 	}
 
 	.about-me {
-		p {
-			width: 100% !important;
-		}
+		height: 85% !important;
+		margin-top: unset !important;
 	}
 
 	.skill-type {
@@ -108,6 +115,18 @@
 
 		.skill-name {
 			width: 40% !important;
+		}
+	}
+
+	.skills {
+		mask-image: unset !important;
+		height: unset !important;
+		margin-top: unset !important;
+		padding: unset !important;
+		margin-left: -1vh;
+
+		h1 {
+			margin-top: unset !important;
 		}
 	}
 
@@ -236,5 +255,11 @@
 
 	.art-list {
 		height: 20rem !important;
+	}
+
+	.skills {
+		height: 90% !important;
+		overflow: unset !important;
+		overflow-y: auto;
 	}
 }

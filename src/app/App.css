@@ -1,0 +1,232 @@
+.loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.loading span > * {
+    box-shadow: 0 0 7px #fff,
+    0 0 10px #fff,
+    0 0 42px #fff,
+    0 0 92px #ddd,
+    0 0 151px #ccc;
+}
+
+.mainContainer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background-color: #0008;
+    width: 80%;
+    height: 70vh;
+    border-radius: 1rem;
+    transform: translate(-50%, -50%) scale(1);
+    box-shadow: 0px 1.1px 1.6px rgba(0, 0, 0, 0.038),
+                0px 2.5px 3.6px rgba(0, 0, 0, 0.056),
+                0px 4.3px 6.3px rgba(0, 0, 0, 0.069),
+                0px 6.9px 10px rgba(0, 0, 0, 0.08),
+                0px 10.6px 15.5px rgba(0, 0, 0, 0.091),
+                0px 16.6px 24.1px rgba(0, 0, 0, 0.104),
+                0px 27.5px 40px rgba(0, 0, 0, 0.122),
+                0px 55px 80px rgba(0, 0, 0, 0.16);
+    animation: 0.5s ease 0s 1 slideFromTop;
+}
+
+.mainContainer:before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    content: "";
+    z-index: -1;
+    backdrop-filter: blur(20px) saturate(150%);
+    -webkit-backdrop-filter: blur(20px) saturate(150%);
+    border-radius: 1rem;
+}
+
+.header {
+    position: absolute;
+    top: 7vh;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+}
+
+.header .btn {
+    width: 180px;
+    flex: 1 0 auto;
+    margin: 0 0.5rem;
+}
+
+.contentContainer {
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+    padding-top: 24vh;
+    overflow-y: scroll;
+    height: calc(70vh - 24vh);
+}
+
+.contentContainer > div {
+    flex-grow: 1;
+    flex-shrink: 0;
+    flex-basis: auto;
+}
+
+.contentContainer > div:last-child {
+    padding-bottom: 2rem;
+}
+
+.verticalLine {
+    margin: 10rem auto;
+    height: 20vh;
+    width: 1px;
+    background-color: #fff;
+}
+
+.contentContainer .dualContent {
+    display: flex;
+}
+
+.dualContent img {
+    height: 35vh;
+    border-radius: 1rem;
+    margin-top: 1rem;
+    box-shadow: 2.4px 0px 2.2px rgba(0, 0, 0, 0.039),
+                5.7px 0px 5.3px rgba(0, 0, 0, 0.057),
+                10.8px 0px 10px rgba(0, 0, 0, 0.07),
+                19.2px 0px 17.9px rgba(0, 0, 0, 0.083),
+                35.9px 0px 33.4px rgba(0, 0, 0, 0.101),
+                86px 0px 80px rgba(0, 0, 0, 0.14);
+}
+
+.contentContainer .content {
+    display: flex;
+    flex-direction: column;
+}
+
+.contentContainer .content.shorter {
+    justify-content: center;
+    align-items: center;
+}
+
+.contentContainer .content > * {
+    margin: 0.5rem 1rem;
+}
+
+.content .homeButtons {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.homeButtons .btn {
+    flex: 1 0 auto;
+    margin: 0.5rem;
+    width: 100px;
+}
+
+.wallCredits {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.pfp {
+    height: 50vh;
+    border-radius: 1rem;
+    box-shadow: 2.8px 0px 2.2px rgba(0, 0, 0, 0.02),
+                6.7px 0px 5.3px rgba(0, 0, 0, 0.028),
+                12.5px 0px 10px rgba(0, 0, 0, 0.035),
+                22.3px 0px 17.9px rgba(0, 0, 0, 0.042),
+                41.8px 0px 33.4px rgba(0, 0, 0, 0.05),
+                100px 0px 80px rgba(0, 0, 0, 0.07);
+}
+
+.repoItem {
+    display: flex;
+    flex-direction: column;
+    background-color: #0008;
+    padding: 1rem;
+    border-radius: 1rem;
+    cursor: pointer;
+    transition: all 250ms ease;
+}
+
+.repoItem:hover {
+    background-color: #2228;
+}
+
+.repoItem .repoInfo {
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.repoInfo .repoDescription {
+    font-size: 0.8rem;
+    font-weight: lighter;
+}
+
+.repoItem .repoStats {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 1rem
+}
+
+.repoStats .statsItem i{
+    margin-right: 1rem;
+}
+
+@media only screen and (max-width: 790px) {
+    .header {
+        flex-direction: column;
+        transform: unset;
+        left: 0.5rem;
+        top: 2rem;
+    }
+    .header .btn {
+        margin: 1rem 0;
+        width: 40px;
+        height: 40px;
+        border-radius: 10rem;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+    .header .btn i {
+        margin-right: auto;
+        margin-left: auto;
+    }
+    .header .btn span {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 760px) {
+    .mainContainer {
+        width: 75%;
+    }
+    .dualContent {
+        flex-direction: column;
+    }
+    .dualContent img {
+        height: unset;
+        box-shadow: unset;
+        margin-bottom: 1rem;
+    }
+}
+
+@media only screen and (max-width: 760px) {
+    .contentContainer {
+        padding-top: 10vh;
+        height: calc(70vh - 10vh);
+    }
+}

@@ -82,7 +82,7 @@ function App() {
                 <h1>Paras Khanchandani</h1>
                 <span style={{ fontSize: "0.9rem" }}>iOS Developer | macOS Developer | web Developer | UX/UI Designer</span>
                 <div className='homeButtons'>
-                  <button className='btn cv' onClick={() => window.open("https://paraskcd.com/CV.pdf", "_blank").focus()}>
+                  <button className='btn cv' onClick={() => window.open("./ParasKhanchandaniCV.docx", "_blank").focus()}>
                     <i className="fa-solid fa-file"></i>
                     <span>{" "} Resume</span>
                   </button>

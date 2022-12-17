@@ -80,7 +80,7 @@ function App() {
               <div className='content' ref={homeRef}>
                 <span style={{ fontSize: "1.3rem" }}>Hi! I'm</span>
                 <h1>Paras Khanchandani</h1>
-                <span style={{ fontSize: "0.9rem" }}>iOS Developer | macOS Developer | web Developer | UX/UI Designer</span>
+                <span style={{ fontSize: "0.9rem" }}>Android Developer | iOS Developer | macOS Developer | Web Developer | UX/UI Designer</span>
                 <div className='homeButtons'>
                   <button className='btn cv' onClick={() => window.open("./ParasKhanchandaniCV.docx", "_blank").focus()}>
                     <i className="fa-solid fa-file"></i>

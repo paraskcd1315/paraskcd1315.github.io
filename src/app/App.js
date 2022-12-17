@@ -119,6 +119,24 @@ function App() {
               <div className="content shorter" ref={skillsRef}>
                 <h1>Skills</h1>
                 <ul>
+                  <li><h3>Linux Development</h3></li>
+                  <ul>
+                    <li>Electron</li>
+                  </ul>
+                  <li><h3>Windows Development</h3></li>
+                  <ul>
+                    <li>Electron</li>
+                  </ul>
+                  <li><h3>Android Development</h3></li>
+                  <ul>
+                    <li>Kotlin</li>
+                    <li>React Native</li>
+                    <li>Jetpack Compose</li>
+                    <li>Hilt and Dagger</li>
+                    <li>Room Database</li>
+                    <li>Retrofit</li>
+                    <li>Coroutines</li>
+                  </ul>
                   <li><h3>macOS and iOS Development</h3></li>
                   <ul>
                     <li>Swift</li>
@@ -139,7 +157,7 @@ function App() {
                     <li>JavaScript</li>
                     <li>JQuery</li>
                   </ul>
-                  <li><h3>API Development</h3></li>
+                  <li><h3>API/Backend Development</h3></li>
                   <ul>
                     <li>MondoDB</li>
                     <li>ExpressJS</li>

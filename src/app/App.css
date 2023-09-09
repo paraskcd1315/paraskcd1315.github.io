@@ -185,6 +185,37 @@
     margin-right: 1rem;
 }
 
+.skills {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.skill {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: 2px solid #fff5;
+    border-radius: 10rem;
+    padding: 0.25rem 1rem;
+    padding-left: 0.25rem;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+    background-color: #fff3;
+    font-size: 12px;
+}
+
+.skill img {
+    margin-right: 1rem;
+    border-radius: 10rem;
+    background-color: white;
+    height: 20px;
+    width: 20px;
+    padding: 5px;
+}
+
 @media only screen and (max-width: 790px) {
     .header {
         flex-direction: column;

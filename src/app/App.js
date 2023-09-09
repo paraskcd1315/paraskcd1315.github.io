@@ -22,13 +22,23 @@ function App() {
 
   useEffect(() => {
 		const fetchData = async () => {
-			const response = await axios.get('https://api.github.com/users/paraskcd1315/repos', {
+			const response = await axios.get('https://api.github.com/orgs/United-Walls/repos', {
 				params: {
 					per_page: '10',
-					sort: 'updated:asc'
+					sort: 'updated:desc'
 				}
 			});
 			setGithubRepos(response.data);
+
+      const newResponse = await axios.get('https://api.github.com/users/paraskcd1315/repos', {
+				params: {
+					per_page: '50',
+					sort: 'updated:desc'
+				}});
+
+        setGithubRepos(state => {
+          return [...state, ...newResponse.data]
+        })
 		};
 
 		fetchData()
@@ -82,10 +92,6 @@ function App() {
                 <h1>Paras Khanchandani</h1>
                 <span style={{ fontSize: "0.9rem" }}>Android Developer | iOS Developer | macOS Developer | Web Developer | UX/UI Designer</span>
                 <div className='homeButtons'>
-                  <button className='btn cv' onClick={() => window.open("./ParasKhanchandaniCV.docx", "_blank").focus()}>
-                    <i className="fa-solid fa-file"></i>
-                    <span>{" "} Resume</span>
-                  </button>
                   <button className='btn github' onClick={() => window.open("https://github.com/paraskcd1315", "_blank").focus()}>
                     <i className="fa-brands fa-github"></i>
                     <span>{" "} GitHub</span>
@@ -102,14 +108,18 @@ function App() {
                     <i className="fa-brands fa-artstation"></i>
                     <span>{" "} Artstation</span>
                   </button>
+                  <button className='btn artstation' onClick={() => window.open(`mailto:dev@paraskcd.com`, "_self").focus()}>
+                    <i className="fa fa-envelope"></i>
+                    <span>{" "} Mail</span>
+                  </button>
                 </div>
               </div>
               <div className="verticalLine"></div>
               <div className='dualContent'>
-                <img src="./IMG_7355.jpeg" alt="PFP" />
+                <img src="./IMG_7355.png" alt="PFP" />
                 <div className="content" ref={aboutRef}>
                   <h1>About me</h1>
-                  <p>I'm Paras Khanchandani and I'm from Tenerife, Canary Islands, Spain. Currently, I'm a student located in Mississauga, Canada. I have a keen interest to learn and develop different types of Applications for the Web as well as different Operating Systems. Developing is my Passion, and I want to focus my career to be a Full Stack Developer.</p>
+                  <p>I'm Paras Khanchandani and I'm from Tenerife, Canary Islands, Spain. Currently, I'm located in Sitges, Barcelona, Spain. I have a keen interest to learn and develop different types of Applications for the Web as well as different Operating Systems. Developing is my Passion, and I want to focus my career to be a Full Stack Developer.</p>
                   <p>I have a small experience working for a Company named "Vidhema Technologies" in Jaipur, India. I was responsible, for being a Full Stack Web Developer for different Clients, talking with them to understand their desires and making sure the end product is upto mark.</p>
                   <p>From doing personal projects, to freelancing, I've done a lot of development for macOS, iOS and Web, all through which can be seen in my <a href='https://github.com/paraskcd1315'>Github</a></p>
                   <p>Other than developing software/websites I also have experience for designing UI, making Photo Manipulations with Adobe Photoshop, making different 3D Models and Texturing them with Autodesk Maya and Substance Painter respectively and also worked in creating Motion Graphics with Tools like Adobe Premiere and Adobe After Effects.</p>
@@ -118,78 +128,60 @@ function App() {
               <div className="verticalLine"></div>
               <div className="content shorter" ref={skillsRef}>
                 <h1>Skills</h1>
-                <ul>
-                  <li><h3>Linux Development</h3></li>
-                  <ul>
-                    <li>Electron</li>
-                  </ul>
-                  <li><h3>Windows Development</h3></li>
-                  <ul>
-                    <li>Electron</li>
-                  </ul>
-                  <li><h3>Android Development</h3></li>
-                  <ul>
-                    <li>Kotlin</li>
-                    <li>React Native</li>
-                    <li>Jetpack Compose</li>
-                    <li>Hilt and Dagger</li>
-                    <li>Room Database</li>
-                    <li>Retrofit</li>
-                    <li>Coroutines</li>
-                  </ul>
-                  <li><h3>macOS and iOS Development</h3></li>
-                  <ul>
-                    <li>Swift</li>
-                    <li>SwiftUI</li>
-                    <li>React Native</li>
-                    <li>Electron</li>
-                  </ul>
-                  <li><h3>Web Development</h3></li>
-                  <ul>
-                    <li>ReactJS</li>
-                    <li>Redux Toolkit</li>
-                    <li>Angular</li>
-                    <li>JavaScript</li>
-                    <li>HTML</li>
-                    <li>CSS</li>
-                    <li>SCSS</li>
-                    <li>SASS</li>
-                    <li>JavaScript</li>
-                    <li>JQuery</li>
-                  </ul>
-                  <li><h3>API/Backend Development</h3></li>
-                  <ul>
-                    <li>MondoDB</li>
-                    <li>ExpressJS</li>
-                    <li>NodeJS</li>
-                    <li>TypeORM</li>
-                    <li>Mongoose</li>
-                  </ul>
-                  <li><h3>Softwares</h3></li>
-                  <ul>
-                    <li>Nodepad ++</li>
-                    <li>Visual Studio Code</li>
-                    <li>Git</li>
-                    <li>Xcode</li>
-                    <li>Adobe Photoshop</li>
-                    <li>Adobe After Effects</li>
-                    <li>Adobe Premiere</li>
-                    <li>Autodesk Maya</li>
-                    <li>Autodesk 3ds Max</li>
-                    <li>Substance Painter</li>
-                    <li>Marmoset</li>
-                    <li>Unreal Engine</li>
-                    <li>Blender</li>
-                  </ul>
-                </ul>
+                <div className="skills">
+                  <div className="skill">
+                    <img src="./swift.png" alt="react" className="skillIcon" />
+                    <span>Swift</span>
+                  </div>
+                  <div className="skill">
+                    <img src="./kotlin.png" alt="react" className="skillIcon" />
+                    <span>Kotlin</span>
+                  </div>
+                  <div className="skill">
+                    <img src="./swiftui.png" alt="redux" className="skillIcon" />
+                    <span>SwiftUI</span>
+                  </div>
+                  <div className="skill">
+                    <img src="./jetpackcompose.webp" alt="redux" className="skillIcon" />
+                    <span>Jetpack Compose</span>
+                  </div>
+                  <div className="skill">
+                    <img src="./javascript.webp" alt="react" className="skillIcon" />
+                    <span>Javascript</span>
+                  </div>
+                  <div className="skill">
+                    <img src="./angular.png" alt="redux" className="skillIcon" />
+                    <span>AngularJS</span>
+                  </div>
+                  <div className="skill">
+                    <img src="./react.webp" alt="react" className="skillIcon" />
+                    <span>ReactJS</span>
+                  </div>
+                  <div className="skill">
+                    <img src="./redux.png" alt="redux" className="skillIcon" />
+                    <span>Redux</span>
+                  </div>
+                  <div className="skill">
+                    <img src="./electron.png" alt="redux" className="skillIcon" />
+                    <span>ElectronJS</span>
+                  </div>
+                  <div className="skill">
+                    <img src="./express.png" alt="redux" className="skillIcon" />
+                    <span>ExpressJS</span>
+                  </div>
+                  <div className="skill">
+                    <img src="./mongodb.png" alt="redux" className="skillIcon" />
+                    <span>MongoDB</span>
+                  </div>
+                </div>
               </div>
               <div className="verticalLine"></div>
               <div className="content" ref={githubRef}>
                 <h1 style={{textAlign: "center"}}>GitHub Projects</h1>
                 {githubRepos.map((repo) => {
                   return (
-                    <div className="repoItem">
-                      <div className="repoInfo" onClick={() => window.open(repo.html_url, "_blank").focus()}>
+                    <div className="repoItem" onClick={() => window.open(repo.html_url, "_blank").focus()}>
+                      <div className="repoInfo">
                         <div className="repoName"><h3>{repo.name}</h3></div>
                         <div className="repoDescription">{repo.description}</div>
                       </div>

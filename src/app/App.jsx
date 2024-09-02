@@ -17,7 +17,7 @@ const App = () => {
 			<img
 				className={`fixed -z-10 object-cover`}
 				src={`https://picsum.photos/${width}/${height}/?${appData?.season}`}
-				alt={`${appData?.season} background`}
+				alt={`${appData?.season}`}
 				onLoad={imageLoaded}
 			/>
 			{appData.status === 'idle' ? (

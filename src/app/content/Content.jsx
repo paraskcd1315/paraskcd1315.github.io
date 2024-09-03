@@ -63,7 +63,7 @@ const Content = ({ width, height }) => {
 					}}>
 					<img
 						className='w-40 h-40 object-cover rounded-full shadow-xl -mt-20 border border-solid border-gray-900/[0.4]'
-						src='./IMG_7355.png'
+						src='./dp.jpeg'
 						alt='Profile pic'
 					/>
 				</motion.div>

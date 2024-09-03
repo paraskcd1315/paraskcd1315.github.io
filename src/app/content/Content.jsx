@@ -53,7 +53,7 @@ const Content = ({ width, height }) => {
 					y: 0,
 					transition: { duration: 0.3 }
 				}}
-				className='flex flex-col items-center mt-48 mx-2 md:mx-48 lg:mx-96 lg:mt-80 rounded-2xl backdrop-blur-xl bg-gray-900/[0.8] border border-solid border-gray-900/[0.6] shadow-xl'>
+				className='flex flex-col items-center mt-48 mx-2 md:mx-48 lg:mx-96 lg:mt-60 rounded-2xl backdrop-blur-xl bg-gray-900/[0.8] border border-solid border-gray-900/[0.6] shadow-xl'>
 				<motion.div
 					initial={{ opacity: 0, y: 10 }}
 					animate={{

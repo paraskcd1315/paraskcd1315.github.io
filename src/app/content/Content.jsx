@@ -25,7 +25,7 @@ const Content = ({ width, height }) => {
 		for (var i = 0; i < reveals.length; i++) {
 			var windowHeight = window.innerHeight;
 			var elementTop = reveals[i].getBoundingClientRect().top;
-			var elementVisible = 150;
+			var elementVisible = 512;
 			if (elementTop < windowHeight - elementVisible) {
 				navigationBar.current?.classList.add('active');
 				reveals[i].classList.add('active');
@@ -53,7 +53,7 @@ const Content = ({ width, height }) => {
 					y: 0,
 					transition: { duration: 0.3 }
 				}}
-				className='flex flex-col items-center mt-48 mx-2 md:mx-48 rounded-2xl backdrop-blur-xl bg-gray-900/[0.8] border border-solid border-gray-900/[0.6] shadow-xl'>
+				className='flex flex-col items-center mt-48 mx-2 md:mx-48 lg:mx-96 lg:mt-80 rounded-2xl backdrop-blur-xl bg-gray-900/[0.8] border border-solid border-gray-900/[0.6] shadow-xl'>
 				<motion.div
 					initial={{ opacity: 0, y: 10 }}
 					animate={{
@@ -147,7 +147,7 @@ const Content = ({ width, height }) => {
 			{/* Navigation Bar */}
 			<div
 				ref={navigationBar}
-				className='navbar flex flex-row space-between rounded-full border backdrop-blur-xl bg-gray-900/[0.8] border-solid border-gray-900/[0.6] shadow-xl p-6 mt-2'>
+				className='navbar flex flex-row space-between rounded-full border backdrop-blur-xl bg-gray-900/[0.8] border-solid border-gray-900/[0.6] shadow-xl p-2 mt-2'>
 				{navigationLinks().map((item, index) => {
 					let ref;
 
@@ -186,11 +186,12 @@ const Content = ({ width, height }) => {
 							Castelldefels, Barcelona, Spain.
 						</b>{' '}
 						I'm working as a{' '}
-						<b className='text-xl'>Junior Software Engineer</b> in{' '}
+						<b className='text-xl'>Software Engineer</b> in{' '}
 						<b className='text-xl'>
 							<a
 								className='text-teal-300'
-								href='https://www.unimedia.tech/'>
+								href='https://www.unimedia.tech/'
+                target="_blank" rel="noopener noreferrer">
 								Unimedia Technology
 							</a>
 						</b>
@@ -221,7 +222,8 @@ const Content = ({ width, height }) => {
 						<b className='text-xl'>
 							<a
 								className='text-teal-300'
-								href='https://github.com/paraskcd1315'>
+								href='https://github.com/paraskcd1315'
+                target="_blank" rel="noopener noreferrer">
 								Github
 							</a>
 						</b>

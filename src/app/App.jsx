@@ -13,9 +13,9 @@ const App = () => {
 	const imageLoaded = useCallback(() => dispatch(setIdle()), [dispatch]);
 
 	return (
-		<div className='flex flex-col text-white'>
+		<div className='flex flex-col text-white h-dvh'>
 			<img
-				className={`fixed -z-10 object-cover`}
+				className={`fixed -z-10 object-cover w-[${width}px] h-[${height}px]`}
 				src={`https://picsum.photos/${width}/${height}/?${appData?.season}`}
 				alt={`${appData?.season}`}
 				onLoad={imageLoaded}

@@ -29,7 +29,7 @@ const NavigationButton = ({
 			} `}
 			onClick={handleClick}>
 			<i className={`${icon} mr-2`}></i>
-			<span className={`${hide ? 'text-sm' : ''}`}>{title}</span>
+			<span className={`${hide ? 'text-sm whitespace-nowrap' : ''}`}>{title}</span>
 		</motion.button>
 	);
 };

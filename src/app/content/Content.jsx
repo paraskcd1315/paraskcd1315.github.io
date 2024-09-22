@@ -15,8 +15,7 @@ const Content = ({ width, height }) => {
 	const handleClick = (ref) => {
 		const yOffset = -120;
 		const element = ref.current;
-		const y =
-			element?.getBoundingClientRect().top + window.scrollY + yOffset;
+		const y = element?.getBoundingClientRect().top + window.scrollY + yOffset;
 		window.scrollTo({ top: y, behavior: 'smooth' });
 	};
 
@@ -53,14 +52,16 @@ const Content = ({ width, height }) => {
 					y: 0,
 					transition: { duration: 0.3 }
 				}}
-				className='flex flex-col items-center mt-48 mx-2 md:mx-48 lg:mx-96 lg:mt-60 rounded-2xl backdrop-blur-xl bg-gray-900/[0.8] border border-solid border-gray-900/[0.6] shadow-xl'>
+				className='flex flex-col items-center mt-48 mx-2 md:mx-48 lg:mx-96 lg:mt-60 rounded-2xl backdrop-blur-xl bg-gray-900/[0.8] border border-solid border-gray-900/[0.6] shadow-xl'
+			>
 				<motion.div
 					initial={{ opacity: 0, y: 10 }}
 					animate={{
 						opacity: 1,
 						y: 0,
 						transition: { delay: 0.3, duration: 0.3 }
-					}}>
+					}}
+				>
 					<img
 						className='w-40 h-40 object-cover rounded-full shadow-xl -mt-20 border border-solid border-gray-900/[0.4]'
 						src='./dp.jpeg'
@@ -73,16 +74,15 @@ const Content = ({ width, height }) => {
 						opacity: 1,
 						y: 0,
 						transition: { delay: 0.6, duration: 0.3 }
-					}}>
+					}}
+				>
 					<div className='flex flex-row p-8 pb-12'>
 						<div className='flex flex-col gap-4'>
 							<span className='text-xl'>Hi! I'm</span>
-							<span className='text-4xl font-black'>
-								Paras Khanchandani
-							</span>
+							<span className='text-4xl font-black'>Paras Khanchandani</span>
 							<span>
-								Android Developer | iOS Developer | macOS
-								Developer | Web Developer | UX/UI Designer
+								Android Developer | iOS Developer | macOS Developer | Web
+								Developer | UX/UI Designer
 							</span>
 							<motion.div
 								initial={{ opacity: 0, y: 10 }}
@@ -93,7 +93,8 @@ const Content = ({ width, height }) => {
 										delay: 0.9,
 										duration: 0.3
 									}
-								}}>
+								}}
+							>
 								<div className='flex flex-row flex-wrap items-center justify-center'>
 									{aboutMeLinks().map((item, index) => (
 										<LinkButton
@@ -119,7 +120,8 @@ const Content = ({ width, height }) => {
 					opacity: 1,
 					y: 0,
 					transition: { delay: 1.2, duration: 0.3 }
-				}}>
+				}}
+			>
 				{navigationLinks().map((item, index) => {
 					let ref;
 
@@ -147,7 +149,8 @@ const Content = ({ width, height }) => {
 			{/* Navigation Bar */}
 			<div
 				ref={navigationBar}
-				className='navbar flex flex-row space-between rounded-full border backdrop-blur-xl bg-gray-900/[0.8] border-solid border-gray-900/[0.6] shadow-xl p-2 mt-2'>
+				className='navbar flex flex-row space-between rounded-full border backdrop-blur-xl bg-gray-900/[0.8] border-solid border-gray-900/[0.6] shadow-xl p-2 mt-2'
+			>
 				{navigationLinks().map((item, index) => {
 					let ref;
 
@@ -176,84 +179,39 @@ const Content = ({ width, height }) => {
 			<div className='reveal flex flex-col md:flex-row flex-wrap mx-2 md:mx-48 mt-32 mb-24'>
 				<div
 					ref={aboutRef}
-					className='mt-8 flex flex-col rounded-2xl backdrop-blur-xl bg-gray-900/[0.8] border border-solid border-gray-900/[0.6] shadow-xl p-12 gap-2'>
+					className='mt-8 flex flex-col rounded-2xl backdrop-blur-xl bg-gray-900/[0.8] border border-solid border-gray-900/[0.6] shadow-xl p-12 gap-2'
+				>
 					<span className='text-4xl font-black mb-8'>About Me</span>
 					<p className='text-lg'>
-						I'm <b className='text-xl'>Paras Khanchandani</b> and
-						I'm from Tenerife, Canary Islands, Spain. Currently, I'm
-						located in{' '}
-						<b className='text-xl'>
-							Castelldefels, Barcelona, Spain.
-						</b>{' '}
-						I'm working as a{' '}
-						<b className='text-xl'>Software Engineer</b> in{' '}
-						<b className='text-xl'>
-							<a
-								className='text-teal-300'
-								href='https://www.unimedia.tech/'
-                target="_blank" rel="noopener noreferrer">
-								Unimedia Technology
-							</a>
-						</b>
-						.
+						Dynamic Software Engineer and Fullstack developer with experience in
+						making full scalable Web as well as Mobile Applications with
+						Technologies like C# .NET with .NET based Web REST APIs as well as
+						Client Side Blazor WASM, Javascript based libraries and frameworks
+						like ReactJS, AngularJS, NextJS, NodeJS for the Web, Swift and
+						SwiftUI for Apple Devices, Kotlin and Jetpack Compose for Android
+						Devices. Able to deliver user-centric solutions focusing on
+						performance, security and maintanability.
 					</p>
-					<p className='mt-4 text-lg'>
-						{' '}
-						Working in multiple projects with them, I have gained{' '}
-						<b className='text-xl'>Experience</b> in{' '}
-						<b className='text-xl'>Technologies</b> like:{' '}
+					<p className='text-lg'>
+						Adaptable at implementing Docker based containers, and provide
+						DevOps solutions in different Platforms like Microsoft Azure, Amazon
+						Web Services, etc. Also can provide solutions to self host entire
+						platforms on home server as well.
 					</p>
-					<ul className='text-lg list-disc pt-5 px-5'>
-						<li>Amazon Web Services</li>
-						<li>Microsoft Azure DevOps</li>
-						<li>Atlassian Jira</li>
-						<li>.NET Core</li>
-						<li>AngularJS</li>
-						<li>ReactJS</li>
-						<li>Docker</li>
-						<li>MySQL</li>
-					</ul>
-					<p className='mt-4 text-lg'>
-						From doing <b className='text-xl'>personal projects</b>,
-						to <b className='text-xl'>freelancing</b>, I've done a
-						lot of development for{' '}
-						<b className='text-xl'>macOS, iOS and Web</b>, all
-						through which can be seen in my{' '}
-						<b className='text-xl'>
-							<a
-								className='text-teal-300'
-								href='https://github.com/paraskcd1315'
-                target="_blank" rel="noopener noreferrer">
-								Github
-							</a>
-						</b>
+					<p className='text-lg'>
+						I love programming, its my passion, as it allows me to learn more
+						and be able to solve problems at ease.
 					</p>
-					<p className='mt-4 text-lg'>
-						Other than developing software/websites I also have
-						experience for <b className='text-xl'>designing UI</b>,
-						making <b className='text-xl'>Photo Manipulations</b>{' '}
-						with <b className='text-xl'>Adobe Photoshop</b>, making
-						different{' '}
-						<b className='text-xl'>3D Models and Texturing them</b>{' '}
-						with{' '}
-						<b className='text-xl'>
-							Autodesk Maya and Substance Painter
-						</b>
-						respectively and also worked in creating{' '}
-						<b className='text-xl'>Motion Graphics</b> with Tools
-						like <b className='text-xl'>Adobe Premiere</b> and{' '}
-						<b className='text-xl'>Adobe After Effects</b>.
-					</p>
-					<p className='mt-4 text-lg'>
-						I also love <b className='text-xl'>Travelling</b>,
-						exploring the world. Also have a keen interest in{' '}
-						<b className='text-xl'>Astrophysics</b>, to learn about
-						Planets, Stars, Galaxies, Black Holes, etc.
+					<p className='text-lg'>
+						I'm a good team player as well having experience with Agile
+						Environments using tools like Jira and Git to ensure proper
+						coordination of multiple projects among the team members.
 					</p>
 				</div>
 				<div
 					ref={skillsRef}
-					className='mt-8 flex flex-col rounded-2xl backdrop-blur-xl bg-gray-900/[0.8] border border-solid border-gray-900/[0.6] shadow-xl p-12 gap-2'>
+					className='mt-8 flex flex-col rounded-2xl backdrop-blur-xl bg-gray-900/[0.8] border border-solid border-gray-900/[0.6] shadow-xl p-12 gap-2'
+				>
 					<span className='text-4xl font-black mb-8'>Skills</span>
 					<div className='flex flex-row flex-wrap items-center'>
 						<div className='flex flex-row items-center text-md items-center bg-gray-900/[0.8] rounded-full ml-2 mt-2 pr-4'>

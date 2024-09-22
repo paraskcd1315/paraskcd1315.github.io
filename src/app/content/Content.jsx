@@ -183,19 +183,53 @@ const Content = ({ width, height }) => {
 				>
 					<span className='text-4xl font-black mb-8'>About Me</span>
 					<p className='text-lg'>
-						Dynamic Software Engineer and Fullstack developer with experience in
-						making full scalable Web as well as Mobile Applications with
-						Technologies like C# .NET with .NET based Web REST APIs as well as
-						Client Side Blazor WASM, Javascript based libraries and frameworks
-						like ReactJS, AngularJS, NextJS, NodeJS for the Web, Swift and
-						SwiftUI for Apple Devices, Kotlin and Jetpack Compose for Android
-						Devices. Able to deliver user-centric solutions focusing on
-						performance, security and maintanability.
+						I'm <b className='text-xl'>Paras Khanchandani</b> and I'm from
+						Tenerife, Canary Islands, Spain. Currently, I'm located in{' '}
+						<b className='text-xl'>Castelldefels, Barcelona, Spain.</b> I'm
+						working as a <b className='text-xl'>Software Engineer</b> in{' '}
+						<b className='text-xl'>
+							<a
+								className='text-teal-300'
+								href='https://www.unimedia.tech/'
+								target='_blank'
+								rel='noopener noreferrer'
+							>
+								Unimedia Technology
+							</a>
+						</b>
+						.
 					</p>
 					<p className='text-lg'>
-						Adaptable at implementing Docker based containers, and provide
-						DevOps solutions in different Platforms like Microsoft Azure, Amazon
-						Web Services, etc. Also can provide solutions to self host entire
+						<b className='text-xl'>Dynamic Software Engineer</b> and{' '}
+						<b className='text-xl'>Fullstack developer</b> with experience in
+						making full scalable <b className='text-xl'>Web</b> as well as{' '}
+						<b className='text-xl'>Mobile Applications</b> with Technologies
+						like <b className='text-xl'>C# .NET</b> with{' '}
+						<b className='text-xl'>.NET based Web REST APIs</b> as well as
+						Client Side <b className='text-xl'>Blazor WASM</b>,{' '}
+						<b className='text-xl'>Javascript</b> based libraries and frameworks
+						like <b className='text-xl'>ReactJS</b>,{' '}
+						<b className='text-xl'>AngularJS</b>,{' '}
+						<b className='text-xl'>NextJS</b>, <b className='text-xl'>NodeJS</b>{' '}
+						for the <b className='text-xl'>Web</b>,{' '}
+						<b className='text-xl'>Swift</b> and
+						<b className='text-xl'>SwiftUI</b> for{' '}
+						<b className='text-xl'>Apple Devices</b>,{' '}
+						<b className='text-xl'>Kotlin</b> and{' '}
+						<b className='text-xl'>Jetpack Compose</b> for{' '}
+						<b className='text-xl'>Android Devices</b>. Able to deliver
+						user-centric solutions focusing on
+						<b className='text-xl'>performance</b>,{' '}
+						<b className='text-xl'>security</b> and{' '}
+						<b className='text-xl'>maintanability</b>.
+					</p>
+					<p className='text-lg'>
+						Adaptable at implementing{' '}
+						<b className='text-xl'>Docker based containers</b>, and provide
+						<b className='text-xl'>DevOps solutions</b> in different Platforms
+						like <b className='text-xl'>Microsoft Azure</b>,{' '}
+						<b className='text-xl'>Amazon Web Services</b>, etc. Also can
+						provide solutions to <b className='text-xl'>self host</b> entire
 						platforms on home server as well.
 					</p>
 					<p className='text-lg'>
@@ -203,8 +237,11 @@ const Content = ({ width, height }) => {
 						and be able to solve problems at ease.
 					</p>
 					<p className='text-lg'>
-						I'm a good team player as well having experience with Agile
-						Environments using tools like Jira and Git to ensure proper
+						I'm a good team player as well having experience with{' '}
+						<b className='text-xl'>Agile</b>
+						Environments using tools like <b className='text-xl'>
+							Jira
+						</b> and <b className='text-xl'>Git</b> to ensure proper
 						coordination of multiple projects among the team members.
 					</p>
 				</div>

@@ -213,13 +213,13 @@ const Content = ({ width, height }) => {
 						<b className='text-xl'>AngularJS</b>,{' '}
 						<b className='text-xl'>NextJS</b>, <b className='text-xl'>NodeJS</b>{' '}
 						for the <b className='text-xl'>Web</b>,{' '}
-						<b className='text-xl'>Swift</b> and
+						<b className='text-xl'>Swift</b> and{' '}
 						<b className='text-xl'>SwiftUI</b> for{' '}
 						<b className='text-xl'>Apple Devices</b>,{' '}
 						<b className='text-xl'>Kotlin</b> and{' '}
 						<b className='text-xl'>Jetpack Compose</b> for{' '}
 						<b className='text-xl'>Android Devices</b>. Able to deliver
-						user-centric solutions focusing on
+						user-centric solutions focusing on{' '}
 						<b className='text-xl'>performance</b>,{' '}
 						<b className='text-xl'>security</b> and{' '}
 						<b className='text-xl'>maintanability</b>.

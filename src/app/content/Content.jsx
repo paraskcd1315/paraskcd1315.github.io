@@ -199,6 +199,7 @@ const Content = ({ width, height }) => {
 						</b>
 						.
 					</p>
+					<br />
 					<p className='text-lg'>
 						<b className='text-xl'>Dynamic Software Engineer</b> and{' '}
 						<b className='text-xl'>Fullstack developer</b> with experience in
@@ -223,26 +224,28 @@ const Content = ({ width, height }) => {
 						<b className='text-xl'>security</b> and{' '}
 						<b className='text-xl'>maintanability</b>.
 					</p>
+					<br />
 					<p className='text-lg'>
 						Adaptable at implementing{' '}
-						<b className='text-xl'>Docker based containers</b>, and provide
+						<b className='text-xl'>Docker based containers</b>, and provide{' '}
 						<b className='text-xl'>DevOps solutions</b> in different Platforms
 						like <b className='text-xl'>Microsoft Azure</b>,{' '}
 						<b className='text-xl'>Amazon Web Services</b>, etc. Also can
 						provide solutions to <b className='text-xl'>self host</b> entire
 						platforms on home server as well.
 					</p>
+					<br />
 					<p className='text-lg'>
 						I love programming, its my passion, as it allows me to learn more
 						and be able to solve problems at ease.
 					</p>
+					<br />
 					<p className='text-lg'>
 						I'm a good team player as well having experience with{' '}
-						<b className='text-xl'>Agile</b>
-						Environments using tools like <b className='text-xl'>
-							Jira
-						</b> and <b className='text-xl'>Git</b> to ensure proper
-						coordination of multiple projects among the team members.
+						<b className='text-xl'>Agile</b> Environments using tools like{' '}
+						<b className='text-xl'>Jira</b> and <b className='text-xl'>Git</b>{' '}
+						to ensure proper coordination of multiple projects among the team
+						members.
 					</p>
 				</div>
 				<div

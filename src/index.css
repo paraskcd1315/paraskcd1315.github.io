@@ -1,52 +1,124 @@
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* ============== Design tokens ============== */
+:root {
+	--ink: #0a0a0b;
+	--ink-2: #131316;
+	--ink-3: #1c1c20;
+	--line: rgba(255, 255, 255, 0.08);
+	--line-strong: rgba(255, 255, 255, 0.16);
+	--paper: #f6f3ec;
+	--paper-2: #ebe7dd;
+	--fg: #f4f1ea;
+	--fg-dim: rgba(244, 241, 234, 0.62);
+	--fg-faint: rgba(244, 241, 234, 0.38);
+	--accent: oklch(0.72 0.16 20); /* rose */
+	--accent-ink: #1a0008;
+	--grain-opacity: 0.06;
+
+	--f-sans: 'Geist', 'Inter', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+	--f-mono: 'Geist Mono', 'JetBrains Mono', 'SF Mono', ui-monospace, monospace;
+
+	--r-sm: 6px;
+	--r-md: 12px;
+	--r-lg: 20px;
+}
+
+/* ============== Reset / base ============== */
+* {
+	box-sizing: border-box;
+}
+html,
 body {
 	margin: 0;
-	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
-		'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
-		'Helvetica Neue', sans-serif;
+	padding: 0;
+}
+html {
+	background: var(--ink);
+	color: var(--fg);
+	font-family: var(--f-sans);
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+	scroll-behavior: smooth;
+}
+body {
+	background: var(--ink);
+	color: var(--fg);
+	overflow-x: hidden;
+	cursor: none;
+}
+@media (pointer: coarse) {
+	body {
+		cursor: auto;
+	}
+}
+::selection {
+	background: var(--accent);
+	color: var(--accent-ink);
 }
 
-code {
-	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-		monospace;
-}
-
-.reveal {
+/* ============== Section primitives (used by every section) ============== */
+section {
 	position: relative;
-	transform: translateY(50px);
+	padding: 140px 36px;
+}
+.container {
+	max-width: 1400px;
+	margin: 0 auto;
+}
+.section-label {
+	font-family: var(--f-mono);
+	font-size: 11px;
+	letter-spacing: 0.2em;
+	text-transform: uppercase;
+	color: var(--fg-faint);
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	margin-bottom: 64px;
+}
+.section-label::before {
+	content: '';
+	display: inline-block;
+	width: 24px;
+	height: 1px;
+	background: var(--accent);
+}
+
+/* ============== Reveal-on-scroll utility ============== */
+.reveal {
 	opacity: 0;
-	transition: 0.3s all ease;
+	transform: translateY(40px);
+	transition: opacity 0.9s cubic-bezier(0.2, 0.7, 0.3, 1), transform 0.9s cubic-bezier(0.2, 0.7, 0.3, 1);
 }
-.reveal.active {
-	transform: translateY(0);
+.reveal.in {
 	opacity: 1;
+	transform: none;
 }
 
-.navbar {
-	z-index: 99;
-	position: fixed;
-	left: 50%;
-	transform: translate(-50%, -50px);
-	opacity: 0;
-	transition: 0.3s all ease;
+/* ============== Shared keyframes ============== */
+@keyframes pulse {
+	0%,
+	100% {
+		opacity: 1;
+		transform: scale(1);
+	}
+	50% {
+		opacity: 0.6;
+		transform: scale(1.4);
+	}
 }
 
-.navbar.active {
-	transform: translate(-50%, 0);
-	opacity: 1;
-}
-
-.bg {
-  opacity: 0;
-	transition: 0.3s all ease;
-}
-
-.bg.active {
-  opacity: 1;
-	transition: 0.3s all ease;
+@media (max-width: 900px) {
+	section {
+		padding: 100px 24px;
+	}
+	.reveal {
+		transform: translateY(60px);
+		transition-duration: 1.1s;
+	}
 }

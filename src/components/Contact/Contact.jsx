@@ -1,0 +1,61 @@
+import useReveal from "../../hooks/useReveal";
+import PORTFOLIO_DATA from "../../data";
+import "./Contact.css";
+
+export default function Contact() {
+  const ref = useReveal();
+  const D = PORTFOLIO_DATA;
+  return (
+    <section
+      id="contact"
+      className="contact"
+      data-screen-label="08 Contact"
+      ref={ref}
+    >
+      <div className="contact-bg"></div>
+      <div className="contact-inner">
+        <div
+          className="section-label reveal"
+          style={{ justifyContent: "center" }}
+        >
+          08 / End of file
+        </div>
+        <h2 className="reveal">
+          Let's <em>build</em>
+          <br />
+          something good.
+        </h2>
+        <a className="email reveal" href={`mailto:${D.email}`}>
+          {D.email}
+        </a>
+        <div className="socials reveal">
+          {D.socials.map((s) => (
+            <a
+              key={s.label}
+              href={s.href}
+              target={s.href.startsWith("http") ? "_blank" : undefined}
+              rel="noopener noreferrer"
+            >
+              <span
+                style={{
+                  width: 6,
+                  height: 6,
+                  borderRadius: 99,
+                  background: "var(--accent)",
+                }}
+              ></span>
+              {s.label}
+            </a>
+          ))}
+        </div>
+      </div>
+      <footer style={{ marginTop: 120 }}>
+        <span className="footer-sig">
+          <img src="/kcd-logo.png" alt="" className="footer-mark" />© Paras
+          Khanchandani · 2026
+        </span>
+        <span>Hand-built → ∞</span>
+      </footer>
+    </section>
+  );
+}

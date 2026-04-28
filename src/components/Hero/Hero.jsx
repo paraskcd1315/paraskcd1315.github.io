@@ -122,7 +122,7 @@ export default function Hero() {
             <span className="word">
               <span>I'm</span>
             </span>
-            <em>{"// engineer"}</em>
+            <em>{"// Fullstack developer"}</em>
           </span>
           <span className="row">
             <span className="word">

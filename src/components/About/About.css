@@ -135,6 +135,24 @@
 		filter: blur(10px);
 		z-index: 1;
 	}
+	/* Heads-up glow on the active card as the swap is about to start. */
+	.about-stories-stage .about-story.is-active::before {
+		content: '';
+		position: absolute;
+		inset: -40px -64px;
+		border-radius: 32px;
+		pointer-events: none;
+		background: radial-gradient(
+			ellipse at center,
+			color-mix(in oklab, var(--accent) 40%, transparent) 0%,
+			color-mix(in oklab, var(--accent) 16%, transparent) 45%,
+			transparent 78%
+		);
+		filter: blur(20px);
+		opacity: var(--leave, 0);
+		transition: opacity 0.18s ease;
+		z-index: -1;
+	}
 }
 
 @media (max-width: 900px) {

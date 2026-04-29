@@ -63,7 +63,23 @@ export default function About() {
             ref={pinRef}
             style={{ "--story-count": stories.length }}
           >
-            <div className="about-stories-stage">
+            <div
+              className="about-stories-stage"
+              style={{
+                "--leave": Math.max(
+                  0,
+                  Math.min(
+                    1,
+                    (Math.max(
+                      0,
+                      Math.min(1, progress * stories.length - active),
+                    ) -
+                      0.55) /
+                      0.45,
+                  ),
+                ),
+              }}
+            >
               {stories.map((s, i) => {
                 const state =
                   i === active ? "active" : i < active ? "past" : "upcoming";

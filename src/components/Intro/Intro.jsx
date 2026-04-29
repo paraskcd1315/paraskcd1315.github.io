@@ -75,15 +75,17 @@ export default function Intro({ onReveal, onDone }) {
       className={`intro intro-${stage}`}
       aria-hidden="true"
       style={{
-        "--logo-url": `url(${process.env.PUBLIC_URL}/kcd-logo-transparent.png)`,
+        // Absolute root path. Don't use process.env.PUBLIC_URL here:
+        // with homepage="." in package.json, it expands to "." and
+        // url(./...) inside CSS resolves relative to the CSS file's
+        // location (build/static/css/), not the page root → 404.
+        // <img src> handles "./..." correctly because src is resolved
+        // relative to the document, but CSS url() is not.
+        "--logo-url": "url(/kcd-logo-transparent.png)",
       }}
     >
       <div className="intro-cutout-overlay" />
-      <img
-        src={`${process.env.PUBLIC_URL}/kcd-logo-transparent.png`}
-        alt=""
-        className="intro-logo"
-      />
+      <img src="/kcd-logo-transparent.png" alt="" className="intro-logo" />
     </div>
   );
 }

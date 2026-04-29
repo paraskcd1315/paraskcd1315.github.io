@@ -1,0 +1,34 @@
+# This .gitignore lives on the gh-pages branch (deployed via `npm run deploy`).
+# This branch holds the built static site only — no source, no dev tooling.
+# If you accidentally `git checkout gh-pages` from main with a dirty working
+# tree, these patterns block you from staging dev/source files into a
+# gh-pages commit.
+
+# Source / tooling (lives on main, never on gh-pages)
+/src/
+/public/
+/worker/
+/node_modules/
+/build/
+/coverage/
+
+package.json
+package-lock.json
+yarn.lock
+tailwind.config.js
+
+# Env / secrets (never on either branch)
+.env
+.env.*
+
+# Logs + system
+*.log
+.DS_Store
+
+# Editor folders
+.idea/
+.vscode/
+
+# Docs
+README.md
+README.old.md

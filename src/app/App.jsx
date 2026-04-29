@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import "./App.css";
 import Chrome from "../components/Chrome";
 import SideProgress from "../components/SideProgress";
+import Intro from "../components/Intro";
 import Hero from "../components/Hero";
 import About from "../components/About";
 import Skills from "../components/Skills";
@@ -12,6 +13,8 @@ import Contact from "../components/Contact";
 
 export default function App() {
   const [konami, setKonami] = useState(false);
+  const [introDone, setIntroDone] = useState(false);
+  const [heroRevealing, setHeroRevealing] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -22,11 +25,15 @@ export default function App() {
     setTimeout(() => setKonami(false), 1600);
   }, []);
 
+  const onIntroReveal = useCallback(() => setHeroRevealing(true), []);
+  const onIntroDone = useCallback(() => setIntroDone(true), []);
+
   return (
     <>
+      {!introDone && <Intro onReveal={onIntroReveal} onDone={onIntroDone} />}
       <Chrome onKonami={onKonami} />
       <SideProgress />
-      <Hero />
+      <Hero startReveal={heroRevealing} />
       <About />
       <Skills />
       <Projects />

@@ -34,7 +34,7 @@ function preload(src) {
   });
 }
 
-export default function Hero() {
+export default function Hero({ startReveal = true }) {
   const y = useScrollY();
   const D = PORTFOLIO_DATA;
   const parallax = Math.min(y, PARALLAX_MAX);
@@ -42,12 +42,13 @@ export default function Hero() {
   const [bgUrl, setBgUrl] = useState(null);
 
   useEffect(() => {
+    if (!startReveal) return undefined;
     const t = setTimeout(
       () => nameRef.current?.classList.add("go"),
       HERO_NAME_REVEAL_DELAY_MS,
     );
     return () => clearTimeout(t);
-  }, []);
+  }, [startReveal]);
 
   useEffect(() => {
     let cancelled = false;

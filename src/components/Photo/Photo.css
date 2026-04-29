@@ -1,6 +1,7 @@
 .photo {
-	padding: 140px 0;
+	padding: 140px 0 0;
 	border-top: 1px solid var(--line);
+	position: relative;
 }
 .photo-head {
 	padding: 0 36px;
@@ -24,16 +25,24 @@
 	line-height: 1.6;
 	color: var(--fg-dim);
 }
+
+.photo-pin {
+	height: 300vh; /* drives horizontal scroll */
+	position: relative;
+}
+.photo-stage {
+	position: sticky;
+	top: 0;
+	height: 100vh;
+	overflow: hidden;
+	display: flex;
+	align-items: center;
+}
 .photo-strip {
 	display: flex;
 	gap: 16px;
 	padding: 0 36px;
-	overflow-x: auto;
-	scroll-snap-type: x mandatory;
-	scrollbar-width: none;
-}
-.photo-strip::-webkit-scrollbar {
-	display: none;
+	will-change: transform;
 }
 .photo-card {
 	flex: 0 0 28vw;
@@ -42,7 +51,6 @@
 	border-radius: var(--r-md);
 	overflow: hidden;
 	background: var(--ink-2);
-	scroll-snap-align: start;
 	position: relative;
 	border: 1px solid var(--line);
 }
@@ -69,15 +77,36 @@
 }
 
 @media (max-width: 900px) {
+	.photo {
+		padding: 140px 0;
+	}
 	.photo-head {
 		grid-template-columns: 1fr;
 		gap: 24px;
 	}
+	/* Disable horizontal pin on mobile, use native swipe instead */
+	.photo-pin {
+		height: auto !important;
+	}
+	.photo-stage {
+		position: relative !important;
+		height: auto;
+		overflow: visible;
+	}
 	.photo-strip {
+		transform: none !important;
+		overflow-x: auto;
+		scroll-snap-type: x mandatory;
 		padding: 0 20px;
+		-webkit-overflow-scrolling: touch;
+		scrollbar-width: none;
+	}
+	.photo-strip::-webkit-scrollbar {
+		display: none;
 	}
 	.photo-card {
 		flex: 0 0 78vw;
 		min-width: 260px;
+		scroll-snap-align: start;
 	}
 }

@@ -104,9 +104,14 @@
 	display: inline-block;
 	overflow: hidden;
 	/* Mask sits below the baseline so round-bottom glyphs (S, a, s, c) aren't clipped. */
-	padding-bottom: 0.18em;
+	padding-bottom: 0.3em;
 	line-height: 1;
 	vertical-align: bottom;
+}
+/* Once the slide-in animation has played, drop the mask entirely so no
+ * residual overflow can clip glyph bottoms. */
+.hero-name.settled .word {
+	overflow: visible;
 }
 .hero-name .word > span {
 	display: inline-block;

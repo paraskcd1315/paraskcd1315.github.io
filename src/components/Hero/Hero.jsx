@@ -43,11 +43,23 @@ export default function Hero({ startReveal = true }) {
 
   useEffect(() => {
     if (!startReveal) return undefined;
+    const el = nameRef.current;
+    if (!el) return undefined;
     const t = setTimeout(
-      () => nameRef.current?.classList.add("go"),
+      () => el.classList.add("go"),
       HERO_NAME_REVEAL_DELAY_MS,
     );
-    return () => clearTimeout(t);
+    // After the slide-in animation completes, drop the per-word mask so
+    // round-bottom glyphs (S, a, s, c) aren't clipped by overflow:hidden.
+    // Animation is 1.1s with up to 0.46s of staggered delay.
+    const settle = setTimeout(
+      () => el.classList.add("settled"),
+      HERO_NAME_REVEAL_DELAY_MS + 1100 + 460 + 100,
+    );
+    return () => {
+      clearTimeout(t);
+      clearTimeout(settle);
+    };
   }, [startReveal]);
 
   useEffect(() => {

@@ -103,7 +103,8 @@
 .hero-name .word {
 	display: inline-block;
 	overflow: hidden;
-	padding-bottom: 0.08em;
+	/* Mask sits below the baseline so round-bottom glyphs (S, a, s, c) aren't clipped. */
+	padding-bottom: 0.18em;
 	line-height: 1;
 	vertical-align: bottom;
 }

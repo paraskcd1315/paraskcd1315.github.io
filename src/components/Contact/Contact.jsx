@@ -5,6 +5,15 @@ import "./Contact.css";
 
 const meta = getSectionMeta("contact");
 
+const TAGLINES = [
+  { verb: "Building", rest: "the universe." },
+  { verb: "Building", rest: "galaxies." },
+  { verb: "Building", rest: "worlds." },
+  { verb: "Rendering", rest: "reality." },
+  { verb: "Compiling", rest: "the cosmos." },
+];
+const tagline = TAGLINES[Math.floor(Math.random() * TAGLINES.length)];
+
 export default function Contact() {
   const ref = useReveal();
   const D = PORTFOLIO_DATA;
@@ -19,9 +28,9 @@ export default function Contact() {
           {meta.label}
         </div>
         <h2 className="reveal">
-          Let's <em>build</em>
+          <em>{tagline.verb}</em>
           <br />
-          something good.
+          {tagline.rest}
         </h2>
         <a className="email reveal" href={`mailto:${D.email}`}>
           {D.email}

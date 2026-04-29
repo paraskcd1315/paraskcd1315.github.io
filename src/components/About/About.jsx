@@ -11,6 +11,7 @@ export default function About() {
   const ref = useReveal();
   const pinRef = useRef(null);
   const [active, setActive] = useState(0);
+  const [progress, setProgress] = useState(0);
   const D = PORTFOLIO_DATA;
   const stories = D.about;
 
@@ -25,6 +26,7 @@ export default function About() {
         const N = stories.length;
         const idx = Math.min(N - 1, Math.max(0, Math.floor(p * N)));
         setActive((prev) => (prev !== idx ? idx : prev));
+        setProgress((prev) => (prev !== p ? p : prev));
       }
       raf = requestAnimationFrame(tick);
     };
@@ -77,6 +79,14 @@ export default function About() {
                   </div>
                 );
               })}
+              <div className="scroll-indicator about-scroll-indicator">
+                <span>{String(active + 1).padStart(2, "0")}</span>
+                <span
+                  className="track"
+                  style={{ "--p": `${progress * 100}%` }}
+                ></span>
+                <span>{String(stories.length).padStart(2, "0")}</span>
+              </div>
             </div>
           </div>
         </div>

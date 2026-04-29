@@ -1,14 +1,25 @@
 .about {
-	padding-top: 100px;
+	padding: 0;
+}
+.about-pin {
+	height: 600vh; /* drives card-by-card scroll on desktop */
+	position: relative;
+}
+.about-stage {
+	position: sticky;
+	top: 0;
+	height: 100vh;
+	display: grid;
+	align-items: center;
+	padding: 80px 36px 40px;
 }
 .about-grid {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	gap: 80px;
+	align-items: start;
 }
 .about-sticky {
-	position: sticky;
-	top: 14vh;
 	align-self: start;
 }
 .about-avatar {
@@ -54,12 +65,16 @@
 }
 
 .about-stories {
-	display: grid;
-	gap: 80px;
+	position: relative;
+	min-height: 60vh;
 }
 .about-story {
+	position: absolute;
+	inset: 0;
 	display: grid;
 	gap: 18px;
+	align-content: start;
+	will-change: transform, opacity;
 }
 .about-story .num {
 	font-family: var(--f-mono);
@@ -91,9 +106,24 @@
 }
 
 @media (max-width: 900px) {
+	.about {
+		padding-top: 100px;
+	}
+	/* Disable desktop pin/stage on mobile/tablet — fall back to natural flow */
+	.about-pin {
+		height: auto;
+	}
+	.about-stage {
+		position: relative;
+		top: 0;
+		height: auto;
+		display: block;
+		padding: 0 24px;
+	}
 	.about-grid {
 		grid-template-columns: 1fr;
 		gap: 24px;
+		align-items: stretch;
 	}
 	.about-sticky {
 		position: relative;
@@ -116,7 +146,9 @@
 	}
 	.about-stories {
 		position: relative;
+		display: grid;
 		gap: 56px;
+		min-height: 0;
 	}
 	.about-stories::before {
 		content: '';
@@ -134,7 +166,9 @@
 	}
 	.about-story {
 		position: relative;
+		inset: auto;
 		padding-left: 64px;
+		will-change: auto;
 	}
 	.about-story .num {
 		position: absolute;

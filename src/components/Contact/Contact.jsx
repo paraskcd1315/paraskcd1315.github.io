@@ -1,24 +1,22 @@
 import useReveal from "../../hooks/useReveal";
 import PORTFOLIO_DATA from "../../data";
+import { getSectionMeta } from "../../sections";
 import "./Contact.css";
+
+const meta = getSectionMeta("contact");
 
 export default function Contact() {
   const ref = useReveal();
   const D = PORTFOLIO_DATA;
   return (
-    <section
-      id="contact"
-      className="contact"
-      data-screen-label="08 Contact"
-      ref={ref}
-    >
+    <section id="contact" className="contact" ref={ref}>
       <div className="contact-bg"></div>
       <div className="contact-inner">
         <div
           className="section-label reveal"
           style={{ justifyContent: "center" }}
         >
-          08 / End of file
+          {meta.label}
         </div>
         <h2 className="reveal">
           Let's <em>build</em>

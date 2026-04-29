@@ -1,6 +1,9 @@
 import useReveal from "../../hooks/useReveal";
 import PORTFOLIO_DATA from "../../data";
+import { getSectionMeta } from "../../sections";
 import "./Skills.css";
+
+const meta = getSectionMeta("skills");
 
 export default function Skills() {
   const ref = useReveal();
@@ -11,14 +14,9 @@ export default function Skills() {
     e.currentTarget.style.setProperty("--my", `${e.clientY - r.top}px`);
   };
   return (
-    <section
-      id="skills"
-      className="skills"
-      data-screen-label="04 Skills"
-      ref={ref}
-    >
+    <section id="skills" className="skills" ref={ref}>
       <div className="container">
-        <div className="section-label reveal">04 / Skills</div>
+        <div className="section-label reveal">{meta.label}</div>
         <div className="skills-head">
           <h2 className="reveal">Tools and tech.</h2>
           <p className="reveal">

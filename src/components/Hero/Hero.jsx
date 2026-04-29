@@ -11,7 +11,7 @@ import {
 } from "../../constants";
 import "./Hero.css";
 
-const NASA_KEY = "DEMO_KEY";
+const APOD_PROXY_URL = "https://apod-proxy.paraskhanchandani1315.workers.dev";
 
 function randomApodDate() {
   const daysAgo = Math.floor(Math.random() * APOD_LOOKBACK_DAYS);
@@ -55,9 +55,7 @@ export default function Hero() {
       for (let i = 0; i < APOD_RETRY_COUNT; i++) {
         try {
           const date = randomApodDate();
-          const res = await fetch(
-            `https://api.nasa.gov/planetary/apod?api_key=${NASA_KEY}&date=${date}`,
-          );
+          const res = await fetch(`${APOD_PROXY_URL}?date=${date}`);
           if (!res.ok) continue;
           const data = await res.json();
           if (data.media_type !== "image" || !data.url) continue;
@@ -83,7 +81,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <section id="hero" className="hero" data-screen-label="01 Hero">
+    <section id="hero" className="hero">
       <a
         className="hero-badge"
         href="https://github.com/paraskcd1315"

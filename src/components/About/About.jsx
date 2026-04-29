@@ -1,19 +1,17 @@
 import useReveal from "../../hooks/useReveal";
 import PORTFOLIO_DATA from "../../data";
+import { getSectionMeta } from "../../sections";
 import "./About.css";
+
+const meta = getSectionMeta("about");
 
 export default function About() {
   const ref = useReveal();
   const D = PORTFOLIO_DATA;
   return (
-    <section
-      id="about"
-      className="about"
-      data-screen-label="02 About"
-      ref={ref}
-    >
+    <section id="about" className="about" ref={ref}>
       <div className="container">
-        <div className="section-label reveal">02 / About</div>
+        <div className="section-label reveal">{meta.label}</div>
         <div className="about-grid">
           <div className="about-sticky reveal">
             <div className="about-avatar">

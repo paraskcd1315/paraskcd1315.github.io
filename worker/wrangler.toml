@@ -1,0 +1,7 @@
+name = "apod-proxy"
+main = "src/index.js"
+compatibility_date = "2026-04-29"
+
+# NASA_KEY is stored as an encrypted secret, NOT a plain var.
+# Set it once with: wrangler secret put NASA_KEY
+# Rotate it the same way — no redeploy required.

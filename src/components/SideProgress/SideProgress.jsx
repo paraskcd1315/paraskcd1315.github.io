@@ -1,19 +1,9 @@
 import { useEffect, useState } from "react";
+import SECTIONS from "../../sections";
 import "./SideProgress.css";
 
-const SECTIONS = [
-  { id: "hero", label: "Intro" },
-  { id: "about", label: "About" },
-  { id: "now", label: "Now" },
-  { id: "skills", label: "Skills" },
-  { id: "projects", label: "Work" },
-  { id: "photo", label: "Lens" },
-  { id: "watch", label: "Watch" },
-  { id: "contact", label: "Contact" },
-];
-
 export default function SideProgress() {
-  const [active, setActive] = useState("hero");
+  const [active, setActive] = useState(SECTIONS[0]?.id);
   useEffect(() => {
     const io = new IntersectionObserver(
       (entries) => {
@@ -43,7 +33,7 @@ export default function SideProgress() {
         >
           <span>{String(i + 1).padStart(2, "0")}</span>
           <span className="bar"></span>
-          <span>{s.label}</span>
+          <span>{s.navLabel}</span>
         </button>
       ))}
     </nav>

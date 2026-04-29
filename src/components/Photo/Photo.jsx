@@ -1,15 +1,18 @@
 import useReveal from "../../hooks/useReveal";
 import PORTFOLIO_DATA from "../../data";
+import { getSectionMeta } from "../../sections";
 import "./Photo.css";
+
+const meta = getSectionMeta("photo");
 
 export default function Photo() {
   const ref = useReveal();
   const D = PORTFOLIO_DATA;
   return (
-    <section id="photo" className="photo" data-screen-label="06 Lens" ref={ref}>
+    <section id="photo" className="photo" ref={ref}>
       <div className="photo-head">
         <div>
-          <div className="section-label reveal">06 / Lens</div>
+          <div className="section-label reveal">{meta.label}</div>
           <h2 className="reveal">Through the lens.</h2>
         </div>
         <p className="reveal">

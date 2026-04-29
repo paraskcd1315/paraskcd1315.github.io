@@ -1,8 +1,10 @@
 import useReveal from "../../hooks/useReveal";
 import PORTFOLIO_DATA from "../../data";
+import { getSectionMeta } from "../../sections";
 import "./Watch.css";
 
 const EMBED_BASE = "https://www.youtube-nocookie.com/embed";
+const meta = getSectionMeta("watch");
 
 function VideoFrame({ id, title }) {
   return (
@@ -22,14 +24,9 @@ export default function Watch() {
   const ref = useReveal();
   const { featured, others } = PORTFOLIO_DATA.videos;
   return (
-    <section
-      id="watch"
-      className="watch"
-      data-screen-label="07 Watch"
-      ref={ref}
-    >
+    <section id="watch" className="watch" ref={ref}>
       <div className="container">
-        <div className="section-label reveal">07 / Watch</div>
+        <div className="section-label reveal">{meta.label}</div>
         <div className="watch-head">
           <h2 className="reveal">My showreel and projects.</h2>
           <p className="reveal">

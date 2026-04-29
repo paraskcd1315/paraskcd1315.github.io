@@ -5,7 +5,10 @@ import {
   MOBILE_BREAKPOINT_PX,
   PROJECT_INTERSECTION_THRESHOLDS,
 } from "../../constants";
+import { getSectionMeta } from "../../sections";
 import "./Projects.css";
+
+const meta = getSectionMeta("projects");
 
 export default function Projects() {
   const D = PORTFOLIO_DATA;
@@ -61,10 +64,10 @@ export default function Projects() {
   }, []);
 
   return (
-    <section id="projects" className="projects" data-screen-label="05 Projects">
+    <section id="projects" className="projects">
       <div className="projects-head">
         <div>
-          <div className="section-label">05 / Selected work</div>
+          <div className="section-label">{meta.label}</div>
           <h2>Things I've shipped.</h2>
         </div>
         <div className="meta">

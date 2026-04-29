@@ -4,7 +4,6 @@ import Chrome from "../components/Chrome";
 import SideProgress from "../components/SideProgress";
 import Hero from "../components/Hero";
 import About from "../components/About";
-import Now from "../components/Now";
 import Skills from "../components/Skills";
 import Projects from "../components/Projects";
 import Photo from "../components/Photo";
@@ -29,7 +28,6 @@ export default function App() {
       <SideProgress />
       <Hero />
       <About />
-      <Now />
       <Skills />
       <Projects />
       <Photo />

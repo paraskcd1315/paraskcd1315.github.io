@@ -4,6 +4,11 @@
 /node_modules
 /.pnp
 .pnp.js
+worker/node_modules
+
+# cloudflare worker local state
+worker/.wrangler
+worker/.dev.vars
 
 # testing
 /coverage

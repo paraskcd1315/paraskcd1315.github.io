@@ -97,8 +97,8 @@
 		position: relative;
 		display: block;
 		gap: 0;
-		/* Pin scroll length: one viewport per card + one trailing viewport. */
-		height: calc((var(--story-count, 6) + 1) * 100vh);
+		/* Pin scroll length: ~half a viewport per card + a short trailing dwell. */
+		height: calc(var(--story-count, 6) * 55vh + 60vh);
 	}
 	.about-stories-stage {
 		position: sticky;
@@ -110,30 +110,48 @@
 		top: 50%;
 		left: 0;
 		right: 0;
-		transform: translate3d(80px, -50%, 0);
+		transform: translate3d(280px, -50%, 0) scale(0.94);
 		opacity: 0;
-		filter: blur(8px);
-		transition: opacity 0.55s ease, transform 0.7s cubic-bezier(0.2, 0.7, 0.3, 1),
-			filter 0.55s ease;
+		filter: blur(10px);
+		transition: opacity 0.32s ease, transform 0.5s cubic-bezier(0.2, 0.7, 0.3, 1),
+			filter 0.32s ease;
 		will-change: opacity, transform, filter;
 	}
 	.about-stories-stage .about-story.is-active {
 		opacity: 1;
-		transform: translate3d(0, -50%, 0);
+		transform: translate3d(0, -50%, 0) scale(1);
 		filter: none;
 		z-index: 2;
 	}
 	.about-stories-stage .about-story.is-past {
 		opacity: 0;
-		transform: translate3d(0, calc(-50% - 12px), 0) scale(0.86);
-		filter: blur(10px);
+		transform: translate3d(0, calc(-50% - 36px), 0) scale(0.7);
+		filter: blur(16px);
 		z-index: 1;
 	}
 	.about-stories-stage .about-story.is-upcoming {
 		opacity: 0;
-		transform: translate3d(80px, -50%, 0);
-		filter: blur(8px);
+		transform: translate3d(280px, -50%, 0) scale(0.94);
+		filter: blur(10px);
 		z-index: 1;
+	}
+	/* Heads-up glow on the active card as the swap is about to start. */
+	.about-stories-stage .about-story.is-active::before {
+		content: '';
+		position: absolute;
+		inset: -40px -64px;
+		border-radius: 32px;
+		pointer-events: none;
+		background: radial-gradient(
+			ellipse at center,
+			color-mix(in oklab, var(--accent) 40%, transparent) 0%,
+			color-mix(in oklab, var(--accent) 16%, transparent) 45%,
+			transparent 78%
+		);
+		filter: blur(20px);
+		opacity: var(--leave, 0);
+		transition: opacity 0.18s ease;
+		z-index: -1;
 	}
 }
 

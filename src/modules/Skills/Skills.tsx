@@ -1,6 +1,6 @@
 import type { MouseEvent } from "react";
 import PORTFOLIO_CONTENT from "../../content";
-import { IconCircle, MonoLabel, SectionLabel } from "../../shared/components";
+import { SectionLabel } from "../../shared/components";
 import { useReveal } from "../../shared/hooks";
 import { getSectionMeta } from "../../sections";
 import styles from "./Skills.module.scss";
@@ -26,17 +26,12 @@ export default function Skills() {
         <div className={`${styles.skillsGrid} reveal`}>
           {skills.items.map((s) => (
             <div className={styles.skill} key={s.name} onMouseMove={onMove}>
-              <IconCircle size={36}>
-                <img
-                  src={s.icon}
-                  alt={s.name}
-                  loading="lazy"
-                  className={styles.glyphImg}
-                />
-              </IconCircle>
+              <div className={styles.glyph}>
+                <img src={s.icon} alt={s.name} loading="lazy" />
+              </div>
               <div>
                 <div className={styles.name}>{s.name}</div>
-                <MonoLabel>{s.cat}</MonoLabel>
+                <div className={styles.cat}>{s.cat}</div>
               </div>
             </div>
           ))}

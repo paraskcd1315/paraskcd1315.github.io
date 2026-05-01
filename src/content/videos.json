@@ -1,0 +1,13 @@
+{
+  "heading": "My showreel and projects.",
+  "body": "My showreel plus a couple of older UI projects I uploaded to YouTube.",
+  "featured": {
+    "id": "zcWLPPgVnTM",
+    "title": "Showreel",
+    "tag": "Reel"
+  },
+  "others": [
+    { "id": "RYQVfypDQKY", "title": "XenHTML setup for jailbroken iPhones", "tag": "iOS · UI" },
+    { "id": "GpaYbYNGciI", "title": "Windows Phone UI on iPhone, with XenHTML", "tag": "iOS · UI" }
+  ]
+}

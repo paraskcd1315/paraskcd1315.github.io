@@ -1,0 +1,250 @@
+@use "../../styles/tokens" as *;
+@use "../../styles/mixins" as *;
+
+.projects {
+  padding: 0;
+  position: relative;
+  background: $ink;
+}
+
+.sectionLabel {
+  @include section-label;
+}
+
+.projectsHead {
+  padding: $sp-10 $sp-6 $sp-7;
+  max-width: $container-max;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $sp-8;
+  align-items: end;
+
+  h2 {
+    font-size: clamp(40px, 5vw, 72px);
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    margin: 0;
+    line-height: 1;
+  }
+
+  .meta {
+    font-family: $f-mono;
+    font-size: 12px;
+    color: $fg-dim;
+    display: grid;
+    gap: 6px;
+    text-align: right;
+
+    strong {
+      color: $fg;
+      font-weight: 500;
+    }
+  }
+
+  @include mobile {
+    padding: $sp-10 20px 40px;
+    grid-template-columns: 1fr;
+    gap: $sp-5;
+
+    .meta {
+      text-align: left;
+    }
+  }
+}
+
+.projectsPin {
+  height: 400vh;
+  position: relative;
+
+  @include mobile {
+    height: auto !important;
+  }
+}
+
+.projectsStage {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+
+  @include mobile {
+    position: relative !important;
+    height: auto;
+    padding: 20px 0 60px;
+  }
+}
+
+.projectsTrack {
+  display: flex;
+  gap: 32px;
+  padding: 0 8vw;
+  will-change: transform;
+
+  @include mobile {
+    transform: none !important;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding: 0 7vw;
+    gap: 16px;
+    -webkit-overflow-scrolling: touch;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}
+
+.projectCard {
+  flex: 0 0 70vw;
+  max-width: 1100px;
+  height: 76vh;
+  position: relative;
+  border-radius: $r-lg;
+  overflow: hidden;
+  background: $ink-2;
+  border: 1px solid $line;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  text-decoration: none;
+  color: inherit;
+  cursor: none;
+
+  &:hover .arrow {
+    background: $accent;
+    color: $accent-ink;
+    border-color: $accent;
+    transform: translateX(4px);
+  }
+
+  @include mobile {
+    flex: 0 0 86vw;
+    scroll-snap-align: center;
+    height: 70vh;
+    min-height: 460px;
+    transition:
+      transform 0.55s cubic-bezier(0.2, 0.8, 0.2, 1),
+      opacity 0.55s cubic-bezier(0.2, 0.8, 0.2, 1);
+
+    &:global(.dim) {
+      transform: scale(0.92);
+      opacity: 0.5;
+    }
+  }
+}
+
+.projectShot {
+  position: relative;
+  overflow: hidden;
+}
+
+.projectMock {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+}
+
+.projectMeta {
+  padding: 22px 28px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: $sp-5;
+  align-items: center;
+  border-top: 1px solid $line;
+  background: $ink;
+
+  .num {
+    font-family: $f-mono;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: $fg-faint;
+  }
+
+  .title {
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+
+  .stack {
+    font-family: $f-mono;
+    font-size: 11px;
+    color: $fg-dim;
+    letter-spacing: 0.04em;
+  }
+
+  .arrow {
+    width: 36px;
+    height: 36px;
+    border: 1px solid $line-strong;
+    border-radius: $r-pill;
+    display: grid;
+    place-items: center;
+    color: $fg;
+    transition:
+      background 0.25s,
+      color 0.25s,
+      transform 0.4s;
+  }
+
+  @include mobile {
+    padding: 16px 18px;
+    gap: 12px;
+
+    .title {
+      font-size: 17px;
+      line-height: 1.2;
+    }
+
+    .stack {
+      font-size: 10px;
+    }
+
+    .arrow {
+      width: 32px;
+      height: 32px;
+      font-size: 14px;
+    }
+  }
+}
+
+.scrollIndicator {
+  position: absolute;
+  bottom: 36px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: $f-mono;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: $fg-faint;
+  z-index: 5;
+
+  .track {
+    width: 120px;
+    height: 1px;
+    background: $line-strong;
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: -1px;
+      height: 3px;
+      background: $accent;
+      width: var(--p, 0%);
+      transition: width 0.1s linear;
+    }
+  }
+
+  @include mobile {
+    display: none;
+  }
+}

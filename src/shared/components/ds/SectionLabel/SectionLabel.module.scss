@@ -1,0 +1,9 @@
+@use "../../../../styles/mixins" as *;
+
+.root {
+  @include section-label;
+
+  &.center {
+    justify-content: center;
+  }
+}

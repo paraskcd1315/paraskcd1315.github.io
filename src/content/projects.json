@@ -1,0 +1,35 @@
+{
+  "heading": "Things I've shipped.",
+  "countSuffix": "selected · 2023 → 2026",
+  "hint": "Swipe → to navigate",
+  "items": [
+    {
+      "num": "01",
+      "title": "KCD Search for Android",
+      "stack": "Kotlin · Jetpack Compose · Hilt · Retrofit · Coroutines",
+      "kind": "kcd",
+      "link": "https://github.com/paraskcd1315/KCDSearch-Android"
+    },
+    {
+      "num": "02",
+      "title": "Influential Launcher for Android",
+      "stack": "Kotlin · Jetpack Compose · Custom launcher",
+      "kind": "influential",
+      "link": "https://github.com/paraskcd1315/InfluentialLauncher"
+    },
+    {
+      "num": "03",
+      "title": "Spotlight Search for Android",
+      "stack": "Kotlin · Jetpack Compose · Hilt · OkHttp · Google Suggestion API",
+      "kind": "spotlight",
+      "link": "https://play.google.com/store/apps/details?id=com.paraskcd.spotlightsearch"
+    },
+    {
+      "num": "04",
+      "title": "United Walls",
+      "stack": "ExpressJS · Mongoose · Grammy · iOS · Android · Raspberry Pi",
+      "kind": "unitedwalls",
+      "link": "https://github.com/United-Walls"
+    }
+  ]
+}

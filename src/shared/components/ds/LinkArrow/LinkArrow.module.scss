@@ -1,0 +1,22 @@
+@use "../../../../styles/tokens" as *;
+
+.root {
+  display: grid;
+  place-items: center;
+  border: 1px solid $line-strong;
+  border-radius: $r-pill;
+  color: $fg;
+  transition:
+    background 0.25s,
+    color 0.25s,
+    border-color 0.25s,
+    transform 0.4s;
+
+  &:global(.is-active),
+  *:hover > & {
+    background: $accent;
+    color: $accent-ink;
+    border-color: $accent;
+    transform: translateX(4px);
+  }
+}

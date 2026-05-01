@@ -1,0 +1,20 @@
+@use "../../../../styles/tokens" as *;
+
+.root {
+  font-family: $f-mono;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: $fg-faint;
+  background: $ink;
+  padding: 6px 10px;
+  border: 1px solid $line-strong;
+  border-radius: $r-pill;
+
+  &.accent {
+    color: $accent;
+    background: transparent;
+    border-color: transparent;
+    padding: 0;
+  }
+}

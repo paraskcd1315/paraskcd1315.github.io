@@ -1,0 +1,106 @@
+@use "../../styles/tokens" as *;
+@use "../../styles/mixins" as *;
+
+.watch {
+  border-top: 1px solid $line;
+
+  @include container;
+}
+
+.sectionLabel {
+  @include section-label;
+}
+
+.watchHead {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $sp-8;
+  align-items: end;
+  margin-bottom: $sp-7;
+
+  h2 {
+    font-size: clamp(40px, 5vw, 72px);
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    margin: 0;
+    line-height: 1;
+  }
+
+  p {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.6;
+    color: $fg-dim;
+    max-width: 460px;
+    text-wrap: pretty;
+  }
+
+  @include mobile {
+    grid-template-columns: 1fr;
+    gap: $sp-5;
+  }
+}
+
+.watchFeatured,
+.watchCard {
+  border-radius: $r-md;
+  overflow: hidden;
+  border: 1px solid $line;
+  background: $ink-2;
+  transition:
+    border-color 0.3s,
+    transform 0.4s;
+
+  &:hover {
+    border-color: $accent;
+  }
+}
+
+.watchFeatured {
+  margin-bottom: $sp-5;
+}
+
+.watchGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $sp-5;
+
+  @include mobile {
+    grid-template-columns: 1fr;
+  }
+}
+
+.watchMeta {
+  padding: 18px 22px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  border-top: 1px solid $line;
+  background: $ink;
+
+  .tag {
+    font-family: $f-mono;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: $accent;
+    flex: 0 0 auto;
+  }
+
+  .title {
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    color: $fg;
+  }
+
+  @include mobile {
+    padding: 14px 18px;
+    gap: 12px;
+    flex-wrap: wrap;
+
+    .title {
+      font-size: 14px;
+    }
+  }
+}

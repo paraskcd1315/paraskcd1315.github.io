@@ -29,7 +29,25 @@
     "extends": [
       "react-app",
       "react-app/jest"
-    ]
+    ],
+    "rules": {
+      "no-restricted-imports": [
+        "error",
+        {
+          "patterns": [
+            {
+              "group": [
+                "*/modules/*/*",
+                "*/shared/components/*/*",
+                "*/shared/hooks/*",
+                "*/shared/utils/*"
+              ],
+              "message": "Deep imports forbidden. Use the folder barrel — e.g. `import { Hero } from '../modules'`, `import { useReveal } from '../../shared/hooks'`."
+            }
+          ]
+        }
+      ]
+    }
   },
   "browserslist": {
     "production": [
@@ -45,6 +63,11 @@
   },
   "homepage": ".",
   "devDependencies": {
-    "tailwindcss": "^3.4.1"
+    "@types/jest": "^30.0.0",
+    "@types/node": "^20.19.39",
+    "@types/react": "^18.3.28",
+    "@types/react-dom": "^18.3.7",
+    "sass": "^1.99.0",
+    "typescript": "^5.9.3"
   }
 }

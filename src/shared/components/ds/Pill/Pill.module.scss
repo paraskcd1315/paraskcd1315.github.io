@@ -1,0 +1,19 @@
+@use "../../../../styles/tokens" as *;
+
+.root {
+  display: inline-block;
+  border: 1px solid $line-strong;
+  border-radius: $r-pill;
+  font-family: $f-mono;
+  color: $fg;
+}
+
+.sm {
+  padding: 4px 8px;
+  font-size: 10px;
+}
+
+.md {
+  padding: 6px 12px;
+  font-size: 11px;
+}

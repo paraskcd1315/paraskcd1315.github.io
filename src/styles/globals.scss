@@ -1,0 +1,102 @@
+@use "./tokens" as *;
+@use "./mixins" as *;
+
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap');
+
+:root {
+  --ink: #{$ink};
+  --ink-2: #{$ink-2};
+  --ink-3: #{$ink-3};
+  --line: #{$line};
+  --line-strong: #{$line-strong};
+  --paper: #{$paper};
+  --paper-2: #{$paper-2};
+  --fg: #{$fg};
+  --fg-dim: #{$fg-dim};
+  --fg-faint: #{$fg-faint};
+  --accent: #{$accent};
+  --accent-ink: #{$accent-ink};
+  --grain-opacity: #{$grain-opacity};
+
+  --f-sans: #{$f-sans};
+  --f-mono: #{$f-mono};
+
+  --r-sm: #{$r-sm};
+  --r-md: #{$r-md};
+  --r-lg: #{$r-lg};
+}
+
+:root[data-theme="light"] {
+  --ink: #{$paper};
+  --ink-2: #{$paper-2};
+  --ink-3: #ddd6c3;
+  --line: rgba(10, 10, 11, 0.08);
+  --line-strong: rgba(10, 10, 11, 0.16);
+  --fg: #{$ink};
+  --fg-dim: rgba(10, 10, 11, 0.62);
+  --fg-faint: rgba(10, 10, 11, 0.38);
+  --accent-ink: #fff5f7;
+  --grain-opacity: 0.04;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  background: $ink;
+  color: $fg;
+  font-family: $f-sans;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+body {
+  background: $ink;
+  color: $fg;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+@include coarse-pointer {
+  body {
+    cursor: auto;
+  }
+}
+
+::selection {
+  background: $accent;
+  color: $accent-ink;
+}
+
+section {
+  position: relative;
+  padding: $section-pad-y $section-pad-x;
+
+  @include mobile {
+    padding: $section-pad-y-mobile $section-pad-x-mobile;
+  }
+}
+
+.reveal {
+  @include reveal-base;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.4);
+  }
+}

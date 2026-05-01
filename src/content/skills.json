@@ -1,0 +1,26 @@
+{
+  "heading": "Tools and tech.",
+  "body": "Languages, frameworks and platforms I work with. Some I lead with, some are supporting tech, all are in active use.",
+  "items": [
+    { "icon": "/dotnetcore.png", "name": ".NET Core", "cat": "Backend" },
+    { "icon": "/dotnetcore.png", "name": "C#", "cat": "Language" },
+    { "icon": "/azure.png", "name": "Azure DevOps", "cat": "Cloud" },
+    { "icon": "/aws.png", "name": "AWS", "cat": "Cloud" },
+    { "icon": "/swift.png", "name": "Swift", "cat": "Apple" },
+    { "icon": "/kotlin.png", "name": "Kotlin", "cat": "Android" },
+    { "icon": "/swiftui.png", "name": "SwiftUI", "cat": "Apple" },
+    { "icon": "/jetpackcompose.webp", "name": "Jetpack Compose", "cat": "Android" },
+    { "icon": "/typescript.png", "name": "TypeScript", "cat": "Web" },
+    { "icon": "/angular.png", "name": "AngularJS", "cat": "Web" },
+    { "icon": "/react.webp", "name": "React / Next", "cat": "Web" },
+    { "icon": "/redux.png", "name": "Redux", "cat": "State" },
+    { "icon": "/electron.png", "name": "ElectronJS", "cat": "Desktop" },
+    { "icon": "/express.png", "name": "ExpressJS", "cat": "Backend" },
+    { "icon": "/mongodb.png", "name": "MongoDB", "cat": "Data" },
+    { "icon": "/dotnetcore.png", "name": "Blazor WASM", "cat": "Web" },
+    { "icon": "/photoshop.png", "name": "Photoshop", "cat": "Design" },
+    { "icon": "/aftereffects.png", "name": "After Effects", "cat": "Motion" },
+    { "icon": "/figma.png", "name": "Figma", "cat": "Design" },
+    { "icon": "/finalcutpro.png", "name": "Final Cut Pro", "cat": "Video" }
+  ]
+}

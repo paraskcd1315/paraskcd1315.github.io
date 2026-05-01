@@ -1,0 +1,81 @@
+@use "../../styles/tokens" as *;
+
+.intro {
+  --logo-size: clamp(200px, 26vw, 320px);
+
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
+.cutoutOverlay {
+  position: absolute;
+  inset: 0;
+  background: $ink;
+
+  -webkit-mask-image: linear-gradient(#000, #000), var(--logo-url);
+  -webkit-mask-position: 0 0, center;
+  -webkit-mask-size: 100% 100%, var(--logo-size) auto;
+  -webkit-mask-repeat: no-repeat, no-repeat;
+  -webkit-mask-composite: source-out;
+
+  mask-image: linear-gradient(#000, #000), var(--logo-url);
+  mask-position: 0 0, center;
+  mask-size: 100% 100%, var(--logo-size) auto;
+  mask-repeat: no-repeat, no-repeat;
+  mask-composite: subtract;
+}
+
+.logo {
+  position: relative;
+  z-index: 1;
+  width: var(--logo-size);
+  height: auto;
+  opacity: 0;
+  transform: scale(0.86);
+  transition:
+    opacity 0.7s ease,
+    transform 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+  filter:
+    drop-shadow(0 0 30px color-mix(in oklab, $accent 60%, transparent))
+    drop-shadow(0 0 80px color-mix(in oklab, $accent 35%, transparent));
+}
+
+.logoIn .logo {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.logoHold .logo {
+  opacity: 1;
+  transform: scale(1.01);
+  transition:
+    opacity 0.7s ease,
+    transform 0.5s ease-out;
+}
+
+.morph .logo {
+  opacity: 0;
+  transform: scale(1);
+  transition:
+    opacity 0.4s ease-out,
+    transform 0s;
+}
+
+.zoom {
+  .logo {
+    opacity: 0;
+  }
+
+  .cutoutOverlay {
+    -webkit-mask-size: 100% 100%, 4000px auto;
+    mask-size: 100% 100%, 4000px auto;
+    transition:
+      -webkit-mask-size 1.1s cubic-bezier(0.65, 0, 0.35, 1),
+      mask-size 1.1s cubic-bezier(0.65, 0, 0.35, 1);
+  }
+}

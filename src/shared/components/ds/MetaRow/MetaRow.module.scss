@@ -1,0 +1,26 @@
+@use "../../../../styles/tokens" as *;
+
+.root {
+  font-family: $f-mono;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: $fg-dim;
+}
+
+.label {
+  display: block;
+  color: $fg-faint;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.value {
+  color: $fg;
+  font-size: 13px;
+}
+
+.accent {
+  color: $accent;
+}

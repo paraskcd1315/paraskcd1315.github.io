@@ -1,0 +1,12 @@
+@use "../../../../styles/tokens" as *;
+
+.root {
+  font-family: $f-mono;
+  letter-spacing: 0.16em;
+  color: $fg-faint;
+  display: inline-block;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}

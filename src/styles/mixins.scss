@@ -1,0 +1,49 @@
+@use "./tokens" as *;
+
+@mixin container {
+  max-width: $container-max;
+  margin: 0 auto;
+}
+
+@mixin section-label {
+  font-family: $f-mono;
+  font-size: $fs-eyebrow;
+  letter-spacing: $ls-eyebrow;
+  text-transform: uppercase;
+  color: $fg-faint;
+  display: flex;
+  align-items: center;
+  gap: $sp-3;
+  margin-bottom: $sp-8;
+
+  &::before {
+    content: '';
+    display: inline-block;
+    width: $sp-5;
+    height: 1px;
+    background: $accent;
+  }
+}
+
+@mixin reveal-base {
+  opacity: 0;
+  transform: translateY($reveal-offset);
+  transition: opacity $dur-slow $ease-reveal, transform $dur-slow $ease-reveal;
+
+  &.in {
+    opacity: 1;
+    transform: none;
+  }
+
+  @include mobile {
+    transform: translateY($reveal-offset-mobile);
+    transition-duration: $dur-slow-mobile;
+  }
+}
+
+@mixin glass-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid $line;
+  border-radius: $r-md;
+  backdrop-filter: blur(12px);
+}

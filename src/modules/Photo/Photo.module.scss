@@ -1,0 +1,130 @@
+@use "../../styles/tokens" as *;
+@use "../../styles/mixins" as *;
+
+.photo {
+  padding: $sp-10 0 0;
+  border-top: 1px solid $line;
+  position: relative;
+
+  @include mobile {
+    padding: $sp-10 0;
+  }
+}
+
+.sectionLabel {
+  @include section-label;
+}
+
+.photoHead {
+  padding: 0 $sp-6;
+  max-width: $container-max;
+  margin: 0 auto $sp-7;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $sp-8;
+  align-items: end;
+
+  h2 {
+    font-size: clamp(40px, 5vw, 72px);
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    margin: 0;
+    line-height: 1;
+  }
+
+  p {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.6;
+    color: $fg-dim;
+  }
+
+  @include mobile {
+    grid-template-columns: 1fr;
+    gap: $sp-5;
+  }
+}
+
+.photoPin {
+  height: 300vh;
+  position: relative;
+
+  @include mobile {
+    height: auto !important;
+  }
+}
+
+.photoStage {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+
+  @include mobile {
+    position: relative !important;
+    height: auto;
+    overflow: visible;
+  }
+}
+
+.photoStrip {
+  display: flex;
+  gap: 16px;
+  padding: 0 $sp-6;
+  will-change: transform;
+
+  @include mobile {
+    transform: none !important;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding: 0 20px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}
+
+.photoCard {
+  flex: 0 0 28vw;
+  min-width: 320px;
+  aspect-ratio: 3 / 4;
+  border-radius: $r-md;
+  overflow: hidden;
+  background: $ink-2;
+  position: relative;
+  border: 1px solid $line;
+
+  @include mobile {
+    flex: 0 0 78vw;
+    min-width: 260px;
+    scroll-snap-align: start;
+  }
+}
+
+.photoPh {
+  position: absolute;
+  inset: 0;
+  background-color: $ink-2;
+  background-size: cover;
+  background-position: center;
+  display: grid;
+  place-items: end start;
+  padding: 20px;
+
+  .tag {
+    font-family: $f-mono;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: $fg-faint;
+    background: $ink;
+    padding: 6px 10px;
+    border: 1px solid $line-strong;
+    border-radius: $r-pill;
+  }
+}

@@ -1,0 +1,13 @@
+$bp-mobile: 900px;
+
+@mixin mobile {
+  @media (max-width: $bp-mobile) {
+    @content;
+  }
+}
+
+@mixin coarse-pointer {
+  @media (pointer: coarse) {
+    @content;
+  }
+}

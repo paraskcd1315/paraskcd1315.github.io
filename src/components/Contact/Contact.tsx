@@ -12,7 +12,8 @@ const TAGLINES = [
   { verb: "Rendering", rest: "reality." },
   { verb: "Compiling", rest: "the cosmos." },
 ];
-const tagline = TAGLINES[Math.floor(Math.random() * TAGLINES.length)];
+const tagline =
+  TAGLINES[Math.floor(Math.random() * TAGLINES.length)] ?? TAGLINES[0]!;
 
 export default function Contact() {
   const ref = useReveal();

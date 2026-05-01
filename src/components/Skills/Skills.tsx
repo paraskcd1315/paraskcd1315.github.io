@@ -1,3 +1,4 @@
+import type { MouseEvent } from "react";
 import useReveal from "../../hooks/useReveal";
 import PORTFOLIO_DATA from "../../data";
 import { getSectionMeta } from "../../sections";
@@ -8,7 +9,7 @@ const meta = getSectionMeta("skills");
 export default function Skills() {
   const ref = useReveal();
   const D = PORTFOLIO_DATA;
-  const onMove = (e) => {
+  const onMove = (e: MouseEvent<HTMLDivElement>) => {
     const r = e.currentTarget.getBoundingClientRect();
     e.currentTarget.style.setProperty("--mx", `${e.clientX - r.left}px`);
     e.currentTarget.style.setProperty("--my", `${e.clientY - r.top}px`);

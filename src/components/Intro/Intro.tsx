@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
-import './Intro.css';
-import { IntroProps } from './IntroTypes';
+import { useEffect, useState, type CSSProperties } from "react";
+import "./Intro.css";
+import { IntroProps } from "./IntroTypes";
 
 /**
  * Stage timing (ms). The user sees:
@@ -26,61 +26,71 @@ import { IntroProps } from './IntroTypes';
  * green stripes / KCD letters all collapse to one solid rose silhouette.
  */
 const STAGE_MS = {
-	logoIn: 800,
-	hold: 500,
-	morph: 350,
-	zoom: 1100
+  logoIn: 800,
+  hold: 500,
+  morph: 350,
+  zoom: 1100,
 };
 
-const TOTAL_MS = STAGE_MS.logoIn + STAGE_MS.hold + STAGE_MS.morph + STAGE_MS.zoom;
+const TOTAL_MS =
+  STAGE_MS.logoIn + STAGE_MS.hold + STAGE_MS.morph + STAGE_MS.zoom;
 
 export default function Intro({ onReveal, onDone }: Readonly<IntroProps>) {
-	const [stage, setStage] = useState('logo-in');
+  const [stage, setStage] = useState<
+    "logo-in" | "logo-hold" | "morph" | "zoom"
+  >("logo-in");
 
-	useEffect(() => {
-		const reduceMotion = typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  useEffect(() => {
+    const reduceMotion =
+      typeof window !== "undefined" &&
+      window.matchMedia &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-		if (reduceMotion) {
-			onReveal?.();
-			onDone();
-			return;
-		}
+    if (reduceMotion) {
+      onReveal?.();
+      onDone();
+      return;
+    }
 
-		const timers = [];
-		timers.push(setTimeout(() => setStage('logo-hold'), STAGE_MS.logoIn));
-		timers.push(setTimeout(() => setStage('morph'), STAGE_MS.logoIn + STAGE_MS.hold));
-		timers.push(
-			setTimeout(
-				() => {
-					setStage('zoom');
-					// Fire onReveal at the start of the zoom so the hero's name rise
-					// can begin overlapping the cutout expansion — by the time the
-					// cutout is gone, the name is most of the way into view, no pause.
-					onReveal?.();
-				},
-				STAGE_MS.logoIn + STAGE_MS.hold + STAGE_MS.morph
-			)
-		);
-		timers.push(setTimeout(() => onDone(), TOTAL_MS));
-		return () => timers.forEach(clearTimeout);
-	}, [onReveal, onDone]);
+    const timers: ReturnType<typeof setTimeout>[] = [];
+    timers.push(setTimeout(() => setStage("logo-hold"), STAGE_MS.logoIn));
+    timers.push(
+      setTimeout(() => setStage("morph"), STAGE_MS.logoIn + STAGE_MS.hold),
+    );
+    timers.push(
+      setTimeout(
+        () => {
+          setStage("zoom");
+          // Fire onReveal at the start of the zoom so the hero's name rise
+          // can begin overlapping the cutout expansion — by the time the
+          // cutout is gone, the name is most of the way into view, no pause.
+          onReveal?.();
+        },
+        STAGE_MS.logoIn + STAGE_MS.hold + STAGE_MS.morph,
+      ),
+    );
+    timers.push(setTimeout(() => onDone(), TOTAL_MS));
+    return () => timers.forEach(clearTimeout);
+  }, [onReveal, onDone]);
 
-	return (
-		<div
-			className={`intro intro-${stage}`}
-			aria-hidden='true'
-			style={{
-				// Absolute root path. Don't use process.env.PUBLIC_URL here:
-				// with homepage="." in package.json, it expands to "." and
-				// url(./...) inside CSS resolves relative to the CSS file's
-				// location (build/static/css/), not the page root → 404.
-				// <img src> handles "./..." correctly because src is resolved
-				// relative to the document, but CSS url() is not.
-				'--logo-url': 'url(/kcd-logo-transparent.png)'
-			}}
-		>
-			<div className='intro-cutout-overlay' />
-			<img src='/kcd-logo-transparent.png' alt='' className='intro-logo' />
-		</div>
-	);
+  return (
+    <div
+      className={`intro intro-${stage}`}
+      aria-hidden="true"
+      style={
+        {
+          // Absolute root path. Don't use process.env.PUBLIC_URL here:
+          // with homepage="." in package.json, it expands to "." and
+          // url(./...) inside CSS resolves relative to the CSS file's
+          // location (build/static/css/), not the page root → 404.
+          // <img src> handles "./..." correctly because src is resolved
+          // relative to the document, but CSS url() is not.
+          "--logo-url": "url(/kcd-logo-transparent.png)",
+        } as CSSProperties
+      }
+    >
+      <div className="intro-cutout-overlay" />
+      <img src="/kcd-logo-transparent.png" alt="" className="intro-logo" />
+    </div>
+  );
 }

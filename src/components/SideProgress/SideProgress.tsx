@@ -3,7 +3,7 @@ import SECTIONS from "../../sections";
 import "./SideProgress.css";
 
 export default function SideProgress() {
-  const [active, setActive] = useState(SECTIONS[0]?.id);
+  const [active, setActive] = useState<string>(SECTIONS[0]?.id ?? "hero");
   useEffect(() => {
     const io = new IntersectionObserver(
       (entries) => {

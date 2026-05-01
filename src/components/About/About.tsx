@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import useReveal from "../../hooks/useReveal";
 import PORTFOLIO_DATA from "../../data";
 import { MOBILE_BREAKPOINT_PX } from "../../constants";
@@ -8,8 +8,8 @@ import "./About.css";
 const meta = getSectionMeta("about");
 
 export default function About() {
-  const ref = useReveal();
-  const pinRef = useRef(null);
+  const ref = useReveal<HTMLElement>();
+  const pinRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
   const [progress, setProgress] = useState(0);
   const D = PORTFOLIO_DATA;
@@ -61,24 +61,26 @@ export default function About() {
           <div
             className="about-stories"
             ref={pinRef}
-            style={{ "--story-count": stories.length }}
+            style={{ "--story-count": stories.length } as CSSProperties}
           >
             <div
               className="about-stories-stage"
-              style={{
-                "--leave": Math.max(
-                  0,
-                  Math.min(
-                    1,
-                    (Math.max(
-                      0,
-                      Math.min(1, progress * stories.length - active),
-                    ) -
-                      0.55) /
-                      0.45,
+              style={
+                {
+                  "--leave": Math.max(
+                    0,
+                    Math.min(
+                      1,
+                      (Math.max(
+                        0,
+                        Math.min(1, progress * stories.length - active),
+                      ) -
+                        0.55) /
+                        0.45,
+                    ),
                   ),
-                ),
-              }}
+                } as CSSProperties
+              }
             >
               {stories.map((s, i) => {
                 const state =
@@ -99,7 +101,7 @@ export default function About() {
                 <span>{String(active + 1).padStart(2, "0")}</span>
                 <span
                   className="track"
-                  style={{ "--p": `${progress * 100}%` }}
+                  style={{ "--p": `${progress * 100}%` } as CSSProperties}
                 ></span>
                 <span>{String(stories.length).padStart(2, "0")}</span>
               </div>

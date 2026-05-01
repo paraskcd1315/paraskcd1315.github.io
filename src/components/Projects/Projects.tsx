@@ -1,6 +1,7 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import PORTFOLIO_DATA from "../../data";
 import ProjectMock from "../ProjectMock";
+import type { ProjectMockKind } from "../ProjectMock/ProjectMockTypes";
 import {
   MOBILE_BREAKPOINT_PX,
   PROJECT_INTERSECTION_THRESHOLDS,
@@ -12,8 +13,8 @@ const meta = getSectionMeta("projects");
 
 export default function Projects() {
   const D = PORTFOLIO_DATA;
-  const pinRef = useRef(null);
-  const trackRef = useRef(null);
+  const pinRef = useRef<HTMLDivElement | null>(null);
+  const trackRef = useRef<HTMLDivElement | null>(null);
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
@@ -57,7 +58,7 @@ export default function Projects() {
         entries.forEach((e) => ratios.set(e.target, e.intersectionRatio));
         update();
       },
-      { root: track, threshold: PROJECT_INTERSECTION_THRESHOLDS },
+      { root: track, threshold: [...PROJECT_INTERSECTION_THRESHOLDS] },
     );
     cards.forEach((c) => io.observe(c));
     return () => io.disconnect();
@@ -89,7 +90,7 @@ export default function Projects() {
                 rel="noopener noreferrer"
               >
                 <div className="project-shot">
-                  <ProjectMock kind={p.kind} />
+                  <ProjectMock kind={p.kind as ProjectMockKind} />
                 </div>
                 <div className="project-meta">
                   <span className="num">{p.num}</span>
@@ -113,7 +114,7 @@ export default function Projects() {
             </span>
             <span
               className="track"
-              style={{ "--p": `${progress * 100}%` }}
+              style={{ "--p": `${progress * 100}%` } as CSSProperties}
             ></span>
             <span>{String(D.projects.length).padStart(2, "0")}</span>
           </div>

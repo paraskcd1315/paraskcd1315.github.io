@@ -9,8 +9,8 @@ const meta = getSectionMeta("photo");
 
 export default function Photo() {
   const ref = useReveal();
-  const pinRef = useRef(null);
-  const trackRef = useRef(null);
+  const pinRef = useRef<HTMLDivElement | null>(null);
+  const trackRef = useRef<HTMLDivElement | null>(null);
   const D = PORTFOLIO_DATA;
 
   useEffect(() => {

@@ -1,10 +1,5 @@
 import type { PhoneTrioProps } from "./PhoneTrio.types";
 
-/**
- * Renders a row of "phones" tilted at -3°/0°/+3° (or -3°/+3° for two)
- * with screenshots inside. Used by KCD Search, Influential Launcher,
- * Spotlight Search, and United Walls project mocks.
- */
 const TWO_PHONE_TILT = [-3, 3];
 const TRIO_TILT = [-3, 0, 3];
 const TRIO_Y_OFFSET = [12, -12, 12];

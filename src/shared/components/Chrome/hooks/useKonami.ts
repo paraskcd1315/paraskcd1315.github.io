@@ -1,11 +1,6 @@
 import { useEffect } from "react";
 import { KONAMI_SEQUENCE } from "../../../../constants";
 
-/**
- * Listens for the konami sequence (↑↑↓↓←→←→BA). Calls `onComplete` when the
- * full sequence is typed. Resets on any wrong key (with a smart re-start
- * if the wrong key is itself the first sequence key).
- */
 export default function useKonami(onComplete?: () => void) {
   useEffect(() => {
     let idx = 0;
@@ -18,6 +13,7 @@ export default function useKonami(onComplete?: () => void) {
           onComplete?.();
         }
       } else {
+        // If the wrong key is itself the first sequence key, count it as a restart.
         idx = k === KONAMI_SEQUENCE[0] ? 1 : 0;
       }
     };

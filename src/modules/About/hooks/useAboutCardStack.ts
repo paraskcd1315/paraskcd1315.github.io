@@ -1,13 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { MOBILE_BREAKPOINT_PX } from "../../../constants";
 
-/**
- * Drives the About section's vertically-pinned card stack. As the user
- * scrolls past the pinned container, a 0..1 progress drives which story
- * card is currently active. Mobile (≤ MOBILE_BREAKPOINT_PX) opts out:
- * progress stays 0, active stays 0, the markup falls back to a normal
- * stacked column via CSS.
- */
 export default function useAboutCardStack(storyCount: number) {
   const pinRef = useRef<HTMLDivElement | null>(null);
   const [active, setActive] = useState(0);

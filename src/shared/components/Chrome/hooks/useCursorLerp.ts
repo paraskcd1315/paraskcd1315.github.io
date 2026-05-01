@@ -4,12 +4,6 @@ import { CURSOR_LERP_FACTOR } from "../../../../constants";
 const INTERACTIVE_SELECTOR =
   "a, button, .skill, .project-card, .photo-card, .progress-item";
 
-/**
- * Custom-cursor pair: a snap-to-pointer dot and a smoothly-lerped ring.
- * Returns refs to attach to the two elements. The ring eases toward the
- * pointer at CURSOR_LERP_FACTOR per frame; both elements gain `.hover`
- * when the pointer is over an interactive selector.
- */
 export default function useCursorLerp() {
   const dotRef = useRef<HTMLDivElement | null>(null);
   const ringRef = useRef<HTMLDivElement | null>(null);

@@ -19,6 +19,8 @@ function picsumFallback() {
   return `https://picsum.photos/1920/1080?${season}-${Date.now()}`;
 }
 
+// Pre-decode via Image() then swap; otherwise the browser progressive-decodes
+// the hero photo top-to-bottom, which looks broken at this size.
 function preload(src: string): Promise<string> {
   return new Promise((resolve, reject) => {
     const img = new Image();
@@ -28,23 +30,13 @@ function preload(src: string): Promise<string> {
   });
 }
 
-/**
- * Fetches a random NASA APOD image (via Cloudflare Worker proxy that holds
- * the API key). Retries up to APOD_RETRY_COUNT times — each retry picks a
- * fresh random date, since some dates are videos/missing/etc. After all
- * retries fail, falls back to a season-tinted Picsum image. Pre-loads via
- * `new Image()` then swaps to avoid the progressive top-to-bottom decode
- * that otherwise looks bad on a hero photo.
- *
- * Returns the resolved URL (empty string until ready). Set as a CSS
- * background-image once non-empty.
- */
 export default function useHeroBackground(): string {
   const [bgUrl, setBgUrl] = useState<string>("");
 
   useEffect(() => {
     let cancelled = false;
     async function loadApod() {
+      // Random date may land on a video / missing entry; retry with fresh dates.
       for (let i = 0; i < APOD_RETRY_COUNT; i++) {
         try {
           const date = randomApodDate();

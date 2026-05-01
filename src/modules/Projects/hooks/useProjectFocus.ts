@@ -1,14 +1,6 @@
 import { useEffect, type RefObject } from "react";
 import { PROJECT_INTERSECTION_THRESHOLDS } from "../../../constants";
 
-/**
- * Within the horizontally-scrolling project track, finds the most-visible
- * card (highest intersection ratio) and adds `.dim` to every other card so
- * the focused one pops. Re-runs whenever any card's visibility changes.
- *
- * Bound to the same `trackRef` already wired up by useHorizontalPin so the
- * intersection root is the scroll viewport.
- */
 export default function useProjectFocus(
   trackRef: RefObject<HTMLDivElement | null>,
 ) {

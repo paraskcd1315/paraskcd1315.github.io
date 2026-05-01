@@ -12,15 +12,6 @@ const TOTAL_MS =
 
 export type IntroStage = "logo-in" | "logo-hold" | "morph" | "zoom";
 
-/**
- * Sequences the intro overlay through 4 stages: logo-in → logo-hold →
- * morph → zoom. Fires `onReveal` at the start of zoom so the hero name
- * animation can overlap the cutout expansion (no perceptible pause).
- * Fires `onDone` after the whole sequence so the overlay can unmount.
- *
- * Honors `prefers-reduced-motion`: skips all timers and fires both
- * callbacks synchronously.
- */
 export default function useIntroStages(
   onReveal?: () => void,
   onDone?: () => void,
@@ -28,10 +19,9 @@ export default function useIntroStages(
   const [stage, setStage] = useState<IntroStage>("logo-in");
 
   useEffect(() => {
-    const reduceMotion =
-      typeof window !== "undefined" &&
-      window.matchMedia &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const reduceMotion = !!globalThis.window?.matchMedia?.(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
 
     if (reduceMotion) {
       onReveal?.();
@@ -39,21 +29,20 @@ export default function useIntroStages(
       return;
     }
 
-    const timers: ReturnType<typeof setTimeout>[] = [];
-    timers.push(setTimeout(() => setStage("logo-hold"), STAGE_MS.logoIn));
-    timers.push(
+    const timers: ReturnType<typeof setTimeout>[] = [
+      setTimeout(() => setStage("logo-hold"), STAGE_MS.logoIn),
       setTimeout(() => setStage("morph"), STAGE_MS.logoIn + STAGE_MS.hold),
-    );
-    timers.push(
       setTimeout(
         () => {
           setStage("zoom");
+          // Fire onReveal at zoom-start so the hero name animation overlaps
+          // the cutout expansion — no perceptible pause between the two.
           onReveal?.();
         },
         STAGE_MS.logoIn + STAGE_MS.hold + STAGE_MS.morph,
       ),
-    );
-    timers.push(setTimeout(() => onDone?.(), TOTAL_MS));
+      setTimeout(() => onDone?.(), TOTAL_MS),
+    ];
     return () => timers.forEach(clearTimeout);
   }, [onReveal, onDone]);
 

@@ -1,15 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { MOBILE_BREAKPOINT_PX } from "../../constants";
 
-/**
- * Sticky-pinned horizontal scroll: as the user scrolls vertically through a
- * tall pin container, an inner track translates horizontally. Returns refs
- * to attach + the current 0..1 progress.
- *
- * Mobile (≤ MOBILE_BREAKPOINT_PX): no pinning — refs still attach but
- * progress stays 0; consumer should fall back to native horizontal scroll
- * via CSS overflow.
- */
 export default function useHorizontalPin() {
   const pinRef = useRef<HTMLDivElement | null>(null);
   const trackRef = useRef<HTMLDivElement | null>(null);

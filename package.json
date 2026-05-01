@@ -29,7 +29,24 @@
     "extends": [
       "react-app",
       "react-app/jest"
-    ]
+    ],
+    "rules": {
+      "no-restricted-imports": [
+        "error",
+        {
+          "patterns": [
+            {
+              "group": [
+                "*/modules/*",
+                "*/layouts/*",
+                "*/components/*"
+              ],
+              "message": "Deep imports forbidden under modules/, layouts/, components/. Import from the folder barrel instead — e.g. `import { Hero } from '../modules'`."
+            }
+          ]
+        }
+      ]
+    }
   },
   "browserslist": {
     "production": [

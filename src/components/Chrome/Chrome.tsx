@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { CURSOR_LERP_FACTOR, KONAMI_SEQUENCE } from "../../constants";
 import "./Chrome.css";
-import { ChromeProps } from "./ChromeTypes";
+import type { ChromeProps } from "./Chrome.types";
 
 const INTERACTIVE_SELECTOR =
   "a, button, .skill, .project-card, .photo-card, .progress-item";

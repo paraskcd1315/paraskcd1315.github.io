@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 import PORTFOLIO_DATA from "../../data";
 import ProjectMock from "../ProjectMock";
-import type { ProjectMockKind } from "../ProjectMock/ProjectMockTypes";
+import type { ProjectMockKind } from "../ProjectMock/ProjectMock.types";
 import {
   MOBILE_BREAKPOINT_PX,
   PROJECT_INTERSECTION_THRESHOLDS,

@@ -10,7 +10,7 @@ import {
   SEASONS_BY_MONTH,
 } from "../../constants";
 import "./Hero.css";
-import { HeroProps } from "./HeroTypes";
+import type { HeroProps } from "./Hero.types";
 
 const APOD_PROXY_URL = "https://apod-proxy.paraskhanchandani1315.workers.dev";
 

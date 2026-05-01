@@ -1,6 +1,6 @@
 import { useEffect, useState, type CSSProperties } from "react";
 import "./Intro.css";
-import { IntroProps } from "./IntroTypes";
+import type { IntroProps } from "./Intro.types";
 
 /**
  * Stage timing (ms). The user sees:

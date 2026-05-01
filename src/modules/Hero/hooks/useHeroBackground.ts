@@ -19,8 +19,6 @@ function picsumFallback() {
   return `https://picsum.photos/1920/1080?${season}-${Date.now()}`;
 }
 
-// Pre-decode via Image() then swap; otherwise the browser progressive-decodes
-// the hero photo top-to-bottom, which looks broken at this size.
 function preload(src: string): Promise<string> {
   return new Promise((resolve, reject) => {
     const img = new Image();
@@ -36,7 +34,6 @@ export default function useHeroBackground(): string {
   useEffect(() => {
     let cancelled = false;
     async function loadApod() {
-      // Random date may land on a video / missing entry; retry with fresh dates.
       for (let i = 0; i < APOD_RETRY_COUNT; i++) {
         try {
           const date = randomApodDate();
@@ -48,7 +45,7 @@ export default function useHeroBackground(): string {
           if (!cancelled) setBgUrl(data.url);
           return;
         } catch {
-          // try next
+          continue;
         }
       }
       try {
@@ -56,7 +53,7 @@ export default function useHeroBackground(): string {
         await preload(url);
         if (!cancelled) setBgUrl(url);
       } catch {
-        // give up silently, gradient backdrop stays
+        return;
       }
     }
     loadApod();

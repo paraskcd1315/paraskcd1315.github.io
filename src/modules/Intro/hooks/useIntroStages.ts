@@ -35,8 +35,6 @@ export default function useIntroStages(
       setTimeout(
         () => {
           setStage("zoom");
-          // Fire onReveal at zoom-start so the hero name animation overlaps
-          // the cutout expansion — no perceptible pause between the two.
           onReveal?.();
         },
         STAGE_MS.logoIn + STAGE_MS.hold + STAGE_MS.morph,

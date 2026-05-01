@@ -11,7 +11,6 @@ export default function useSectionObserver(): string {
           if (e.isIntersecting) setActive(e.target.id);
         });
       },
-      // -40%/-55% gives a stable mid-screen activation band, not edge-flicker.
       { rootMargin: "-40% 0px -55% 0px" },
     );
     SECTIONS.forEach((s) => {

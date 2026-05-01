@@ -23,8 +23,6 @@ export type SectionId = (typeof SECTIONS)[number]["id"];
 
 export default SECTIONS;
 
-// Param narrowed to SectionId so the lookup is guaranteed to succeed —
-// return is non-null without runtime fallback ceremony at every callsite.
 export function getSectionMeta(id: SectionId): SectionMeta {
   const idx = SECTIONS.findIndex((s) => s.id === id);
   const s = SECTIONS[idx];

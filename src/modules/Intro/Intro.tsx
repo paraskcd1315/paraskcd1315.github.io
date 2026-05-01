@@ -12,9 +12,6 @@ export default function Intro({ onReveal, onDone }: Readonly<IntroProps>) {
       aria-hidden="true"
       style={
         {
-          // homepage="." in package.json makes process.env.PUBLIC_URL expand
-          // to ".", which breaks CSS url() resolution from build/static/css/.
-          // Hardcode the absolute root path here.
           "--logo-url": "url(/kcd-logo-transparent.png)",
         } as CSSProperties
       }

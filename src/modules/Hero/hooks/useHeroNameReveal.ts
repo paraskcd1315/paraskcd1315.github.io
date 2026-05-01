@@ -16,8 +16,6 @@ export default function useHeroNameReveal(startReveal: boolean) {
       () => el.classList.add("go"),
       HERO_NAME_REVEAL_DELAY_MS,
     );
-    // After all words land, drop the per-word mask so round-bottom glyphs
-    // (S, a, s, c) aren't clipped by overflow:hidden.
     const settle = setTimeout(
       () => el.classList.add("settled"),
       HERO_NAME_REVEAL_DELAY_MS +

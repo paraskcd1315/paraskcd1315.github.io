@@ -13,11 +13,10 @@ export default function useKonami(onComplete?: () => void) {
           onComplete?.();
         }
       } else {
-        // If the wrong key is itself the first sequence key, count it as a restart.
         idx = k === KONAMI_SEQUENCE[0] ? 1 : 0;
       }
     };
-    window.addEventListener("keydown", onKey);
+    globalThis.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [onComplete]);
 }

@@ -61,7 +61,14 @@ import { SectionLabel, MetaRow, Tag } from "../../shared/components";
 
 ## Refactor backlog
 
-PORT-53 (1.5.3) — refactor existing modules to consume DS atoms/molecules
-(e.g., Hero.tsx uses MetaRow + LiveDot + RoleBadge instead of raw spans;
-Projects.tsx uses ScrollIndicator + LinkArrow). Deferred — current modules
-work; refactor when adding new sections that benefit from reuse.
+PORT-108 (1.5.5) — three atoms need adjustments so Skills + Projects can
+re-consume them (initial PORT-53 swap failed visual-parity audit and was
+reverted). Specifically:
+- **IconCircle** needs a `borderRadius` prop (Skills wants 8px square, not
+  pill) + `overflow: hidden` + inner-img sizing (76% × 76% for child `<img>`)
+- **ScrollIndicator** is currently layout-agnostic but Projects expected a
+  positioning wrapper. Document that fact here; consumer wraps in an
+  absolutely-positioned div.
+- **LinkArrow** hover via `*:hover > &` only matches direct parent; needs
+  an `active` prop the consumer drives from its own hover state (project-card
+  hover is two levels above the atom).

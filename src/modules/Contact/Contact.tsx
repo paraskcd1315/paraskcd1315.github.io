@@ -1,23 +1,16 @@
+import PORTFOLIO_CONTENT from "../../content";
 import { useReveal } from "../../shared/hooks";
-import PORTFOLIO_DATA from "../../data";
 import { getSectionMeta } from "../../sections";
 import "./Contact.css";
 
 const meta = getSectionMeta("contact");
 
-const TAGLINES = [
-  { verb: "Building", rest: "the universe." },
-  { verb: "Building", rest: "galaxies." },
-  { verb: "Building", rest: "worlds." },
-  { verb: "Rendering", rest: "reality." },
-  { verb: "Compiling", rest: "the cosmos." },
-];
-const tagline =
-  TAGLINES[Math.floor(Math.random() * TAGLINES.length)] ?? TAGLINES[0]!;
-
 export default function Contact() {
-  const ref = useReveal();
-  const D = PORTFOLIO_DATA;
+  const ref = useReveal<HTMLElement>();
+  const { profile, branding, socials, contact } = PORTFOLIO_CONTENT;
+  const tagline =
+    contact.taglines[Math.floor(Math.random() * contact.taglines.length)] ??
+    contact.taglines[0]!;
   return (
     <section id="contact" className="contact" ref={ref}>
       <div className="contact-bg"></div>
@@ -33,11 +26,11 @@ export default function Contact() {
           <br />
           {tagline.rest}
         </h2>
-        <a className="email reveal" href={`mailto:${D.email}`}>
-          {D.email}
+        <a className="email reveal" href={`mailto:${profile.email}`}>
+          {profile.email}
         </a>
         <div className="socials reveal">
-          {D.socials.map((s) => (
+          {socials.map((s) => (
             <a
               key={s.label}
               href={s.href}
@@ -59,10 +52,10 @@ export default function Contact() {
       </div>
       <footer style={{ marginTop: 120 }}>
         <span className="footer-sig">
-          <img src="/kcd-logo.png" alt="" className="footer-mark" />© Paras
-          Khanchandani · 2026
+          <img src={branding.logoPath} alt="" className="footer-mark" />
+          {profile.copyright}
         </span>
-        <span>Hand-built → ∞</span>
+        <span>{profile.signature}</span>
       </footer>
     </section>
   );

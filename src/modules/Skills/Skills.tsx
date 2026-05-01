@@ -1,5 +1,5 @@
 import type { MouseEvent } from "react";
-import PORTFOLIO_DATA from "../../data";
+import PORTFOLIO_CONTENT from "../../content";
 import { useReveal } from "../../shared/hooks";
 import { getSectionMeta } from "../../sections";
 import "./Skills.css";
@@ -8,7 +8,7 @@ const meta = getSectionMeta("skills");
 
 export default function Skills() {
   const ref = useReveal<HTMLElement>();
-  const D = PORTFOLIO_DATA;
+  const { skills } = PORTFOLIO_CONTENT;
   const onMove = (e: MouseEvent<HTMLDivElement>) => {
     const r = e.currentTarget.getBoundingClientRect();
     e.currentTarget.style.setProperty("--mx", `${e.clientX - r.left}px`);
@@ -19,14 +19,11 @@ export default function Skills() {
       <div className="container">
         <div className="section-label reveal">{meta.label}</div>
         <div className="skills-head">
-          <h2 className="reveal">Tools and tech.</h2>
-          <p className="reveal">
-            Languages, frameworks and platforms I work with. Some I lead with,
-            some are supporting tech, all are in active use.
-          </p>
+          <h2 className="reveal">{skills.heading}</h2>
+          <p className="reveal">{skills.body}</p>
         </div>
         <div className="skills-grid reveal">
-          {D.skills.map((s) => (
+          {skills.items.map((s) => (
             <div className="skill" key={s.name} onMouseMove={onMove}>
               <div className="glyph">
                 <img src={s.icon} alt={s.name} loading="lazy" />

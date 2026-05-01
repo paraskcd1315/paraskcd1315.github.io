@@ -1,4 +1,4 @@
-import PORTFOLIO_DATA from "../../data";
+import PORTFOLIO_CONTENT from "../../content";
 import { useScrollY } from "../../shared/hooks";
 import { HERO_FADE_DISTANCE, PARALLAX_MAX } from "../../constants";
 import "./Hero.css";
@@ -8,7 +8,7 @@ import useHeroNameReveal from "./hooks/useHeroNameReveal";
 
 export default function Hero({ startReveal = true }: Readonly<HeroProps>) {
   const y = useScrollY();
-  const D = PORTFOLIO_DATA;
+  const { profile, branding, hero } = PORTFOLIO_CONTENT;
   const parallax = Math.min(y, PARALLAX_MAX);
   const nameRef = useHeroNameReveal(startReveal);
   const bgUrl = useHeroBackground();
@@ -17,12 +17,12 @@ export default function Hero({ startReveal = true }: Readonly<HeroProps>) {
     <section id="hero" className="hero">
       <a
         className="hero-badge"
-        href="https://github.com/paraskcd1315"
+        href={branding.badgeHref}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="KCD"
+        aria-label={branding.badgeAriaLabel}
       >
-        <img src="/kcd-logo.png" alt="KCD" />
+        <img src={branding.logoPath} alt={branding.badgeAriaLabel} />
       </a>
       <div
         className={`hero-photo${bgUrl ? " ready" : ""}`}
@@ -43,46 +43,48 @@ export default function Hero({ startReveal = true }: Readonly<HeroProps>) {
       >
         <div className="hero-eyebrow">
           <span className="dot"></span>
-          <span>{new Date().getFullYear()} · CASTELLDEFELS, ES</span>
+          <span>
+            {new Date().getFullYear()} · {profile.location.eyebrow}
+          </span>
         </div>
         <h1 className="hero-name" ref={nameRef}>
           <span className="row">
-            <span className="word">
-              <span>Hi,</span>
-            </span>
-            <span className="word">
-              <span>I'm</span>
-            </span>
-            <em>{"// Fullstack developer"}</em>
+            {hero.greeting.map((word) => (
+              <span className="word" key={word}>
+                <span>{word}</span>
+              </span>
+            ))}
+            <em>{hero.taglineLabel}</em>
           </span>
           <span className="row">
             <span className="word">
-              <span>{D.name[0]}</span>
+              <span>{profile.name[0]}</span>
             </span>
           </span>
           <span className="row">
             <span className="word">
               <span>
-                {D.name[1]}
-                {D.name[2]}
+                {profile.name[1]}
+                {profile.name[2]}
               </span>
             </span>
           </span>
         </h1>
         <div className="hero-meta">
-          <div>
-            <span className="label">Discipline</span>
-            <span className="value">Full-stack engineering · UX/UI</span>
-          </div>
-          <div>
-            <span className="label">Currently</span>
-            <span className="value" style={{ color: "var(--accent)" }}>
-              @ Unimedia Technology
-            </span>
-          </div>
+          {hero.meta.map((m) => (
+            <div key={m.label}>
+              <span className="label">{m.label}</span>
+              <span
+                className="value"
+                style={m.accent ? { color: "var(--accent)" } : undefined}
+              >
+                {m.value}
+              </span>
+            </div>
+          ))}
           <div className="roles">
-            <span className="label">Stacks</span>
-            {D.rolesShort.map((r) => (
+            <span className="label">{hero.stacksLabel}</span>
+            {profile.rolesShort.map((r) => (
               <span key={r}>{r}</span>
             ))}
           </div>

@@ -1,0 +1,13 @@
+{
+  "name": ["Paras", "Khanchan", "dani"],
+  "tagline": "Full-stack engineer & UX/UI designer",
+  "rolesShort": ["Web", "iOS", "macOS", "Android", "UX/UI"],
+  "location": {
+    "city": "Castelldefels, Barcelona",
+    "origin": "Tenerife, Canary Islands",
+    "eyebrow": "CASTELLDEFELS, ES"
+  },
+  "email": "dev@paraskcd.com",
+  "signature": "Hand-built → ∞",
+  "copyright": "© Paras Khanchandani · 2026"
+}

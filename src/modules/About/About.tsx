@@ -1,5 +1,5 @@
 import { type CSSProperties } from "react";
-import PORTFOLIO_DATA from "../../data";
+import PORTFOLIO_CONTENT from "../../content";
 import { useReveal } from "../../shared/hooks";
 import { getSectionMeta } from "../../sections";
 import "./About.css";
@@ -9,8 +9,8 @@ const meta = getSectionMeta("about");
 
 export default function About() {
   const ref = useReveal<HTMLElement>();
-  const D = PORTFOLIO_DATA;
-  const stories = D.about;
+  const { profile, branding, about } = PORTFOLIO_CONTENT;
+  const stories = about.stories;
   const { pinRef, active, progress } = useAboutCardStack(stories.length);
 
   return (
@@ -20,20 +20,19 @@ export default function About() {
         <div className="about-grid">
           <div className="about-sticky reveal">
             <div className="about-avatar">
-              <img src="/dp.jpeg" alt="Paras Khanchandani" />
+              <img src={branding.avatarPath} alt={branding.avatarAlt} />
             </div>
             <h2>
-              I make Web and
-              <br />
-              Mobile Apps. <em>{"// full stack"}</em>
+              {about.heading} <em>{about.headingTagline}</em>
             </h2>
             <div className="about-loc">
               <div>
-                <span className="pin">●</span> Currently · {D.location.city}
+                <span className="pin">●</span> {about.labels.currently} ·{" "}
+                {profile.location.city}
               </div>
               <div>
-                <span style={{ color: "var(--fg-faint)" }}>●</span> From ·{" "}
-                {D.location.origin}
+                <span style={{ color: "var(--fg-faint)" }}>●</span>{" "}
+                {about.labels.from} · {profile.location.origin}
               </div>
             </div>
           </div>

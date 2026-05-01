@@ -1,0 +1,40 @@
+{
+  "heading": "I make Web and Mobile Apps.",
+  "headingTagline": "// full stack",
+  "labels": {
+    "currently": "Currently",
+    "from": "From"
+  },
+  "stories": [
+    {
+      "n": "01",
+      "h": "Full Stack Developer.",
+      "p": "I'm a <strong>Software Engineer at <span class='hl'>Unimedia Technology</span></strong>, where I make full scalable Web as well as Mobile Applications with technologies like <strong>C# .NET</strong>, <strong>Blazor WASM</strong>, <strong>ReactJS</strong>, <strong>NextJS</strong>, <strong>Swift</strong>, <strong>Kotlin</strong> and <strong>Jetpack Compose</strong>. Every project gets me to learn something new, a new tool, framework or architecture problem to solve."
+    },
+    {
+      "n": "02",
+      "h": "DevOps and self-hosting.",
+      "p": "I'm adaptable at implementing <strong>Docker</strong> based containers and providing DevOps solutions on platforms like <strong>Microsoft Azure</strong>, <strong>AWS</strong> and CI/CD pipelines. I also self host a few of my own platforms on a home server, as I like to understand the full stack from the bottom up."
+    },
+    {
+      "n": "03",
+      "h": "Design first.",
+      "p": "I sketch in <strong>Figma</strong> before I touch the editor. I'm able to deliver user-centric solutions focusing on performance, security and maintainability."
+    },
+    {
+      "n": "04",
+      "h": "Team player, Agile by default.",
+      "p": "I'm a good team player with experience in <strong>Agile</strong> Environments, using tools like <strong>Jira</strong> and <strong>Git</strong> to ensure proper coordination of multiple projects among team members. Programming is my passion, it lets me keep learning and solve problems at ease."
+    },
+    {
+      "n": "05",
+      "h": "Outside of work.",
+      "p": "I love <strong>space</strong>, I love <strong>science</strong>. I watch a lot of YouTube videos on astrophysics, cosmology, <span class='hl'>black holes</span>, quantum physics and new research. I also kind of think we live in a <strong>simulation</strong>, and the more I read about it, the more interesting it gets."
+    },
+    {
+      "n": "06",
+      "h": "Favourite movies and series.",
+      "p": "My favourite movies are <strong>The Matrix trilogy</strong>, <strong>Inception</strong> and <strong>Interstellar</strong>. My favourite series is <span class='hl'>Mr. Robot</span>."
+    }
+  ]
+}

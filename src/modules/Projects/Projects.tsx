@@ -1,5 +1,5 @@
 import { type CSSProperties } from "react";
-import PORTFOLIO_DATA from "../../data";
+import PORTFOLIO_CONTENT from "../../content";
 import { ProjectMock, type ProjectMockKind } from "../../shared/components";
 import { useHorizontalPin } from "../../shared/hooks";
 import { getSectionMeta } from "../../sections";
@@ -9,7 +9,7 @@ import useProjectFocus from "./hooks/useProjectFocus";
 const meta = getSectionMeta("projects");
 
 export default function Projects() {
-  const D = PORTFOLIO_DATA;
+  const { projects } = PORTFOLIO_CONTENT;
   const { pinRef, trackRef, progress } = useHorizontalPin();
   useProjectFocus(trackRef);
 
@@ -18,19 +18,19 @@ export default function Projects() {
       <div className="projects-head">
         <div>
           <div className="section-label">{meta.label}</div>
-          <h2>Things I've shipped.</h2>
+          <h2>{projects.heading}</h2>
         </div>
         <div className="meta">
           <div>
-            <strong>{D.projects.length}</strong> selected · 2023 → 2026
+            <strong>{projects.items.length}</strong> {projects.countSuffix}
           </div>
-          <div>Swipe → to navigate</div>
+          <div>{projects.hint}</div>
         </div>
       </div>
       <div className="projects-pin" ref={pinRef}>
         <div className="projects-stage">
           <div className="projects-track" ref={trackRef}>
-            {D.projects.map((p) => (
+            {projects.items.map((p) => (
               <a
                 className="project-card"
                 key={p.num}
@@ -56,8 +56,8 @@ export default function Projects() {
             <span>
               {String(
                 Math.min(
-                  D.projects.length,
-                  Math.floor(progress * D.projects.length) + 1,
+                  projects.items.length,
+                  Math.floor(progress * projects.items.length) + 1,
                 ),
               ).padStart(2, "0")}
             </span>
@@ -65,7 +65,7 @@ export default function Projects() {
               className="track"
               style={{ "--p": `${progress * 100}%` } as CSSProperties}
             ></span>
-            <span>{String(D.projects.length).padStart(2, "0")}</span>
+            <span>{String(projects.items.length).padStart(2, "0")}</span>
           </div>
         </div>
       </div>

@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import "./App.css";
+import PORTFOLIO_CONTENT from "../content";
 import { Chrome, SideProgress } from "../shared/components";
 import {
   About,
@@ -12,10 +13,13 @@ import {
   Watch,
 } from "../modules";
 
+const KONAMI_FLASH_DURATION_MS = 1600;
+
 export default function App() {
   const [konami, setKonami] = useState(false);
   const [introDone, setIntroDone] = useState(false);
   const [heroRevealing, setHeroRevealing] = useState(false);
+  const { branding } = PORTFOLIO_CONTENT;
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -23,7 +27,7 @@ export default function App() {
 
   const onKonami = useCallback(() => {
     setKonami(true);
-    setTimeout(() => setKonami(false), 1600);
+    setTimeout(() => setKonami(false), KONAMI_FLASH_DURATION_MS);
   }, []);
 
   const onIntroReveal = useCallback(() => setHeroRevealing(true), []);
@@ -41,7 +45,7 @@ export default function App() {
       <Photo />
       <Watch />
       <Contact />
-      {konami && <div className="konami-flash">↑↑↓↓←→←→BA</div>}
+      {konami && <div className="konami-flash">{branding.konamiFlashText}</div>}
     </>
   );
 }

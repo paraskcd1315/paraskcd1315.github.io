@@ -1,0 +1,9 @@
+{
+  "greeting": ["Hi,", "I'm"],
+  "taglineLabel": "// Fullstack developer",
+  "meta": [
+    { "label": "Discipline", "value": "Full-stack engineering · UX/UI" },
+    { "label": "Currently", "value": "@ Unimedia Technology", "accent": true }
+  ],
+  "stacksLabel": "Stacks"
+}

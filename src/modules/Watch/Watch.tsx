@@ -1,4 +1,4 @@
-import PORTFOLIO_DATA from "../../data";
+import PORTFOLIO_CONTENT from "../../content";
 import { VideoFrame } from "../../shared/components";
 import { useReveal } from "../../shared/hooks";
 import { getSectionMeta } from "../../sections";
@@ -8,17 +8,15 @@ const meta = getSectionMeta("watch");
 
 export default function Watch() {
   const ref = useReveal<HTMLElement>();
-  const { featured, others } = PORTFOLIO_DATA.videos;
+  const { videos } = PORTFOLIO_CONTENT;
+  const { featured, others } = videos;
   return (
     <section id="watch" className="watch" ref={ref}>
       <div className="container">
         <div className="section-label reveal">{meta.label}</div>
         <div className="watch-head">
-          <h2 className="reveal">My showreel and projects.</h2>
-          <p className="reveal">
-            My showreel plus a couple of older UI projects I uploaded to
-            YouTube.
-          </p>
+          <h2 className="reveal">{videos.heading}</h2>
+          <p className="reveal">{videos.body}</p>
         </div>
         <article className="watch-featured reveal">
           <VideoFrame id={featured.id} title={featured.title} />

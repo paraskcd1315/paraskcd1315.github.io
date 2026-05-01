@@ -1,28 +1,13 @@
 import useReveal from "../../hooks/useReveal";
 import PORTFOLIO_DATA from "../../data";
 import { getSectionMeta } from "../../sections";
+import { VideoFrame } from "../../components";
 import "./Watch.css";
-import type { VideoFrameProps } from "./Watch.types";
 
-const EMBED_BASE = "https://www.youtube-nocookie.com/embed";
 const meta = getSectionMeta("watch");
 
-function VideoFrame({ id, title }: Readonly<VideoFrameProps>) {
-  return (
-    <div className="watch-frame">
-      <iframe
-        src={`${EMBED_BASE}/${id}?rel=0`}
-        title={title}
-        loading="lazy"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowFullScreen
-      />
-    </div>
-  );
-}
-
 export default function Watch() {
-  const ref = useReveal();
+  const ref = useReveal<HTMLElement>();
   const { featured, others } = PORTFOLIO_DATA.videos;
   return (
     <section id="watch" className="watch" ref={ref}>

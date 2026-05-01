@@ -5,3 +5,5 @@ export type {
   ProjectMockKind,
   ProjectMockProps,
 } from "./ProjectMock/ProjectMock.types";
+export { default as VideoFrame } from "./VideoFrame";
+export type { VideoFrameProps } from "./VideoFrame/VideoFrame.types";

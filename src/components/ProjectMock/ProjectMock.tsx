@@ -1,4 +1,5 @@
 import PhoneTrio from '../PhoneTrio';
+import { ProjectMockProps } from './ProjectMockTypes';
 
 const PHONE_MOCKS = {
 	kcd: {
@@ -27,7 +28,7 @@ const PHONE_MOCKS = {
 	}
 };
 
-export default function ProjectMock({ kind }: { kind: keyof typeof PHONE_MOCKS }) {
+export default function ProjectMock({ kind }: Readonly<ProjectMockProps>) {
 	const config = PHONE_MOCKS[kind];
 	if (!config) return null;
 	return <PhoneTrio {...config} />;

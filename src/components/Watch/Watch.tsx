@@ -2,11 +2,12 @@ import useReveal from '../../hooks/useReveal';
 import PORTFOLIO_DATA from '../../data';
 import { getSectionMeta } from '../../sections';
 import './Watch.css';
+import { VideoFrameProps } from './WatchTypes';
 
 const EMBED_BASE = 'https://www.youtube-nocookie.com/embed';
 const meta = getSectionMeta('watch');
 
-function VideoFrame({ id, title }: { id: string; title: string }) {
+function VideoFrame({ id, title }: Readonly<VideoFrameProps>) {
 	return (
 		<div className='watch-frame'>
 			<iframe

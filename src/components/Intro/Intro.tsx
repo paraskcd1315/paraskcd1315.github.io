@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import './Intro.css';
+import { IntroProps } from './IntroTypes';
 
 /**
  * Stage timing (ms). The user sees:
@@ -33,7 +34,7 @@ const STAGE_MS = {
 
 const TOTAL_MS = STAGE_MS.logoIn + STAGE_MS.hold + STAGE_MS.morph + STAGE_MS.zoom;
 
-export default function Intro({ onReveal, onDone }: { onReveal: () => void; onDone: () => void }) {
+export default function Intro({ onReveal, onDone }: Readonly<IntroProps>) {
 	const [stage, setStage] = useState('logo-in');
 
 	useEffect(() => {

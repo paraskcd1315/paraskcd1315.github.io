@@ -1,3 +1,5 @@
+import { PhoneTrioProps } from './PhoneTrioTypes';
+
 /**
  * Renders a row of "phones" tilted at -3°/0°/+3° (or -3°/+3° for two)
  * with screenshots inside. Used by KCD Search, Influential Launcher,
@@ -8,17 +10,7 @@ const TRIO_TILT = [-3, 0, 3];
 const TRIO_Y_OFFSET = [12, -12, 12];
 const DUO_Y_OFFSET = [14, -14];
 
-type PhoneTrioProps = {
-	shots: string[];
-	background: string;
-	alt: string;
-	phoneWidth?: number;
-	phoneMaxHeight?: number;
-	borderRadius?: number;
-	gap?: string;
-};
-
-export default function PhoneTrio({ shots, background, alt, phoneWidth = 180, phoneMaxHeight = 420, borderRadius = 22, gap = '20px' }: PhoneTrioProps) {
+export default function PhoneTrio({ shots, background, alt, phoneWidth = 180, phoneMaxHeight = 420, borderRadius = 22, gap = '20px' }: Readonly<PhoneTrioProps>) {
 	const isDuo = shots.length === 2;
 	const tilts = isDuo ? TWO_PHONE_TILT : TRIO_TILT;
 	const yOffsets = isDuo ? DUO_Y_OFFSET : TRIO_Y_OFFSET;

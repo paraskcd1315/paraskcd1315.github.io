@@ -1,10 +1,11 @@
 import { useEffect, useRef } from 'react';
 import { CURSOR_LERP_FACTOR, KONAMI_SEQUENCE } from '../../constants';
 import './Chrome.css';
+import { ChromeProps } from './ChromeTypes';
 
 const INTERACTIVE_SELECTOR = 'a, button, .skill, .project-card, .photo-card, .progress-item';
 
-export default function Chrome({ onKonami }: { onKonami: () => void }) {
+export default function Chrome({ onKonami }: Readonly<ChromeProps>) {
 	const dotRef = useRef(null);
 	const ringRef = useRef(null);
 	const targetRef = useRef({ x: 0, y: 0 });

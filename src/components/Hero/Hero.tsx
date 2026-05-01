@@ -3,6 +3,7 @@ import useScrollY from '../../hooks/useScrollY';
 import PORTFOLIO_DATA from '../../data';
 import { APOD_LOOKBACK_DAYS, APOD_RETRY_COUNT, HERO_FADE_DISTANCE, HERO_NAME_REVEAL_DELAY_MS, PARALLAX_MAX, SEASONS_BY_MONTH } from '../../constants';
 import './Hero.css';
+import { HeroProps } from './HeroTypes';
 
 const APOD_PROXY_URL = 'https://apod-proxy.paraskhanchandani1315.workers.dev';
 
@@ -27,7 +28,7 @@ function preload(src) {
 	});
 }
 
-export default function Hero({ startReveal = true }: { startReveal?: boolean }) {
+export default function Hero({ startReveal = true }: Readonly<HeroProps>) {
 	const y = useScrollY();
 	const D = PORTFOLIO_DATA;
 	const parallax = Math.min(y, PARALLAX_MAX);

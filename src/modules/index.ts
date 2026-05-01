@@ -1,0 +1,10 @@
+export { default as About } from "./About";
+export { default as Contact } from "./Contact";
+export { default as Hero } from "./Hero";
+export type { HeroProps } from "./Hero/Hero.types";
+export { default as Intro } from "./Intro";
+export type { IntroProps } from "./Intro/Intro.types";
+export { default as Photo } from "./Photo";
+export { default as Projects } from "./Projects";
+export { default as Skills } from "./Skills";
+export { default as Watch } from "./Watch";

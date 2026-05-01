@@ -1,7 +1,6 @@
 import { type CSSProperties } from "react";
 import PORTFOLIO_DATA from "../../data";
-import ProjectMock from "../../components/ProjectMock";
-import type { ProjectMockKind } from "../../components/ProjectMock/ProjectMock.types";
+import { ProjectMock, type ProjectMockKind } from "../../components";
 import useHorizontalPin from "../../hooks/useHorizontalPin";
 import { getSectionMeta } from "../../sections";
 import "./Projects.css";

@@ -1,15 +1,16 @@
 import { useCallback, useEffect, useState } from "react";
 import "./App.css";
-import Chrome from "../layouts/Chrome";
-import SideProgress from "../layouts/SideProgress";
-import Intro from "../modules/Intro";
-import Hero from "../modules/Hero";
-import About from "../modules/About";
-import Skills from "../modules/Skills";
-import Projects from "../modules/Projects";
-import Photo from "../modules/Photo";
-import Watch from "../modules/Watch";
-import Contact from "../modules/Contact";
+import { Chrome, SideProgress } from "../layouts";
+import {
+  About,
+  Contact,
+  Hero,
+  Intro,
+  Photo,
+  Projects,
+  Skills,
+  Watch,
+} from "../modules";
 
 export default function App() {
   const [konami, setKonami] = useState(false);

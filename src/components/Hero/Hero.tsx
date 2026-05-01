@@ -1,98 +1,17 @@
-import { useEffect, useRef, useState } from "react";
 import useScrollY from "../../hooks/useScrollY";
 import PORTFOLIO_DATA from "../../data";
-import {
-  APOD_LOOKBACK_DAYS,
-  APOD_RETRY_COUNT,
-  HERO_FADE_DISTANCE,
-  HERO_NAME_REVEAL_DELAY_MS,
-  PARALLAX_MAX,
-  SEASONS_BY_MONTH,
-} from "../../constants";
+import { HERO_FADE_DISTANCE, PARALLAX_MAX } from "../../constants";
 import "./Hero.css";
 import type { HeroProps } from "./Hero.types";
-
-const APOD_PROXY_URL = "https://apod-proxy.paraskhanchandani1315.workers.dev";
-
-function randomApodDate() {
-  const daysAgo = Math.floor(Math.random() * APOD_LOOKBACK_DAYS);
-  const d = new Date();
-  d.setDate(d.getDate() - daysAgo);
-  return d.toISOString().slice(0, 10);
-}
-
-function picsumFallback() {
-  const season = SEASONS_BY_MONTH[new Date().getMonth()];
-  return `https://picsum.photos/1920/1080?${season}-${Date.now()}`;
-}
-
-function preload(src: string): Promise<string> {
-  return new Promise((resolve, reject) => {
-    const img = new Image();
-    img.onload = () => resolve(src);
-    img.onerror = () => reject(new Error("image failed to load"));
-    img.src = src;
-  });
-}
+import useHeroBackground from "./useHeroBackground";
+import useHeroNameReveal from "./useHeroNameReveal";
 
 export default function Hero({ startReveal = true }: Readonly<HeroProps>) {
   const y = useScrollY();
   const D = PORTFOLIO_DATA;
   const parallax = Math.min(y, PARALLAX_MAX);
-  const nameRef = useRef<HTMLHeadingElement | null>(null);
-  const [bgUrl, setBgUrl] = useState<string>("");
-
-  useEffect(() => {
-    if (!startReveal) return undefined;
-    const el = nameRef.current;
-    if (!el) return undefined;
-    const t = setTimeout(
-      () => el.classList.add("go"),
-      HERO_NAME_REVEAL_DELAY_MS,
-    );
-    // After the slide-in animation completes, drop the per-word mask so
-    // round-bottom glyphs (S, a, s, c) aren't clipped by overflow:hidden.
-    // Animation is 1.1s with up to 0.46s of staggered delay.
-    const settle = setTimeout(
-      () => el.classList.add("settled"),
-      HERO_NAME_REVEAL_DELAY_MS + 1100 + 460 + 100,
-    );
-    return () => {
-      clearTimeout(t);
-      clearTimeout(settle);
-    };
-  }, [startReveal]);
-
-  useEffect(() => {
-    let cancelled = false;
-    async function loadApod() {
-      for (let i = 0; i < APOD_RETRY_COUNT; i++) {
-        try {
-          const date = randomApodDate();
-          const res = await fetch(`${APOD_PROXY_URL}?date=${date}`);
-          if (!res.ok) continue;
-          const data = await res.json();
-          if (data.media_type !== "image" || !data.url) continue;
-          await preload(data.url);
-          if (!cancelled) setBgUrl(data.url);
-          return;
-        } catch {
-          // try next
-        }
-      }
-      try {
-        const url = picsumFallback();
-        await preload(url);
-        if (!cancelled) setBgUrl(url);
-      } catch {
-        // give up silently, gradient backdrop stays
-      }
-    }
-    loadApod();
-    return () => {
-      cancelled = true;
-    };
-  }, []);
+  const nameRef = useHeroNameReveal(startReveal);
+  const bgUrl = useHeroBackground();
 
   return (
     <section id="hero" className="hero">

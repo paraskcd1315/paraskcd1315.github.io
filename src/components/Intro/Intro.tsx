@@ -1,9 +1,10 @@
-import { useEffect, useState, type CSSProperties } from "react";
+import { type CSSProperties } from "react";
 import "./Intro.css";
 import type { IntroProps } from "./Intro.types";
+import useIntroStages from "./useIntroStages";
 
 /**
- * Stage timing (ms). The user sees:
+ * Intro overlay. The user sees:
  *   1. logo-in   — solid black backdrop, rose-tinted KCD logo fades in
  *                  (the cutout hole behind it is already sized to the logo,
  *                  but is fully covered by the logo image so invisible)
@@ -21,57 +22,12 @@ import type { IntroProps } from "./Intro.types";
  * PNG. Subtracting layer 2 from layer 1 punches a logo-shaped hole.
  *
  * The rose tint on the logo image uses an inline SVG feColorMatrix filter
- * (defined below). Every opaque pixel of the PNG is replaced with the
+ * (defined in CSS). Every opaque pixel of the PNG is replaced with the
  * rose accent color while preserving alpha, so the original sunflowers /
  * green stripes / KCD letters all collapse to one solid rose silhouette.
  */
-const STAGE_MS = {
-  logoIn: 800,
-  hold: 500,
-  morph: 350,
-  zoom: 1100,
-};
-
-const TOTAL_MS =
-  STAGE_MS.logoIn + STAGE_MS.hold + STAGE_MS.morph + STAGE_MS.zoom;
-
 export default function Intro({ onReveal, onDone }: Readonly<IntroProps>) {
-  const [stage, setStage] = useState<
-    "logo-in" | "logo-hold" | "morph" | "zoom"
-  >("logo-in");
-
-  useEffect(() => {
-    const reduceMotion =
-      typeof window !== "undefined" &&
-      window.matchMedia &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-    if (reduceMotion) {
-      onReveal?.();
-      onDone();
-      return;
-    }
-
-    const timers: ReturnType<typeof setTimeout>[] = [];
-    timers.push(setTimeout(() => setStage("logo-hold"), STAGE_MS.logoIn));
-    timers.push(
-      setTimeout(() => setStage("morph"), STAGE_MS.logoIn + STAGE_MS.hold),
-    );
-    timers.push(
-      setTimeout(
-        () => {
-          setStage("zoom");
-          // Fire onReveal at the start of the zoom so the hero's name rise
-          // can begin overlapping the cutout expansion — by the time the
-          // cutout is gone, the name is most of the way into view, no pause.
-          onReveal?.();
-        },
-        STAGE_MS.logoIn + STAGE_MS.hold + STAGE_MS.morph,
-      ),
-    );
-    timers.push(setTimeout(() => onDone(), TOTAL_MS));
-    return () => timers.forEach(clearTimeout);
-  }, [onReveal, onDone]);
+  const stage = useIntroStages(onReveal, onDone);
 
   return (
     <div

@@ -1,35 +1,15 @@
-import { useEffect, useRef } from "react";
 import useReveal from "../../hooks/useReveal";
+import useHorizontalPin from "../../hooks/useHorizontalPin";
 import PORTFOLIO_DATA from "../../data";
-import { MOBILE_BREAKPOINT_PX } from "../../constants";
 import { getSectionMeta } from "../../sections";
 import "./Photo.css";
 
 const meta = getSectionMeta("photo");
 
 export default function Photo() {
-  const ref = useReveal();
-  const pinRef = useRef<HTMLDivElement | null>(null);
-  const trackRef = useRef<HTMLDivElement | null>(null);
+  const ref = useReveal<HTMLElement>();
+  const { pinRef, trackRef } = useHorizontalPin();
   const D = PORTFOLIO_DATA;
-
-  useEffect(() => {
-    let raf = 0;
-    const tick = () => {
-      const pin = pinRef.current;
-      const track = trackRef.current;
-      if (pin && track && window.innerWidth > MOBILE_BREAKPOINT_PX) {
-        const r = pin.getBoundingClientRect();
-        const total = pin.offsetHeight - window.innerHeight;
-        const p = Math.max(0, Math.min(1, -r.top / total));
-        const trackW = track.scrollWidth - window.innerWidth;
-        track.style.transform = `translate3d(${-p * trackW}px, 0, 0)`;
-      }
-      raf = requestAnimationFrame(tick);
-    };
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
-  }, []);
 
   return (
     <section id="photo" className="photo" ref={ref}>

@@ -14,12 +14,14 @@ export const KONAMI_SEQUENCE = [
   "ArrowRight",
   "b",
   "a",
-];
+] as const;
 
 export const APOD_LOOKBACK_DAYS = 90;
 export const APOD_RETRY_COUNT = 4;
 
-export const SEASONS_BY_MONTH = [
+export type Season = "winter" | "spring" | "summer" | "autumn";
+
+export const SEASONS_BY_MONTH: readonly Season[] = [
   "winter",
   "winter",
   "spring",
@@ -34,7 +36,7 @@ export const SEASONS_BY_MONTH = [
   "winter",
 ];
 
-export const PROJECT_INTERSECTION_THRESHOLDS = [0, 0.25, 0.5, 0.75, 1];
+export const PROJECT_INTERSECTION_THRESHOLDS = [0, 0.25, 0.5, 0.75, 1] as const;
 export const MOBILE_BREAKPOINT_PX = 900;
 
 export const CURSOR_LERP_FACTOR = 0.18;

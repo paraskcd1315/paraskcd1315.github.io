@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import "./App.css";
-import { Chrome, SideProgress } from "../layouts";
+import { Chrome, SideProgress } from "../shared/components";
 import {
   About,
   Contact,

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { MOBILE_BREAKPOINT_PX } from "../../constants";
+import { MOBILE_BREAKPOINT_PX } from "../../../constants";
 
 /**
  * Drives the About section's vertically-pinned card stack. As the user

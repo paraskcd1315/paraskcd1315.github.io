@@ -1,10 +1,10 @@
-import useScrollY from "../../hooks/useScrollY";
 import PORTFOLIO_DATA from "../../data";
+import { useScrollY } from "../../shared/hooks";
 import { HERO_FADE_DISTANCE, PARALLAX_MAX } from "../../constants";
 import "./Hero.css";
 import type { HeroProps } from "./Hero.types";
-import useHeroBackground from "./useHeroBackground";
-import useHeroNameReveal from "./useHeroNameReveal";
+import useHeroBackground from "./hooks/useHeroBackground";
+import useHeroNameReveal from "./hooks/useHeroNameReveal";
 
 export default function Hero({ startReveal = true }: Readonly<HeroProps>) {
   const y = useScrollY();

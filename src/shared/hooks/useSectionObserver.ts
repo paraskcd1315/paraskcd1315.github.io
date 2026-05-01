@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import SECTIONS from "../sections";
+import SECTIONS from "../../sections";
 
 /**
  * Tracks which registered section is currently in view via IntersectionObserver.

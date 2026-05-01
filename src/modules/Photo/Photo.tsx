@@ -1,6 +1,5 @@
-import useReveal from "../../hooks/useReveal";
-import useHorizontalPin from "../../hooks/useHorizontalPin";
 import PORTFOLIO_DATA from "../../data";
+import { useHorizontalPin, useReveal } from "../../shared/hooks";
 import { getSectionMeta } from "../../sections";
 import "./Photo.css";
 

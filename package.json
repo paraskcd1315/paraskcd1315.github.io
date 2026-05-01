@@ -37,11 +37,12 @@
           "patterns": [
             {
               "group": [
-                "*/modules/*",
-                "*/layouts/*",
-                "*/components/*"
+                "*/modules/*/*",
+                "*/shared/components/*/*",
+                "*/shared/hooks/*",
+                "*/shared/utils/*"
               ],
-              "message": "Deep imports forbidden under modules/, layouts/, components/. Import from the folder barrel instead — e.g. `import { Hero } from '../modules'`."
+              "message": "Deep imports forbidden. Use the folder barrel — e.g. `import { Hero } from '../modules'`, `import { useReveal } from '../../shared/hooks'`."
             }
           ]
         }

@@ -1,7 +1,7 @@
-import useReveal from "../../hooks/useReveal";
 import PORTFOLIO_DATA from "../../data";
+import { VideoFrame } from "../../shared/components";
+import { useReveal } from "../../shared/hooks";
 import { getSectionMeta } from "../../sections";
-import { VideoFrame } from "../../components";
 import "./Watch.css";
 
 const meta = getSectionMeta("watch");

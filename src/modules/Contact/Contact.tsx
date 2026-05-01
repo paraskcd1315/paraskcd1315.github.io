@@ -1,4 +1,4 @@
-import useReveal from "../../hooks/useReveal";
+import { useReveal } from "../../shared/hooks";
 import PORTFOLIO_DATA from "../../data";
 import { getSectionMeta } from "../../sections";
 import "./Contact.css";

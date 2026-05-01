@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { MOBILE_BREAKPOINT_PX } from "../constants";
+import { MOBILE_BREAKPOINT_PX } from "../../constants";
 
 /**
  * Sticky-pinned horizontal scroll: as the user scrolls vertically through a

@@ -1,5 +1,5 @@
-import SECTIONS from "../../sections";
-import useSectionObserver from "../../hooks/useSectionObserver";
+import SECTIONS from "../../../sections";
+import { useSectionObserver } from "../../hooks";
 import "./SideProgress.css";
 
 export default function SideProgress() {

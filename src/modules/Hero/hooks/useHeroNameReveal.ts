@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { HERO_NAME_REVEAL_DELAY_MS } from "../../constants";
+import { HERO_NAME_REVEAL_DELAY_MS } from "../../../constants";
 
 const NAME_ANIM_DURATION_MS = 1100;
 const NAME_STAGGER_MAX_MS = 460;

@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { KONAMI_SEQUENCE } from "../../constants";
+import { KONAMI_SEQUENCE } from "../../../../constants";
 
 /**
  * Listens for the konami sequence (↑↑↓↓←→←→BA). Calls `onComplete` when the

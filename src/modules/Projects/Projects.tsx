@@ -1,10 +1,10 @@
 import { type CSSProperties } from "react";
 import PORTFOLIO_DATA from "../../data";
-import { ProjectMock, type ProjectMockKind } from "../../components";
-import useHorizontalPin from "../../hooks/useHorizontalPin";
+import { ProjectMock, type ProjectMockKind } from "../../shared/components";
+import { useHorizontalPin } from "../../shared/hooks";
 import { getSectionMeta } from "../../sections";
 import "./Projects.css";
-import useProjectFocus from "./useProjectFocus";
+import useProjectFocus from "./hooks/useProjectFocus";
 
 const meta = getSectionMeta("projects");
 

@@ -1,5 +1,5 @@
 import { useEffect, type RefObject } from "react";
-import { PROJECT_INTERSECTION_THRESHOLDS } from "../../constants";
+import { PROJECT_INTERSECTION_THRESHOLDS } from "../../../constants";
 
 /**
  * Within the horizontally-scrolling project track, finds the most-visible

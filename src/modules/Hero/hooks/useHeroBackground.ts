@@ -3,7 +3,7 @@ import {
   APOD_LOOKBACK_DAYS,
   APOD_RETRY_COUNT,
   SEASONS_BY_MONTH,
-} from "../../constants";
+} from "../../../constants";
 
 const APOD_PROXY_URL = "https://apod-proxy.paraskhanchandani1315.workers.dev";
 

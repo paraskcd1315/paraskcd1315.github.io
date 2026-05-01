@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { CURSOR_LERP_FACTOR } from "../../constants";
+import { CURSOR_LERP_FACTOR } from "../../../../constants";
 
 const INTERACTIVE_SELECTOR =
   "a, button, .skill, .project-card, .photo-card, .progress-item";

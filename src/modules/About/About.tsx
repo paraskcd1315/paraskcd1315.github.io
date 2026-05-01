@@ -1,9 +1,9 @@
 import { type CSSProperties } from "react";
-import useReveal from "../../hooks/useReveal";
 import PORTFOLIO_DATA from "../../data";
+import { useReveal } from "../../shared/hooks";
 import { getSectionMeta } from "../../sections";
 import "./About.css";
-import useAboutCardStack from "./useAboutCardStack";
+import useAboutCardStack from "./hooks/useAboutCardStack";
 
 const meta = getSectionMeta("about");
 

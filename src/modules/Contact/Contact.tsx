@@ -1,7 +1,7 @@
 import PORTFOLIO_CONTENT from "../../content";
 import { useReveal } from "../../shared/hooks";
 import { getSectionMeta } from "../../sections";
-import "./Contact.css";
+import styles from "./Contact.module.scss";
 
 const meta = getSectionMeta("contact");
 
@@ -12,24 +12,22 @@ export default function Contact() {
     contact.taglines[Math.floor(Math.random() * contact.taglines.length)] ??
     contact.taglines[0]!;
   return (
-    <section id="contact" className="contact" ref={ref}>
-      <div className="contact-bg"></div>
-      <div className="contact-inner">
-        <div
-          className="section-label reveal"
-          style={{ justifyContent: "center" }}
-        >
-          {meta.label}
-        </div>
+    <section id="contact" className={styles.contact} ref={ref}>
+      <div className={styles.contactBg}></div>
+      <div className={styles.contactInner}>
+        <div className={`${styles.sectionLabel} reveal`}>{meta.label}</div>
         <h2 className="reveal">
           <em>{tagline.verb}</em>
           <br />
           {tagline.rest}
         </h2>
-        <a className="email reveal" href={`mailto:${profile.email}`}>
+        <a
+          className={`${styles.email} reveal`}
+          href={`mailto:${profile.email}`}
+        >
           {profile.email}
         </a>
-        <div className="socials reveal">
+        <div className={`${styles.socials} reveal`}>
           {socials.map((s) => (
             <a
               key={s.label}
@@ -50,9 +48,9 @@ export default function Contact() {
           ))}
         </div>
       </div>
-      <footer style={{ marginTop: 120 }}>
-        <span className="footer-sig">
-          <img src={branding.logoPath} alt="" className="footer-mark" />
+      <footer className={styles.footer} style={{ marginTop: 120 }}>
+        <span className={styles.footerSig}>
+          <img src={branding.logoPath} alt="" className={styles.footerMark} />
           {profile.copyright}
         </span>
         <span>{profile.signature}</span>

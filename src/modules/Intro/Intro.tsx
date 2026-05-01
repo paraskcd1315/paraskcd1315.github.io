@@ -1,8 +1,15 @@
 import { type CSSProperties } from "react";
 import PORTFOLIO_CONTENT from "../../content";
-import "./Intro.css";
+import styles from "./Intro.module.scss";
 import type { IntroProps } from "./Intro.types";
-import useIntroStages from "./hooks/useIntroStages";
+import useIntroStages, { type IntroStage } from "./hooks/useIntroStages";
+
+const STAGE_CLASS: Record<IntroStage, string> = {
+  "logo-in": "logoIn",
+  "logo-hold": "logoHold",
+  morph: "morph",
+  zoom: "zoom",
+};
 
 export default function Intro({ onReveal, onDone }: Readonly<IntroProps>) {
   const stage = useIntroStages(onReveal, onDone);
@@ -10,7 +17,7 @@ export default function Intro({ onReveal, onDone }: Readonly<IntroProps>) {
 
   return (
     <div
-      className={`intro intro-${stage}`}
+      className={`${styles.intro} ${styles[STAGE_CLASS[stage]]}`}
       aria-hidden="true"
       style={
         {
@@ -18,11 +25,11 @@ export default function Intro({ onReveal, onDone }: Readonly<IntroProps>) {
         } as CSSProperties
       }
     >
-      <div className="intro-cutout-overlay" />
+      <div className={styles.cutoutOverlay} />
       <img
         src={branding.logoTransparentPath}
         alt={intro.logoAlt}
-        className="intro-logo"
+        className={styles.logo}
       />
     </div>
   );

@@ -1,0 +1,64 @@
+@use "../../../styles/tokens" as *;
+
+.grain {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  mix-blend-mode: overlay;
+  opacity: $grain-opacity;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1.2 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+}
+
+.cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: $r-pill;
+  background: $accent;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition:
+    width $dur-fast $ease-reveal,
+    height $dur-fast $ease-reveal,
+    background $dur-fast;
+  mix-blend-mode: difference;
+
+  &:global(.hover) {
+    width: 4px;
+    height: 4px;
+  }
+}
+
+.cursorRing {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 36px;
+  height: 36px;
+  border: 1px solid $fg-dim;
+  border-radius: $r-pill;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition:
+    width 0.3s $ease-reveal,
+    height 0.3s $ease-reveal,
+    border-color $dur-fast;
+
+  &:global(.hover) {
+    width: 64px;
+    height: 64px;
+    border-color: $accent;
+  }
+}
+
+@include coarse-pointer {
+  .cursor,
+  .cursorRing {
+    display: none;
+  }
+}

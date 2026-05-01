@@ -1,10 +1,11 @@
 import type { VideoFrameProps } from "./VideoFrame.types";
+import styles from "./VideoFrame.module.scss";
 
 const EMBED_BASE = "https://www.youtube-nocookie.com/embed";
 
 export default function VideoFrame({ id, title }: Readonly<VideoFrameProps>) {
   return (
-    <div className="watch-frame">
+    <div className={styles.frame}>
       <iframe
         src={`${EMBED_BASE}/${id}?rel=0`}
         title={title}

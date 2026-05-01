@@ -1,4 +1,4 @@
-import "./Chrome.css";
+import styles from "./Chrome.module.scss";
 import type { ChromeProps } from "./Chrome.types";
 import useCursorLerp from "./hooks/useCursorLerp";
 import useKonami from "./hooks/useKonami";
@@ -9,9 +9,9 @@ export default function Chrome({ onKonami }: Readonly<ChromeProps>) {
 
   return (
     <>
-      <div className="grain" />
-      <div className="cursor-ring" ref={ringRef} />
-      <div className="cursor" ref={dotRef} />
+      <div className={styles.grain} />
+      <div className={styles.cursorRing} ref={ringRef} />
+      <div className={styles.cursor} ref={dotRef} />
     </>
   );
 }

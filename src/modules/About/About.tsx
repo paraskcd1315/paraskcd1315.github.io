@@ -2,10 +2,16 @@ import { type CSSProperties } from "react";
 import PORTFOLIO_CONTENT from "../../content";
 import { useReveal } from "../../shared/hooks";
 import { getSectionMeta } from "../../sections";
-import "./About.css";
+import styles from "./About.module.scss";
 import useAboutCardStack from "./hooks/useAboutCardStack";
 
 const meta = getSectionMeta("about");
+
+const STATE_CLASS: Record<"active" | "past" | "upcoming", string> = {
+  active: "isActive",
+  past: "isPast",
+  upcoming: "isUpcoming",
+};
 
 export default function About() {
   const ref = useReveal<HTMLElement>();
@@ -14,20 +20,20 @@ export default function About() {
   const { pinRef, active, progress } = useAboutCardStack(stories.length);
 
   return (
-    <section id="about" className="about" ref={ref}>
-      <div className="container">
-        <div className="section-label reveal">{meta.label}</div>
-        <div className="about-grid">
-          <div className="about-sticky reveal">
-            <div className="about-avatar">
+    <section id="about" className={styles.about} ref={ref}>
+      <div>
+        <div className={`${styles.sectionLabel} reveal`}>{meta.label}</div>
+        <div className={styles.aboutGrid}>
+          <div className={`${styles.aboutSticky} reveal`}>
+            <div className={styles.aboutAvatar}>
               <img src={branding.avatarPath} alt={branding.avatarAlt} />
             </div>
             <h2>
               {about.heading} <em>{about.headingTagline}</em>
             </h2>
-            <div className="about-loc">
+            <div className={styles.aboutLoc}>
               <div>
-                <span className="pin">●</span> {about.labels.currently} ·{" "}
+                <span className={styles.pin}>●</span> {about.labels.currently} ·{" "}
                 {profile.location.city}
               </div>
               <div>
@@ -37,12 +43,12 @@ export default function About() {
             </div>
           </div>
           <div
-            className="about-stories"
+            className={styles.aboutStories}
             ref={pinRef}
             style={{ "--story-count": stories.length } as CSSProperties}
           >
             <div
-              className="about-stories-stage"
+              className={styles.aboutStoriesStage}
               style={
                 {
                   "--leave": Math.max(
@@ -65,24 +71,16 @@ export default function About() {
                   i === active ? "active" : i < active ? "past" : "upcoming";
                 return (
                   <div
-                    className={`about-story is-${state} reveal`}
+                    className={`${styles.aboutStory} ${styles[STATE_CLASS[state]]} reveal`}
                     data-index={i}
                     key={s.n}
                   >
-                    <div className="num">{s.n}</div>
+                    <div className={styles.num}>{s.n}</div>
                     <h3>{s.h}</h3>
                     <p dangerouslySetInnerHTML={{ __html: s.p }} />
                   </div>
                 );
               })}
-              <div className="scroll-indicator about-scroll-indicator">
-                <span>{String(active + 1).padStart(2, "0")}</span>
-                <span
-                  className="track"
-                  style={{ "--p": `${progress * 100}%` } as CSSProperties}
-                ></span>
-                <span>{String(stories.length).padStart(2, "0")}</span>
-              </div>
             </div>
           </div>
         </div>

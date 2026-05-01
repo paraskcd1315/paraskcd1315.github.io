@@ -2,7 +2,7 @@ import type { MouseEvent } from "react";
 import PORTFOLIO_CONTENT from "../../content";
 import { useReveal } from "../../shared/hooks";
 import { getSectionMeta } from "../../sections";
-import "./Skills.css";
+import styles from "./Skills.module.scss";
 
 const meta = getSectionMeta("skills");
 
@@ -15,22 +15,22 @@ export default function Skills() {
     e.currentTarget.style.setProperty("--my", `${e.clientY - r.top}px`);
   };
   return (
-    <section id="skills" className="skills" ref={ref}>
-      <div className="container">
-        <div className="section-label reveal">{meta.label}</div>
-        <div className="skills-head">
+    <section id="skills" className={styles.skills} ref={ref}>
+      <div>
+        <div className={`${styles.sectionLabel} reveal`}>{meta.label}</div>
+        <div className={styles.skillsHead}>
           <h2 className="reveal">{skills.heading}</h2>
           <p className="reveal">{skills.body}</p>
         </div>
-        <div className="skills-grid reveal">
+        <div className={`${styles.skillsGrid} reveal`}>
           {skills.items.map((s) => (
-            <div className="skill" key={s.name} onMouseMove={onMove}>
-              <div className="glyph">
+            <div className={styles.skill} key={s.name} onMouseMove={onMove}>
+              <div className={styles.glyph}>
                 <img src={s.icon} alt={s.name} loading="lazy" />
               </div>
               <div>
-                <div className="name">{s.name}</div>
-                <div className="cat">{s.cat}</div>
+                <div className={styles.name}>{s.name}</div>
+                <div className={styles.cat}>{s.cat}</div>
               </div>
             </div>
           ))}

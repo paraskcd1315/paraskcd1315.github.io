@@ -3,7 +3,7 @@ import PORTFOLIO_CONTENT from "../../content";
 import { ProjectMock, type ProjectMockKind } from "../../shared/components";
 import { useHorizontalPin } from "../../shared/hooks";
 import { getSectionMeta } from "../../sections";
-import "./Projects.css";
+import styles from "./Projects.module.scss";
 import useProjectFocus from "./hooks/useProjectFocus";
 
 const meta = getSectionMeta("projects");
@@ -14,45 +14,45 @@ export default function Projects() {
   useProjectFocus(trackRef);
 
   return (
-    <section id="projects" className="projects">
-      <div className="projects-head">
+    <section id="projects" className={styles.projects}>
+      <div className={styles.projectsHead}>
         <div>
-          <div className="section-label">{meta.label}</div>
+          <div className={styles.sectionLabel}>{meta.label}</div>
           <h2>{projects.heading}</h2>
         </div>
-        <div className="meta">
+        <div className={styles.meta}>
           <div>
             <strong>{projects.items.length}</strong> {projects.countSuffix}
           </div>
           <div>{projects.hint}</div>
         </div>
       </div>
-      <div className="projects-pin" ref={pinRef}>
-        <div className="projects-stage">
-          <div className="projects-track" ref={trackRef}>
+      <div className={styles.projectsPin} ref={pinRef}>
+        <div className={styles.projectsStage}>
+          <div className={styles.projectsTrack} ref={trackRef}>
             {projects.items.map((p) => (
               <a
-                className="project-card"
+                className={`${styles.projectCard} project-card`}
                 key={p.num}
                 href={p.link || "#"}
                 target={p.link && p.link !== "#" ? "_blank" : undefined}
                 rel="noopener noreferrer"
               >
-                <div className="project-shot">
+                <div className={styles.projectShot}>
                   <ProjectMock kind={p.kind as ProjectMockKind} />
                 </div>
-                <div className="project-meta">
-                  <span className="num">{p.num}</span>
+                <div className={styles.projectMeta}>
+                  <span className={styles.num}>{p.num}</span>
                   <div>
-                    <div className="title">{p.title}</div>
-                    <div className="stack">{p.stack}</div>
+                    <div className={styles.title}>{p.title}</div>
+                    <div className={styles.stack}>{p.stack}</div>
                   </div>
-                  <div className="arrow">↗</div>
+                  <div className={styles.arrow}>↗</div>
                 </div>
               </a>
             ))}
           </div>
-          <div className="scroll-indicator">
+          <div className={styles.scrollIndicator}>
             <span>
               {String(
                 Math.min(
@@ -62,7 +62,7 @@ export default function Projects() {
               ).padStart(2, "0")}
             </span>
             <span
-              className="track"
+              className={styles.track}
               style={{ "--p": `${progress * 100}%` } as CSSProperties}
             ></span>
             <span>{String(projects.items.length).padStart(2, "0")}</span>

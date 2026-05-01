@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import "./App.css";
+import styles from "./App.module.scss";
 import PORTFOLIO_CONTENT from "../content";
 import { Chrome, SideProgress } from "../shared/components";
 import {
@@ -45,7 +45,9 @@ export default function App() {
       <Photo />
       <Watch />
       <Contact />
-      {konami && <div className="konami-flash">{branding.konamiFlashText}</div>}
+      {konami && (
+        <div className={styles.konamiFlash}>{branding.konamiFlashText}</div>
+      )}
     </>
   );
 }

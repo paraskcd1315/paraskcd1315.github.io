@@ -1,0 +1,138 @@
+@use "../../styles/tokens" as *;
+@use "../../styles/mixins" as *;
+
+.contact {
+  padding: 160px $sp-6 80px;
+  border-top: 1px solid $line;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+
+  @include mobile {
+    padding: $sp-10 20px 60px;
+  }
+
+  h2 {
+    font-size: clamp(56px, 9vw, 160px);
+    font-weight: 500;
+    letter-spacing: -0.045em;
+    line-height: 0.92;
+    margin: 0 0 32px;
+
+    em {
+      font-style: normal;
+      color: $accent;
+    }
+
+    @include mobile {
+      font-size: clamp(44px, 14vw, 80px);
+    }
+  }
+}
+
+.sectionLabel {
+  @include section-label;
+  justify-content: center;
+}
+
+.contactBg {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at center bottom,
+    color-mix(in oklab, $accent 14%, transparent),
+    transparent 60%
+  );
+  z-index: 0;
+}
+
+.contactInner {
+  position: relative;
+  z-index: 1;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.email {
+  font-size: clamp(20px, 2.4vw, 28px);
+  font-family: $f-mono;
+  color: $fg;
+  text-decoration: none;
+  border-bottom: 1px solid $line-strong;
+  padding-bottom: 6px;
+  transition:
+    border-color 0.3s,
+    color 0.3s;
+  cursor: none;
+
+  &:hover {
+    border-color: $accent;
+    color: $accent;
+  }
+}
+
+.socials {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 56px;
+  flex-wrap: wrap;
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 20px;
+    border: 1px solid $line-strong;
+    border-radius: $r-pill;
+    text-decoration: none;
+    color: $fg;
+    font-family: $f-mono;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    cursor: none;
+    transition:
+      background 0.25s,
+      color 0.25s,
+      border-color 0.25s,
+      transform 0.3s;
+
+    &:hover {
+      background: $fg;
+      color: $ink;
+      border-color: $fg;
+      transform: translateY(-2px);
+    }
+  }
+}
+
+.footer {
+  padding: $sp-6;
+  border-top: 1px solid $line;
+  display: flex;
+  justify-content: space-between;
+  font-family: $f-mono;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: $fg-faint;
+
+  @include mobile {
+    padding: $sp-5 20px;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+}
+
+.footerSig {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.footerMark {
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  display: block;
+}

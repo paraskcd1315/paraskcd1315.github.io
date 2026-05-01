@@ -1,0 +1,37 @@
+@use "../styles/tokens" as *;
+
+.konamiFlash {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  pointer-events: none;
+  display: grid;
+  place-items: center;
+  background: color-mix(in oklab, $accent 90%, transparent);
+  color: $accent-ink;
+  font-family: $f-mono;
+  font-size: 14vw;
+  font-weight: 700;
+  letter-spacing: $ls-tight;
+  opacity: 0;
+  animation: flash 1.6s ease-out forwards;
+}
+
+@keyframes flash {
+  0% {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  20% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  80% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.05);
+  }
+}

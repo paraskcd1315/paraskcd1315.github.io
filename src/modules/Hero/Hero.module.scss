@@ -118,7 +118,7 @@
 .heroName {
   font-family: $f-sans;
   font-weight: 600;
-  font-size: clamp(52px, 10vw, 160px);
+  font-size: clamp(48px, 7.5vw, 120px);
   line-height: 0.88;
   letter-spacing: -0.045em;
   margin: 0;
@@ -184,7 +184,7 @@
   }
 
   @media (max-width: 600px) {
-    font-size: clamp(40px, 12vw, 72px) !important;
+    font-size: clamp(36px, 9vw, 56px) !important;
   }
 }
 

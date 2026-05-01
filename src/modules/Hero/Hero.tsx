@@ -64,10 +64,7 @@ export default function Hero({ startReveal = true }: Readonly<HeroProps>) {
           </span>
           <span className={styles.row}>
             <span className={styles.word}>
-              <span>
-                {profile.name[1]}
-                {profile.name[2]}
-              </span>
+              <span>{profile.name[1]}</span>
             </span>
           </span>
         </h1>

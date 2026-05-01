@@ -1,6 +1,10 @@
-import { type CSSProperties } from "react";
 import PORTFOLIO_CONTENT from "../../content";
-import { ProjectMock, type ProjectMockKind } from "../../shared/components";
+import {
+  LinkArrow,
+  ProjectMock,
+  type ProjectMockKind,
+  ScrollIndicator,
+} from "../../shared/components";
 import { useHorizontalPin } from "../../shared/hooks";
 import { getSectionMeta } from "../../sections";
 import styles from "./Projects.module.scss";
@@ -12,6 +16,11 @@ export default function Projects() {
   const { projects } = PORTFOLIO_CONTENT;
   const { pinRef, trackRef, progress } = useHorizontalPin();
   useProjectFocus(trackRef);
+
+  const currentIdx = Math.min(
+    projects.items.length,
+    Math.floor(progress * projects.items.length) + 1,
+  );
 
   return (
     <section id="projects" className={styles.projects}>
@@ -47,25 +56,17 @@ export default function Projects() {
                     <div className={styles.title}>{p.title}</div>
                     <div className={styles.stack}>{p.stack}</div>
                   </div>
-                  <div className={styles.arrow}>↗</div>
+                  <LinkArrow />
                 </div>
               </a>
             ))}
           </div>
-          <div className={styles.scrollIndicator}>
-            <span>
-              {String(
-                Math.min(
-                  projects.items.length,
-                  Math.floor(progress * projects.items.length) + 1,
-                ),
-              ).padStart(2, "0")}
-            </span>
-            <span
-              className={styles.track}
-              style={{ "--p": `${progress * 100}%` } as CSSProperties}
-            ></span>
-            <span>{String(projects.items.length).padStart(2, "0")}</span>
+          <div className={styles.scrollIndicatorWrap}>
+            <ScrollIndicator
+              current={currentIdx}
+              total={projects.items.length}
+              progress={progress}
+            />
           </div>
         </div>
       </div>

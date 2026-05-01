@@ -1,4 +1,5 @@
 import PORTFOLIO_CONTENT from "../../content";
+import { LiveDot, MetaRow, RoleBadge } from "../../shared/components";
 import { useScrollY } from "../../shared/hooks";
 import { HERO_FADE_DISTANCE, PARALLAX_MAX } from "../../constants";
 import styles from "./Hero.module.scss";
@@ -42,7 +43,7 @@ export default function Hero({ startReveal = true }: Readonly<HeroProps>) {
         }}
       >
         <div className={styles.heroEyebrow}>
-          <span className={styles.dot}></span>
+          <LiveDot />
           <span>
             {new Date().getFullYear()} · {profile.location.eyebrow}
           </span>
@@ -72,20 +73,14 @@ export default function Hero({ startReveal = true }: Readonly<HeroProps>) {
         </h1>
         <div className={styles.heroMeta}>
           {hero.meta.map((m) => (
-            <div key={m.label}>
-              <span className={styles.label}>{m.label}</span>
-              <span
-                className={styles.value}
-                style={m.accent ? { color: "var(--accent)" } : undefined}
-              >
-                {m.value}
-              </span>
-            </div>
+            <MetaRow key={m.label} label={m.label} accent={m.accent}>
+              {m.value}
+            </MetaRow>
           ))}
           <div className={styles.roles}>
             <span className={styles.label}>{hero.stacksLabel}</span>
             {profile.rolesShort.map((r) => (
-              <span key={r}>{r}</span>
+              <RoleBadge key={r} role={r} />
             ))}
           </div>
         </div>

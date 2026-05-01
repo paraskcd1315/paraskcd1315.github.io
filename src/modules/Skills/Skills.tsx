@@ -1,5 +1,6 @@
 import type { MouseEvent } from "react";
 import PORTFOLIO_CONTENT from "../../content";
+import { IconCircle, MonoLabel, SectionLabel } from "../../shared/components";
 import { useReveal } from "../../shared/hooks";
 import { getSectionMeta } from "../../sections";
 import styles from "./Skills.module.scss";
@@ -17,7 +18,7 @@ export default function Skills() {
   return (
     <section id="skills" className={styles.skills} ref={ref}>
       <div>
-        <div className={`${styles.sectionLabel} reveal`}>{meta.label}</div>
+        <SectionLabel className="reveal">{meta.label}</SectionLabel>
         <div className={styles.skillsHead}>
           <h2 className="reveal">{skills.heading}</h2>
           <p className="reveal">{skills.body}</p>
@@ -25,12 +26,17 @@ export default function Skills() {
         <div className={`${styles.skillsGrid} reveal`}>
           {skills.items.map((s) => (
             <div className={styles.skill} key={s.name} onMouseMove={onMove}>
-              <div className={styles.glyph}>
-                <img src={s.icon} alt={s.name} loading="lazy" />
-              </div>
+              <IconCircle size={36}>
+                <img
+                  src={s.icon}
+                  alt={s.name}
+                  loading="lazy"
+                  className={styles.glyphImg}
+                />
+              </IconCircle>
               <div>
                 <div className={styles.name}>{s.name}</div>
-                <div className={styles.cat}>{s.cat}</div>
+                <MonoLabel>{s.cat}</MonoLabel>
               </div>
             </div>
           ))}

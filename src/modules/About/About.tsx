@@ -1,5 +1,6 @@
 import { type CSSProperties } from "react";
 import PORTFOLIO_CONTENT from "../../content";
+import { Avatar, SectionLabel } from "../../shared/components";
 import { useReveal } from "../../shared/hooks";
 import { getSectionMeta } from "../../sections";
 import styles from "./About.module.scss";
@@ -22,12 +23,10 @@ export default function About() {
   return (
     <section id="about" className={styles.about} ref={ref}>
       <div>
-        <div className={`${styles.sectionLabel} reveal`}>{meta.label}</div>
+        <SectionLabel className="reveal">{meta.label}</SectionLabel>
         <div className={styles.aboutGrid}>
           <div className={`${styles.aboutSticky} reveal`}>
-            <div className={styles.aboutAvatar}>
-              <img src={branding.avatarPath} alt={branding.avatarAlt} />
-            </div>
+            <Avatar src={branding.avatarPath} alt={branding.avatarAlt} />
             <h2>
               {about.heading} <em>{about.headingTagline}</em>
             </h2>

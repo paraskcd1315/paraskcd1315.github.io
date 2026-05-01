@@ -1,4 +1,5 @@
 import PORTFOLIO_CONTENT from "../../content";
+import { SectionLabel, Tag } from "../../shared/components";
 import { useHorizontalPin, useReveal } from "../../shared/hooks";
 import { getSectionMeta } from "../../sections";
 import styles from "./Photo.module.scss";
@@ -14,7 +15,7 @@ export default function Photo() {
     <section id="photo" className={styles.photo} ref={ref}>
       <div className={styles.photoHead}>
         <div>
-          <div className={`${styles.sectionLabel} reveal`}>{meta.label}</div>
+          <SectionLabel className="reveal">{meta.label}</SectionLabel>
           <h2 className="reveal">{photos.heading}</h2>
         </div>
         <p className="reveal">{photos.body}</p>
@@ -34,7 +35,7 @@ export default function Photo() {
                   className={styles.photoPh}
                   style={{ backgroundImage: `url(${p.src})` }}
                 >
-                  <span className={styles.tag}>{p.cap}</span>
+                  <Tag>{p.cap}</Tag>
                 </div>
               </a>
             ))}

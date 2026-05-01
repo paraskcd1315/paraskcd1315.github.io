@@ -1,4 +1,5 @@
 import PORTFOLIO_CONTENT from "../../content";
+import { SectionLabel } from "../../shared/components";
 import { useReveal } from "../../shared/hooks";
 import { getSectionMeta } from "../../sections";
 import styles from "./Contact.module.scss";
@@ -15,7 +16,9 @@ export default function Contact() {
     <section id="contact" className={styles.contact} ref={ref}>
       <div className={styles.contactBg}></div>
       <div className={styles.contactInner}>
-        <div className={`${styles.sectionLabel} reveal`}>{meta.label}</div>
+        <SectionLabel align="center" className="reveal">
+          {meta.label}
+        </SectionLabel>
         <h2 className="reveal">
           <em>{tagline.verb}</em>
           <br />

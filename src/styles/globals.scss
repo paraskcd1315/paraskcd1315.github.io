@@ -26,6 +26,19 @@
   --r-lg: #{$r-lg};
 }
 
+:root[data-theme="light"] {
+  --ink: #{$paper};
+  --ink-2: #{$paper-2};
+  --ink-3: #ddd6c3;
+  --line: rgba(10, 10, 11, 0.08);
+  --line-strong: rgba(10, 10, 11, 0.16);
+  --fg: #{$ink};
+  --fg-dim: rgba(10, 10, 11, 0.62);
+  --fg-faint: rgba(10, 10, 11, 0.38);
+  --accent-ink: #fff5f7;
+  --grain-opacity: 0.04;
+}
+
 * {
   box-sizing: border-box;
 }

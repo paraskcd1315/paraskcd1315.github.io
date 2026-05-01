@@ -1,0 +1,8 @@
+@use "../../../../styles/tokens" as *;
+
+.root {
+  border-radius: $r-pill;
+  background: $accent;
+  box-shadow: 0 0 18px $accent;
+  animation: pulse 2.6s ease-in-out infinite;
+}

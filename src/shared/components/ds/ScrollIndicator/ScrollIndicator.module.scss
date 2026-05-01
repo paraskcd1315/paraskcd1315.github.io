@@ -1,0 +1,29 @@
+@use "../../../../styles/tokens" as *;
+
+.root {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: $f-mono;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: $fg-faint;
+}
+
+.track {
+  height: 1px;
+  background: $line-strong;
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: -1px;
+    height: 3px;
+    background: $accent;
+    width: var(--p, 0%);
+    transition: width 0.1s linear;
+  }
+}

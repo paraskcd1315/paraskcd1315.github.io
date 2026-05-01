@@ -1,0 +1,12 @@
+@use "../../../../styles/tokens" as *;
+
+.root {
+  display: inline-block;
+  padding: 4px 8px;
+  border: 1px solid $line-strong;
+  border-radius: $r-pill;
+  margin: 0 4px 4px 0;
+  font-family: $f-mono;
+  font-size: 10px;
+  color: $fg;
+}

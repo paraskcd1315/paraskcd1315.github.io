@@ -1,0 +1,65 @@
+@use "../../../../styles/tokens" as *;
+
+.root {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $sp-2;
+  border-radius: $r-pill;
+  font-family: $f-mono;
+  letter-spacing: 0.04em;
+  cursor: none;
+  transition:
+    background 0.25s,
+    color 0.25s,
+    border-color 0.25s,
+    transform 0.3s;
+  text-decoration: none;
+  border: 1px solid transparent;
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+}
+
+.sm {
+  padding: 8px 14px;
+  font-size: 11px;
+}
+
+.md {
+  padding: 12px 20px;
+  font-size: 12px;
+}
+
+.primary {
+  background: $accent;
+  color: $accent-ink;
+  border-color: $accent;
+
+  &:hover {
+    background: color-mix(in oklab, $accent 80%, $fg);
+  }
+}
+
+.ghost {
+  background: transparent;
+  color: $fg;
+  border-color: transparent;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.06);
+  }
+}
+
+.outline {
+  background: transparent;
+  color: $fg;
+  border-color: $line-strong;
+
+  &:hover {
+    background: $fg;
+    color: $ink;
+    border-color: $fg;
+  }
+}

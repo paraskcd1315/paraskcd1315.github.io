@@ -1,13 +1,15 @@
 import { useMemo, useState } from "react";
 import PORTFOLIO_CONTENT from "../../../../content";
 import { Modal } from "../../../../shared/components";
+import { useGithubRepos } from "../../hooks";
+import type { RepoScope } from "../../hooks";
 import type { GithubModalProps } from "./GithubModal.types";
 import styles from "./GithubModal.module.scss";
 
 interface Tab {
   key: string;
   label: string;
-  scope: "user" | "org";
+  scope: RepoScope;
   account: string;
 }
 
@@ -39,6 +41,11 @@ export default function GithubModal({
   );
   const [activeKey, setActiveKey] = useState<string>(personalTab.key);
   const active = tabs.find((t) => t.key === activeKey) ?? personalTab;
+  const { repos, loading, error, retryAt } = useGithubRepos(
+    active.scope,
+    active.account,
+    open,
+  );
 
   return (
     <Modal
@@ -62,10 +69,23 @@ export default function GithubModal({
         ))}
       </div>
       <div className={styles.tabBody} role="tabpanel">
-        <p className={styles.placeholder}>
-          Repos for <code>{active.account}</code> land in PORT-121 (fetch +
-          cache) → PORT-122 (card layout).
-        </p>
+        {loading && <p className={styles.placeholder}>Loading repos…</p>}
+        {error === "rate-limit" && (
+          <p className={styles.placeholder}>
+            GitHub rate limit hit. Retry after{" "}
+            {retryAt ? new Date(retryAt).toLocaleTimeString() : "a few minutes"}
+            .
+          </p>
+        )}
+        {error && error !== "rate-limit" && (
+          <p className={styles.placeholder}>Fetch error: {error}</p>
+        )}
+        {repos && (
+          <p className={styles.placeholder}>
+            <code>{active.account}</code> — {repos.length} repos. Card layout
+            arrives in PORT-122.
+          </p>
+        )}
       </div>
     </Modal>
   );

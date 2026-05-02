@@ -375,3 +375,81 @@
 		padding: $sp-3 $sp-4;
 	}
 }
+
+@media (prefers-reduced-motion: reduce) {
+	.pin {
+		height: auto !important;
+	}
+
+	.stage {
+		position: relative !important;
+		height: auto;
+		padding: 20px 0 60px;
+		overflow: visible;
+		display: block;
+	}
+
+	.spine,
+	.eras,
+	.connector,
+	.marker {
+		display: none;
+	}
+
+	.track {
+		transform: none !important;
+		display: block;
+		padding: 0 $sp-4;
+		width: auto;
+		height: auto;
+
+		&::before {
+			content: '';
+			position: absolute;
+			left: calc($sp-4 + 22px);
+			top: 12px;
+			bottom: 12px;
+			width: 1px;
+			background: linear-gradient(180deg, color-mix(in oklab, $accent 70%, transparent) 0%, color-mix(in oklab, $accent 20%, transparent) 60%, transparent 100%);
+			pointer-events: none;
+		}
+	}
+
+	.event {
+		flex: none;
+		max-width: none;
+		width: auto;
+		padding-bottom: 0;
+		padding-left: 56px;
+		margin-left: 0;
+		margin-bottom: 56px;
+		justify-content: flex-start;
+		transform: none;
+		opacity: 1;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+
+		&::before {
+			content: '';
+			position: absolute;
+			left: 16px;
+			top: 8px;
+			width: 14px;
+			height: 14px;
+			border-radius: 999px;
+			background: $ink;
+			border: 2px solid $accent;
+			box-shadow:
+				0 0 0 3px color-mix(in oklab, $accent 18%, transparent),
+				0 0 10px color-mix(in oklab, $accent 50%, transparent);
+			z-index: 2;
+		}
+	}
+
+	.card {
+		transform: none;
+		opacity: 1;
+	}
+}

@@ -1,0 +1,73 @@
+@use "../../../../styles/tokens" as *;
+@use "../../../../styles/mixins" as *;
+
+.grid {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: $sp-3;
+
+	@include mobile {
+		grid-template-columns: 1fr;
+	}
+}
+
+.card {
+	display: grid;
+	gap: 8px;
+	padding: $sp-4;
+	border: 1px solid $line;
+	border-radius: $r-md;
+	background: color-mix(in oklab, $ink 55%, transparent);
+}
+
+.line {
+	height: 12px;
+	border-radius: 4px;
+	background: linear-gradient(
+		90deg,
+		$ink-3 0%,
+		color-mix(in oklab, $ink-3 55%, $line) 50%,
+		$ink-3 100%
+	);
+	background-size: 200% 100%;
+	animation: shimmer 1.4s linear infinite;
+}
+
+.lineName {
+	width: 45%;
+	height: 14px;
+}
+
+.lineDesc {
+	width: 95%;
+}
+
+.lineDescShort {
+	width: 70%;
+}
+
+.metaRow {
+	display: flex;
+	gap: 14px;
+	margin-top: 6px;
+}
+
+.lineMeta {
+	width: 48px;
+	height: 10px;
+}
+
+@keyframes shimmer {
+	0% {
+		background-position: 200% 0;
+	}
+	100% {
+		background-position: -200% 0;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.line {
+		animation: none;
+	}
+}

@@ -84,6 +84,59 @@
 	}
 }
 
+.errorBox {
+	display: grid;
+	gap: 10px;
+	justify-items: center;
+	padding: $sp-6 $sp-4;
+	border: 1px dashed color-mix(in oklab, $accent 30%, $line);
+	border-radius: $r-md;
+	text-align: center;
+}
+
+.errorTitle {
+	margin: 0;
+	font-size: 16px;
+	font-weight: 500;
+	color: $fg;
+}
+
+.errorBody {
+	margin: 0;
+	font-family: $f-mono;
+	font-size: 12px;
+	color: $fg-faint;
+	letter-spacing: 0.04em;
+}
+
+.retryBtn {
+	margin-top: 4px;
+	background: transparent;
+	border: 1px solid $accent;
+	border-radius: $r-pill;
+	padding: 8px 16px;
+	font-family: $f-mono;
+	font-size: 11px;
+	letter-spacing: 0.04em;
+	color: $accent;
+	text-transform: uppercase;
+	cursor: none;
+	transition:
+		background 0.2s,
+		color 0.2s,
+		opacity 0.2s;
+
+	&:hover:not(:disabled) {
+		background: $accent;
+		color: $accent-ink;
+	}
+
+	&:disabled {
+		opacity: 0.4;
+		cursor: not-allowed;
+	}
+}
+
 .placeholder {
 	font-family: $f-mono;
 	font-size: 13px;

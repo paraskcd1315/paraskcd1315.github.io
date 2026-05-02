@@ -4,10 +4,20 @@ import { Modal } from "../../../../shared/components";
 import { useGithubRepos } from "../../hooks";
 import type { RepoScope } from "../../hooks";
 import RepoCard from "./RepoCard";
+import RepoSkeleton from "./RepoSkeleton";
 import type { GithubModalProps } from "./GithubModal.types";
 import styles from "./GithubModal.module.scss";
 
 const INITIAL_VISIBLE = 12;
+
+function formatCountdown(ms: number): string {
+  if (ms <= 0) return "now";
+  const total = Math.ceil(ms / 1000);
+  const m = Math.floor(total / 60);
+  const s = total % 60;
+  if (m > 0) return `${m}m ${s.toString().padStart(2, "0")}s`;
+  return `${s}s`;
+}
 
 interface Tab {
   key: string;
@@ -44,8 +54,9 @@ export default function GithubModal({
   );
   const [activeKey, setActiveKey] = useState<string>(personalTab.key);
   const [visibleCount, setVisibleCount] = useState<number>(INITIAL_VISIBLE);
+  const [now, setNow] = useState<number>(() => Date.now());
   const active = tabs.find((t) => t.key === activeKey) ?? personalTab;
-  const { repos, loading, error, retryAt } = useGithubRepos(
+  const { repos, loading, error, retryAt, refresh } = useGithubRepos(
     active.scope,
     active.account,
     open,
@@ -55,8 +66,15 @@ export default function GithubModal({
     setVisibleCount(INITIAL_VISIBLE);
   }, [activeKey]);
 
+  useEffect(() => {
+    if (error !== "rate-limit" || !retryAt) return;
+    const id = globalThis.setInterval(() => setNow(Date.now()), 1000);
+    return () => globalThis.clearInterval(id);
+  }, [error, retryAt]);
+
   const visibleRepos = repos ? repos.slice(0, visibleCount) : null;
   const hasMore = repos ? repos.length > visibleCount : false;
+  const retryReady = !retryAt || now >= retryAt;
 
   return (
     <Modal
@@ -80,21 +98,38 @@ export default function GithubModal({
         ))}
       </div>
       <div className={styles.tabBody} role="tabpanel">
-        {loading && <p className={styles.placeholder}>Loading repos…</p>}
+        {loading && <RepoSkeleton count={6} />}
         {error === "rate-limit" && (
-          <p className={styles.placeholder}>
-            GitHub rate limit hit. Retry after{" "}
-            {retryAt ? new Date(retryAt).toLocaleTimeString() : "a few minutes"}
-            .
-          </p>
+          <div className={styles.errorBox} role="alert">
+            <p className={styles.errorTitle}>GitHub rate limit hit</p>
+            <p className={styles.errorBody}>
+              {retryReady
+                ? "Cooldown ended. Retry now."
+                : `Retry available in ${formatCountdown((retryAt ?? 0) - now)}.`}
+            </p>
+            <button
+              type="button"
+              className={styles.retryBtn}
+              onClick={refresh}
+              disabled={!retryReady}
+            >
+              Retry
+            </button>
+          </div>
         )}
         {error && error !== "rate-limit" && (
-          <p className={styles.placeholder}>Fetch error: {error}</p>
+          <div className={styles.errorBox} role="alert">
+            <p className={styles.errorTitle}>Couldn't reach GitHub</p>
+            <p className={styles.errorBody}>{error}</p>
+            <button type="button" className={styles.retryBtn} onClick={refresh}>
+              Retry
+            </button>
+          </div>
         )}
-        {visibleRepos?.length === 0 && (
+        {!loading && !error && visibleRepos?.length === 0 && (
           <p className={styles.placeholder}>No public repos here.</p>
         )}
-        {visibleRepos && visibleRepos.length > 0 && (
+        {!loading && !error && visibleRepos && visibleRepos.length > 0 && (
           <>
             <div className={styles.grid}>
               {visibleRepos.map((r) => (

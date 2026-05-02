@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 export interface GithubRepo {
   id: number;
@@ -20,6 +20,7 @@ export interface UseGithubReposState {
   loading: boolean;
   error: string | null;
   retryAt: number | null;
+  refresh: () => void;
 }
 
 interface CacheEntry {
@@ -58,34 +59,47 @@ function writeCache(key: string, repos: GithubRepo[]) {
   }
 }
 
+function clearCache(key: string) {
+  try {
+    localStorage.removeItem(key);
+  } catch {
+    /* silent */
+  }
+}
+
 export default function useGithubRepos(
   scope: RepoScope,
   account: string,
   enabled: boolean,
 ): UseGithubReposState {
-  const [state, setState] = useState<UseGithubReposState>({
-    repos: null,
-    loading: false,
-    error: null,
-    retryAt: null,
-  });
+  const [repos, setRepos] = useState<GithubRepo[] | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
+  const [retryAt, setRetryAt] = useState<number | null>(null);
+  const [nonce, setNonce] = useState<number>(0);
+
+  const refresh = useCallback(() => {
+    clearCache(cacheKey(scope, account));
+    setNonce((n) => n + 1);
+  }, [scope, account]);
 
   useEffect(() => {
     if (!enabled) return;
     const key = cacheKey(scope, account);
     const cached = readCache(key);
     if (cached) {
-      setState({
-        repos: cached.repos,
-        loading: false,
-        error: null,
-        retryAt: null,
-      });
+      setRepos(cached.repos);
+      setLoading(false);
+      setError(null);
+      setRetryAt(null);
       return;
     }
 
     let cancelled = false;
-    setState({ repos: null, loading: true, error: null, retryAt: null });
+    setRepos(null);
+    setLoading(true);
+    setError(null);
+    setRetryAt(null);
 
     const url =
       scope === "user"
@@ -97,24 +111,18 @@ export default function useGithubRepos(
         if (cancelled) return;
         if (res.status === 403 || res.status === 429) {
           const reset = res.headers.get("x-ratelimit-reset");
-          const retryAt = reset
-            ? Number(reset) * 1000
-            : Date.now() + 15 * 60 * 1000;
-          setState({
-            repos: null,
-            loading: false,
-            error: "rate-limit",
-            retryAt,
-          });
+          const ts = reset ? Number(reset) * 1000 : Date.now() + 15 * 60 * 1000;
+          setRepos(null);
+          setLoading(false);
+          setError("rate-limit");
+          setRetryAt(ts);
           return;
         }
         if (!res.ok) {
-          setState({
-            repos: null,
-            loading: false,
-            error: `HTTP ${res.status}`,
-            retryAt: null,
-          });
+          setRepos(null);
+          setLoading(false);
+          setError(`HTTP ${res.status}`);
+          setRetryAt(null);
           return;
         }
         const data = (await res.json()) as GithubRepo[];
@@ -122,23 +130,24 @@ export default function useGithubRepos(
           (a, b) => Date.parse(b.pushed_at) - Date.parse(a.pushed_at),
         );
         writeCache(key, sorted);
-        setState({
-          repos: sorted,
-          loading: false,
-          error: null,
-          retryAt: null,
-        });
+        setRepos(sorted);
+        setLoading(false);
+        setError(null);
+        setRetryAt(null);
       })
       .catch((err: unknown) => {
         if (cancelled) return;
         const msg = err instanceof Error ? err.message : "fetch failed";
-        setState({ repos: null, loading: false, error: msg, retryAt: null });
+        setRepos(null);
+        setLoading(false);
+        setError(msg);
+        setRetryAt(null);
       });
 
     return () => {
       cancelled = true;
     };
-  }, [scope, account, enabled]);
+  }, [scope, account, enabled, nonce]);
 
-  return state;
+  return { repos, loading, error, retryAt, refresh };
 }

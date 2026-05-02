@@ -278,3 +278,20 @@
     }
   }
 }
+
+.scrollIndicator {
+  @media (min-width: 901px) {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 4vh;
+    display: flex;
+    justify-content: center;
+    z-index: 3;
+    pointer-events: none;
+  }
+
+  @include mobile {
+    display: none;
+  }
+}

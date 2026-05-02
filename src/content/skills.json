@@ -17,7 +17,7 @@
     { "icon": "/electron.png", "name": "ElectronJS", "cat": "Desktop" },
     { "icon": "/express.png", "name": "ExpressJS", "cat": "Backend" },
     { "icon": "/mongodb.png", "name": "MongoDB", "cat": "Data" },
-    { "icon": "/dotnetcore.png", "name": "Blazor WASM", "cat": "Web" },
+    { "icon": "/dotnetcore.png", "name": "Blazor", "cat": "Web" },
     { "icon": "/photoshop.png", "name": "Photoshop", "cat": "Design" },
     { "icon": "/aftereffects.png", "name": "After Effects", "cat": "Motion" },
     { "icon": "/figma.png", "name": "Figma", "cat": "Design" },

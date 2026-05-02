@@ -1,0 +1,148 @@
+{
+	"heading": "The path so far",
+	"body": "Milestones in narrative order — not strict chronology. Each entry surfaces the tools and tech learned at that point.",
+	"items": [
+		{
+			"date": "1996-09-15",
+			"title": "Born",
+			"body": "Tenerife, Canary Islands."
+		},
+		{
+			"date": "2012",
+			"title": "First touched design",
+			"body": "Photoshop, After Effects, the early Adobe-suite curiosity that turned into a serious hobby.",
+			"tags": ["Photoshop", "After Effects"]
+		},
+		{
+			"date": "2016",
+			"title": "Graduated high school",
+			"body": "Started college at IGNOU + a parallel course in 3ds Max, Photoshop, After Effects, and Maya. The 3D pipeline foundation.",
+			"tags": ["3ds Max", "Maya", "Photoshop", "After Effects"]
+		},
+		{
+			"date": "2018",
+			"title": "3D prop design for games",
+			"body": "Started doing prop design for games — Maya for modeling, Substance Painter for texturing, Marmoset Viewer for presentation, the full PBR workflow. Game-friendly assets, baking maps, surface authoring. Most of the renders in Lens come from this period.",
+			"tags": ["Maya", "Substance Painter", "Marmoset Viewer", "PBR"]
+		},
+		{
+			"date": "2019",
+			"title": "First serious dive into JavaScript",
+			"body": "Started learning JavaScript and React in earnest. Began freelancing on small web projects on the side.",
+			"tags": ["JavaScript", "React"]
+		},
+		{
+			"date": "2020",
+			"title": "COVID — co-built Nitroless",
+			"body": "Cydia-style repo GUI system for distributing custom stickers + emojis across messaging apps. Shipped a Swift app + keyboard, Jetpack Compose app + keyboard, a macOS app, and an Electron app — community-driven, multi-platform.",
+			"tags": ["Swift", "Jetpack Compose", "Kotlin", "macOS", "Electron"]
+		},
+		{
+			"date": "2021-02",
+			"title": "Frosty-Glass-Pro",
+			"body": "Frosted-glass aesthetic theme for jailbroken iPhones — JavaScript / XenHTML on the home screen.",
+			"tags": ["JavaScript", "XenHTML", "iOS jailbreak"],
+			"links": [{ "label": "GitHub", "href": "https://github.com/paraskcd1315/Frosty-Glass-Pro" }]
+		},
+		{
+			"date": "2021-03",
+			"title": "libkcdxenhtml",
+			"body": "JS library that became the foundation for my XenHTML themes — animation, layout, and home-screen widget primitives reused across every jailbreak project after.",
+			"tags": ["JavaScript", "XenHTML", "Library"],
+			"links": [{ "label": "GitHub", "href": "https://github.com/paraskcd1315/libkcdxenhtml" }]
+		},
+		{
+			"date": "2021-03",
+			"title": "metroUI",
+			"body": "Windows-Phone-style home-screen replacement for jailbroken iPhones — live tiles, accent colors, the whole Metro design language ported to iOS via XenHTML.",
+			"tags": ["JavaScript", "XenHTML", "iOS jailbreak"],
+			"links": [{ "label": "GitHub", "href": "https://github.com/paraskcd1315/metroUI" }]
+		},
+		{
+			"date": "2021-07",
+			"title": "Influential — first version (iPhone jailbreak)",
+			"body": "First version of Influential Launcher, for jailbroken iPhones. Built in React on top of XenHTML — a custom home-screen launcher with my own layout + interaction system. Spiritual ancestor to the 2025 native Android rewrite.",
+			"tags": ["React", "JavaScript", "XenHTML", "iOS jailbreak"],
+			"links": [{ "label": "GitHub", "href": "https://github.com/paraskcd1315/influential-11-react" }]
+		},
+		{
+			"date": "2021-09",
+			"title": "First job — Vidhema Technologies",
+			"body": "3 months. Worked across Node.js, React, and Angular — first time shipping production code on someone else's stack.",
+			"tags": ["Node.js", "React", "Angular"]
+		},
+		{
+			"date": "2022-03",
+			"title": "Moved to Canada — built United Walls solo",
+			"body": "Wallpaper-sharing platform with a SwiftUI iOS app, a Jetpack Compose Android app, a Grammy bot for Telegram, and a self-hosted Node/Express/Mongoose backend on a Raspberry Pi. First deep dive into Docker and self-hosting.",
+			"tags": ["SwiftUI", "Jetpack Compose", "Node.js", "Express", "Mongoose", "Docker", "Raspberry Pi"]
+		},
+		{
+			"date": "2023-09",
+			"title": "Moved to Sitges, Barcelona, Spain",
+			"body": "New chapter."
+		},
+		{
+			"date": "2023-11",
+			"title": "Joined Unimedia Technology",
+			"body": "Started with Angular (had been React-only before), then picked up .NET for APIs, PHP, Ionic, and a wider full-stack practice.",
+			"tags": ["Angular", ".NET", "PHP", "Ionic"]
+		},
+		{
+			"date": "2025-07",
+			"title": "Shipped SpotlightSearch",
+			"body": "Android app inspired by macOS Spotlight — quick app launcher, contact search with call/SMS/WhatsApp shortcuts, inline calculator + unit conversions, Google search suggestions. Pure Kotlin. Shipped to the Play Store.",
+			"tags": ["Kotlin", "Android", "Play Store"],
+			"links": [
+				{ "label": "GitHub", "href": "https://github.com/paraskcd1315/SpotlightSearch" },
+				{ "label": "Play Store", "href": "https://play.google.com/store/apps/details?id=com.paraskcd.spotlightsearch" }
+			]
+		},
+		{
+			"date": "2025-08",
+			"title": "Influential Launcher — native Android rewrite",
+			"body": "Started over from scratch in pure Kotlin. Native Android launcher this time, no jailbreak — the same product idea, four years later, on a real platform.",
+			"tags": ["Kotlin", "Android", "Launcher"],
+			"links": [{ "label": "GitHub", "href": "https://github.com/paraskcd1315/InfluentialLauncher" }]
+		},
+		{
+			"date": "2025-12",
+			"title": "AI-assisted coding",
+			"body": "Started experimenting. Learned the limitations and the sharp edges, but also where it genuinely accelerates work.",
+			"tags": ["AI"]
+		},
+		{
+			"date": "2026-01",
+			"title": "Started KCDSearch — cross-platform search",
+			"body": "Personal-knowledge search across the apps I use. Web client first (TypeScript, Jan 2026), then native Android (Kotlin, Feb 2026), then native Apple (Swift, Mar 2026). Three platforms, one product surface.",
+			"tags": ["TypeScript", "Kotlin", "Swift", "Android", "Apple"],
+			"links": [
+				{ "label": "Web", "href": "https://github.com/paraskcd1315/KCDSearch-Web" },
+				{ "label": "Android", "href": "https://github.com/paraskcd1315/KCDSearch-Android" },
+				{ "label": "Apple", "href": "https://github.com/paraskcd1315/KCDSearch-Apple" }
+			]
+		},
+		{
+			"date": "2026-02",
+			"title": "Built ClaudeContext",
+			"body": "Workflow + memory system around AI-assisted development. Context-driven sessions, Jira/Toggl/RAG integration, MCP server for structured code intelligence. Ongoing — getting iterated on continuously.",
+			"tags": ["AI", "workflow", "memory system", "MCP"]
+		},
+		{
+			"date": "2026-03",
+			"title": "Started ContextOS",
+			"body": "Backend-and-frontend stack experiment: .NET 10 API with Hot Chocolate GraphQL + EF Core + PostgreSQL with pgvector for semantic search, paired with a React 19 + TypeScript + Apollo Client frontend.",
+			"tags": [".NET 10", "Hot Chocolate", "GraphQL", "EF Core", "PostgreSQL", "pgvector", "React 19", "Apollo Client"],
+			"links": [
+				{ "label": "Server", "href": "https://github.com/KCD-ContextOS/contextos-server" },
+				{ "label": "Web", "href": "https://github.com/KCD-ContextOS/contextos-web" }
+			]
+		},
+		{
+			"date": "2026-03",
+			"title": "Started MeetingMonitor",
+			"body": "Native macOS Swift app for monitoring meeting state — small, focused tool built around the daily-work pain point of context switching during calls.",
+			"tags": ["Swift", "macOS"]
+		}
+	]
+}

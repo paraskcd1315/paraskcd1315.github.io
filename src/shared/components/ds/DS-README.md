@@ -59,16 +59,12 @@ import { SectionLabel, MetaRow, Tag } from "../../shared/components";
 3. Add named export + type export to `src/shared/components/ds/index.ts`
 4. Bump category table above
 
-## Refactor backlog
+## Layout-agnostic atoms
 
-PORT-108 (1.5.5) — three atoms need adjustments so Skills + Projects can
-re-consume them (initial PORT-53 swap failed visual-parity audit and was
-reverted). Specifically:
-- **IconCircle** needs a `borderRadius` prop (Skills wants 8px square, not
-  pill) + `overflow: hidden` + inner-img sizing (76% × 76% for child `<img>`)
-- **ScrollIndicator** is currently layout-agnostic but Projects expected a
-  positioning wrapper. Document that fact here; consumer wraps in an
-  absolutely-positioned div.
-- **LinkArrow** hover via `*:hover > &` only matches direct parent; needs
-  an `active` prop the consumer drives from its own hover state (project-card
-  hover is two levels above the atom).
+`ScrollIndicator` does not position itself. Consumers wrap it in their own positioning element (e.g. `position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%)`).
+
+## Hover state — driven from outside
+
+`LinkArrow` accepts an `active: boolean` prop. When the trigger element is more than one level above the atom (e.g. Projects' card-hover is two levels up from the arrow), the consumer manages hover state in React and toggles `active`. The atom keeps its built-in `*:hover > &` for one-level-up consumers, and accepts a `className` for consumers that prefer CSS-driven hover targeting.
+
+`IconCircle` accepts `borderRadius` (square / rounded variants) and `className` (consumer-extensible). It clips inner content (`overflow: hidden`) and sizes a direct `<img>` child to `76% × 76%` with `object-fit: contain` automatically.

@@ -5,12 +5,19 @@
   place-items: center;
   border: 1px solid $line-strong;
   border-radius: $r-pill;
+  overflow: hidden;
   color: $fg;
   transition:
     background 0.25s,
     color 0.25s,
     border-color 0.25s,
     transform 0.4s;
+
+  & > img {
+    width: 76%;
+    height: 76%;
+    object-fit: contain;
+  }
 
   &.accent {
     border-color: $accent;

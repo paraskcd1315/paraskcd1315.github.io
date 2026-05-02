@@ -10,6 +10,7 @@ import {
   Photo,
   Projects,
   Skills,
+  Timeline,
   Watch,
 } from "../modules";
 
@@ -40,6 +41,7 @@ export default function App() {
       <SideProgress />
       <Hero startReveal={heroRevealing} />
       <About />
+      <Timeline />
       <Skills />
       <Projects />
       <Photo />

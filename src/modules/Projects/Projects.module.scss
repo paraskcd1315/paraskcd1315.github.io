@@ -176,20 +176,6 @@
     letter-spacing: 0.04em;
   }
 
-  .arrow {
-    width: 36px;
-    height: 36px;
-    border: 1px solid $line-strong;
-    border-radius: $r-pill;
-    display: grid;
-    place-items: center;
-    color: $fg;
-    transition:
-      background 0.25s,
-      color 0.25s,
-      transform 0.4s;
-  }
-
   @include mobile {
     padding: 16px 18px;
     gap: 12px;
@@ -216,33 +202,7 @@
   bottom: 36px;
   left: 50%;
   transform: translateX(-50%);
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font-family: $f-mono;
-  font-size: 10px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: $fg-faint;
   z-index: 5;
-
-  .track {
-    width: 120px;
-    height: 1px;
-    background: $line-strong;
-    position: relative;
-
-    &::after {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: -1px;
-      height: 3px;
-      background: $accent;
-      width: var(--p, 0%);
-      transition: width 0.1s linear;
-    }
-  }
 
   @include mobile {
     display: none;

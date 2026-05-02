@@ -114,6 +114,25 @@ export interface IntroContent {
   logoAlt: string;
 }
 
+export interface TimelineLink {
+  label: string;
+  href: string;
+}
+
+export interface TimelineEvent {
+  date: string;
+  title: string;
+  body: string;
+  tags?: readonly string[];
+  links?: readonly TimelineLink[];
+}
+
+export interface TimelineContent {
+  heading: string;
+  body: string;
+  items: readonly TimelineEvent[];
+}
+
 export interface PortfolioContent {
   profile: Profile;
   branding: Branding;
@@ -126,4 +145,5 @@ export interface PortfolioContent {
   videos: VideosContent;
   contact: ContactContent;
   intro: IntroContent;
+  timeline: TimelineContent;
 }

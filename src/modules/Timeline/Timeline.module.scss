@@ -62,7 +62,6 @@
   }
 }
 
-// Pinned scroll length scales with event count.
 .pin {
   position: relative;
   height: calc(var(--event-count, 8) * 60vh + 100vh);
@@ -78,7 +77,7 @@
   height: 100vh;
   overflow: hidden;
   display: flex;
-  align-items: center;
+  align-items: stretch;
 
   @include mobile {
     position: relative !important;
@@ -94,6 +93,7 @@
   padding: 0 8vw;
   position: relative;
   will-change: transform;
+  width: max-content;
 
   @include mobile {
     transform: none !important;
@@ -101,6 +101,7 @@
     scroll-snap-type: x mandatory;
     padding: 0 7vw;
     gap: 20px;
+    width: auto;
     -webkit-overflow-scrolling: touch;
 
     &::-webkit-scrollbar {
@@ -109,12 +110,13 @@
   }
 }
 
+// Horizontal rose-accent spine pinned to the bottom of the stage area —
+// markers sit on this line, cards rise above it.
 .spine {
   position: absolute;
   left: 0;
   right: 0;
-  // Aligned to the top of cards (markers sit on this line).
-  top: 14vh;
+  bottom: 18vh;
   height: 2px;
   background: linear-gradient(
     to right,
@@ -134,24 +136,86 @@
 .event {
   flex: 0 0 360px;
   position: relative;
-  padding-top: 14vh; // leaves room for marker + connector above the card
+  height: calc(100vh - 60px);
   display: flex;
   flex-direction: column;
+  justify-content: flex-end; // anchor card content to the bottom (above spine)
+  padding-bottom: 18vh; // leaves room below for spine + marker
   scroll-snap-align: center;
 
   @include mobile {
     flex: 0 0 80vw;
     max-width: 320px;
-    padding-top: 0;
+    height: auto;
+    padding-bottom: 0;
+    justify-content: flex-start;
+  }
+}
+
+// Card drops in from above as the event becomes visible inside the stage.
+// IO toggles `.isVisible` (in the same way Projects toggles `.dim`).
+.card {
+  display: grid;
+  gap: 10px;
+  padding: $sp-4 $sp-5;
+  background: color-mix(in oklab, $ink-2 75%, transparent);
+  border: 1px solid $line;
+  border-radius: $r-md;
+  position: relative;
+  z-index: 2;
+
+  transform: translateY(-40px);
+  opacity: 0;
+  transition:
+    transform 0.7s cubic-bezier(0.2, 0.7, 0.3, 1),
+    opacity 0.5s ease,
+    border-color $dur-med $ease-reveal;
+
+  &:hover {
+    border-color: color-mix(in oklab, $accent 40%, $line);
+  }
+
+  .event:global(.isVisible) & {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  @include mobile {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+.connector {
+  position: absolute;
+  left: 50%;
+  bottom: calc(18vh + 1px);
+  width: 1px;
+  height: 30px;
+  background: linear-gradient(
+    to bottom,
+    color-mix(in oklab, $accent 20%, transparent) 0%,
+    color-mix(in oklab, $accent 70%, transparent) 100%
+  );
+  transform: translateX(-50%);
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.5s ease 0.15s;
+
+  .event:global(.isVisible) & {
+    opacity: 1;
+  }
+
+  @include mobile {
+    display: none;
   }
 }
 
 .marker {
   position: absolute;
-  // Center on spine
   left: 50%;
-  top: calc(14vh - 9px);
-  transform: translateX(-50%);
+  bottom: calc(18vh - 9px);
+  transform: translate(-50%, 0) scale(0.4);
   width: 18px;
   height: 18px;
   border-radius: 999px;
@@ -161,71 +225,18 @@
     0 0 0 4px color-mix(in oklab, $accent 18%, transparent),
     0 0 14px color-mix(in oklab, $accent 60%, transparent);
   z-index: 2;
-
-  @include mobile {
-    display: none;
-  }
-}
-
-.connector {
-  position: absolute;
-  left: 50%;
-  top: 14vh;
-  bottom: auto;
-  width: 1px;
-  height: 28px;
-  background: linear-gradient(
-    to bottom,
-    color-mix(in oklab, $accent 70%, transparent) 0%,
-    color-mix(in oklab, $accent 20%, transparent) 100%
-  );
-  transform: translateX(-50%);
-  z-index: 1;
-
-  @include mobile {
-    display: none;
-  }
-}
-
-.card {
-  margin-top: 28px;
-  display: grid;
-  gap: 10px;
-  padding: $sp-4 $sp-5;
-  background: color-mix(in oklab, $ink-2 75%, transparent);
-  border: 1px solid $line;
-  border-radius: $r-md;
-  flex: 1;
-  position: relative;
-  z-index: 2;
-
-  // Drop-in animation: cards slide down from above the spine into place.
-  // Stagger via per-card --i so adjacent cards cascade.
-  animation: timeline-drop-in 0.7s cubic-bezier(0.2, 0.7, 0.3, 1) both;
-  animation-delay: calc(var(--i, 0) * 60ms + 200ms);
-
+  opacity: 0;
   transition:
-    border-color $dur-med $ease-reveal,
-    transform $dur-med $ease-reveal;
+    transform 0.5s cubic-bezier(0.2, 0.7, 0.3, 1) 0.1s,
+    opacity 0.4s ease 0.1s;
 
-  &:hover {
-    border-color: color-mix(in oklab, $accent 40%, $line);
-    transform: translateY(-3px);
+  .event:global(.isVisible) & {
+    transform: translate(-50%, 0) scale(1);
+    opacity: 1;
   }
 
   @include mobile {
-    margin-top: 0;
-  }
-}
-
-@keyframes timeline-drop-in {
-  from {
-    transform: translateY(-30px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
+    display: none;
   }
 }
 

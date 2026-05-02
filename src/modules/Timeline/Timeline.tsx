@@ -9,12 +9,14 @@ import {
 import { useHorizontalPin } from "../../shared/hooks";
 import { getSectionMeta } from "../../sections";
 import styles from "./Timeline.module.scss";
+import useTimelineReveal from "./hooks/useTimelineReveal";
 
 const meta = getSectionMeta("timeline");
 
 export default function Timeline() {
   const { timeline } = PORTFOLIO_CONTENT;
   const { pinRef, trackRef, progress } = useHorizontalPin();
+  useTimelineReveal(trackRef);
   const items = timeline.items;
   const current = Math.min(
     items.length,

@@ -3,92 +3,229 @@
 
 .timeline {
   padding-top: 100px;
-  @include container;
 }
 
 .head {
-  max-width: 720px;
-  margin: 0 0 $sp-7;
+  @include container;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: end;
+  gap: 32px;
+  margin-bottom: $sp-7;
 
   h2 {
     font-size: clamp(36px, 4.4vw, 60px);
     font-weight: 500;
     letter-spacing: -0.03em;
     line-height: 1.05;
-    margin: 0 0 16px;
+    margin: 12px 0 0;
   }
 
-  p {
-    color: $fg-dim;
-    font-size: 17px;
-    line-height: 1.6;
-    margin: 0;
+  @include mobile {
+    grid-template-columns: 1fr;
+    align-items: start;
+    gap: 16px;
+  }
+}
+
+.headMeta {
+  text-align: right;
+  font-family: $f-mono;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: $fg-dim;
+  display: grid;
+  gap: 6px;
+
+  strong {
+    color: $accent;
+    font-weight: 500;
+    font-size: 16px;
+  }
+
+  div:last-child {
+    text-transform: none;
+    letter-spacing: 0;
+    font-family: $f-sans;
+    font-size: 14px;
+    color: $fg-faint;
+    max-width: 380px;
+    margin-left: auto;
+  }
+
+  @include mobile {
+    text-align: left;
+    div:last-child {
+      margin-left: 0;
+    }
+  }
+}
+
+// Pinned scroll length scales with event count.
+.pin {
+  position: relative;
+  height: calc(var(--event-count, 8) * 60vh + 100vh);
+
+  @include mobile {
+    height: auto !important;
+  }
+}
+
+.stage {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+
+  @include mobile {
+    position: relative !important;
+    height: auto;
+    padding: 20px 0 60px;
   }
 }
 
 .track {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+  display: flex;
+  align-items: stretch;
+  gap: 28px;
+  padding: 0 8vw;
   position: relative;
+  will-change: transform;
 
-  // rose-accent vertical spine
-  &::before {
-    content: "";
-    position: absolute;
-    left: 7px;
-    top: 8px;
-    bottom: 8px;
-    width: 2px;
-    background: linear-gradient(
-      to bottom,
-      transparent 0%,
-      color-mix(in oklab, $accent 60%, transparent) 8%,
-      color-mix(in oklab, $accent 60%, transparent) 92%,
-      transparent 100%
-    );
-    border-radius: 2px;
-    pointer-events: none;
+  @include mobile {
+    transform: none !important;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding: 0 7vw;
+    gap: 20px;
+    -webkit-overflow-scrolling: touch;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}
+
+.spine {
+  position: absolute;
+  left: 0;
+  right: 0;
+  // Aligned to the top of cards (markers sit on this line).
+  top: 14vh;
+  height: 2px;
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    color-mix(in oklab, $accent 70%, transparent) 4%,
+    color-mix(in oklab, $accent 70%, transparent) 96%,
+    transparent 100%
+  );
+  pointer-events: none;
+  z-index: 0;
+
+  @include mobile {
+    display: none;
   }
 }
 
 .event {
+  flex: 0 0 360px;
   position: relative;
-  padding-left: 44px;
-  padding-bottom: $sp-7;
+  padding-top: 14vh; // leaves room for marker + connector above the card
+  display: flex;
+  flex-direction: column;
+  scroll-snap-align: center;
 
-  &:last-child {
-    padding-bottom: 0;
+  @include mobile {
+    flex: 0 0 80vw;
+    max-width: 320px;
+    padding-top: 0;
   }
 }
 
 .marker {
   position: absolute;
-  left: 0;
-  top: 6px;
-  width: 16px;
-  height: 16px;
+  // Center on spine
+  left: 50%;
+  top: calc(14vh - 9px);
+  transform: translateX(-50%);
+  width: 18px;
+  height: 18px;
   border-radius: 999px;
   background: $ink;
   border: 2px solid $accent;
   box-shadow:
     0 0 0 4px color-mix(in oklab, $accent 18%, transparent),
-    0 0 12px color-mix(in oklab, $accent 50%, transparent);
+    0 0 14px color-mix(in oklab, $accent 60%, transparent);
+  z-index: 2;
+
+  @include mobile {
+    display: none;
+  }
+}
+
+.connector {
+  position: absolute;
+  left: 50%;
+  top: 14vh;
+  bottom: auto;
+  width: 1px;
+  height: 28px;
+  background: linear-gradient(
+    to bottom,
+    color-mix(in oklab, $accent 70%, transparent) 0%,
+    color-mix(in oklab, $accent 20%, transparent) 100%
+  );
+  transform: translateX(-50%);
+  z-index: 1;
+
+  @include mobile {
+    display: none;
+  }
 }
 
 .card {
+  margin-top: 28px;
   display: grid;
   gap: 10px;
   padding: $sp-4 $sp-5;
-  background: color-mix(in oklab, $ink-2 70%, transparent);
+  background: color-mix(in oklab, $ink-2 75%, transparent);
   border: 1px solid $line;
   border-radius: $r-md;
-  transition: border-color $dur-med $ease-reveal,
+  flex: 1;
+  position: relative;
+  z-index: 2;
+
+  // Drop-in animation: cards slide down from above the spine into place.
+  // Stagger via per-card --i so adjacent cards cascade.
+  animation: timeline-drop-in 0.7s cubic-bezier(0.2, 0.7, 0.3, 1) both;
+  animation-delay: calc(var(--i, 0) * 60ms + 200ms);
+
+  transition:
+    border-color $dur-med $ease-reveal,
     transform $dur-med $ease-reveal;
 
   &:hover {
     border-color: color-mix(in oklab, $accent 40%, $line);
-    transform: translateY(-2px);
+    transform: translateY(-3px);
+  }
+
+  @include mobile {
+    margin-top: 0;
+  }
+}
+
+@keyframes timeline-drop-in {
+  from {
+    transform: translateY(-30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
   }
 }
 
@@ -130,7 +267,8 @@
     text-transform: uppercase;
     border-bottom: 1px solid color-mix(in oklab, $accent 40%, transparent);
     padding-bottom: 2px;
-    transition: color $dur-fast $ease-reveal,
+    transition:
+      color $dur-fast $ease-reveal,
       border-color $dur-fast $ease-reveal;
 
     &:hover {
@@ -140,31 +278,27 @@
   }
 }
 
+.scrollIndicator {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 6vh;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 3;
+
+  @include mobile {
+    display: none;
+  }
+}
+
 @include mobile {
-  .head h2 {
-    font-size: clamp(28px, 8vw, 40px);
-  }
-
-  .track::before {
-    left: 5px;
-  }
-
-  .event {
-    padding-left: 30px;
-    padding-bottom: $sp-5;
-  }
-
-  .marker {
-    width: 12px;
-    height: 12px;
-    top: 4px;
+  .title {
+    font-size: 18px;
   }
 
   .card {
     padding: $sp-3 $sp-4;
-  }
-
-  .title {
-    font-size: 18px;
   }
 }

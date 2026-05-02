@@ -64,11 +64,13 @@ export default function About() {
                   </div>
                 );
               })}
-              <ScrollIndicator
-                current={active + 1}
-                total={stories.length}
-                progress={progress}
-              />
+              <div className={styles.scrollIndicator}>
+                <ScrollIndicator
+                  current={active + 1}
+                  total={stories.length}
+                  progress={progress}
+                />
+              </div>
             </div>
           </div>
         </div>

@@ -6,7 +6,7 @@ import { parseTimelineDate } from "../Timeline/TimelineUtils";
 const SKILL_ALIASES: Record<string, readonly string[]> = {
   ".NET Core": [".NET", ".NET 10"],
   "C#": [".NET", ".NET 10"],
-  "Blazor WASM": [".NET", ".NET 10"],
+  Blazor: [".NET", ".NET 10"],
   AngularJS: ["Angular"],
   "React / Next": ["React", "React 19"],
   Redux: ["React"],

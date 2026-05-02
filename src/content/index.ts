@@ -9,6 +9,7 @@ import photos from "./photos.json";
 import videos from "./videos.json";
 import contact from "./contact.json";
 import intro from "./intro.json";
+import timeline from "./timeline.json";
 import type {
   AboutContent,
   Branding,
@@ -21,6 +22,7 @@ import type {
   ProjectsContent,
   SkillsContent,
   Social,
+  TimelineContent,
   VideosContent,
 } from "./types";
 
@@ -36,6 +38,7 @@ const PORTFOLIO_CONTENT: PortfolioContent = {
   videos: videos as VideosContent,
   contact: contact as ContactContent,
   intro: intro as IntroContent,
+  timeline: timeline as TimelineContent,
 };
 
 export default PORTFOLIO_CONTENT;

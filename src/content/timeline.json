@@ -21,16 +21,49 @@
 		},
 		{
 			"date": "2018",
+			"title": "3D prop design for games",
+			"body": "Started doing prop design for games — Maya for modeling, Substance Painter for texturing, Marmoset Viewer for presentation, the full PBR workflow. Game-friendly assets, baking maps, surface authoring. Most of the renders in Lens come from this period.",
+			"tags": ["Maya", "Substance Painter", "Marmoset Viewer", "PBR"]
+		},
+		{
+			"date": "2019",
 			"title": "First serious dive into JavaScript",
-			"body": "Built libkcdxenhtml — a library for building XenHTML home-screen replacements for jailbroken iPhones. Started learning React. Began freelancing.",
-			"tags": ["JavaScript", "React", "XenHTML"],
-			"links": [{ "label": "libkcdxenhtml", "href": "https://github.com/paraskcd1315/libkcdxenhtml" }]
+			"body": "Started learning JavaScript and React in earnest. Began freelancing on small web projects on the side.",
+			"tags": ["JavaScript", "React"]
 		},
 		{
 			"date": "2020",
 			"title": "COVID — co-built Nitroless",
 			"body": "Cydia-style repo GUI system for distributing custom stickers + emojis across messaging apps. Shipped a Swift app + keyboard, Jetpack Compose app + keyboard, a macOS app, and an Electron app — community-driven, multi-platform.",
 			"tags": ["Swift", "Jetpack Compose", "Kotlin", "macOS", "Electron"]
+		},
+		{
+			"date": "2021-02",
+			"title": "Frosty-Glass-Pro",
+			"body": "Frosted-glass aesthetic theme for jailbroken iPhones — JavaScript / XenHTML on the home screen.",
+			"tags": ["JavaScript", "XenHTML", "iOS jailbreak"],
+			"links": [{ "label": "GitHub", "href": "https://github.com/paraskcd1315/Frosty-Glass-Pro" }]
+		},
+		{
+			"date": "2021-03",
+			"title": "libkcdxenhtml",
+			"body": "JS library that became the foundation for my XenHTML themes — animation, layout, and home-screen widget primitives reused across every jailbreak project after.",
+			"tags": ["JavaScript", "XenHTML", "Library"],
+			"links": [{ "label": "GitHub", "href": "https://github.com/paraskcd1315/libkcdxenhtml" }]
+		},
+		{
+			"date": "2021-03",
+			"title": "metroUI",
+			"body": "Windows-Phone-style home-screen replacement for jailbroken iPhones — live tiles, accent colors, the whole Metro design language ported to iOS via XenHTML.",
+			"tags": ["JavaScript", "XenHTML", "iOS jailbreak"],
+			"links": [{ "label": "GitHub", "href": "https://github.com/paraskcd1315/metroUI" }]
+		},
+		{
+			"date": "2021-07",
+			"title": "Influential — first version (iPhone jailbreak)",
+			"body": "First version of Influential Launcher, for jailbroken iPhones. Built in React on top of XenHTML — a custom home-screen launcher with my own layout + interaction system. Spiritual ancestor to the 2025 native Android rewrite.",
+			"tags": ["React", "JavaScript", "XenHTML", "iOS jailbreak"],
+			"links": [{ "label": "GitHub", "href": "https://github.com/paraskcd1315/influential-11-react" }]
 		},
 		{
 			"date": "2021-09",
@@ -67,8 +100,8 @@
 		},
 		{
 			"date": "2025-08",
-			"title": "Started InfluentialLauncher",
-			"body": "Custom Android launcher experiment in pure Kotlin — Gradle Kotlin DSL build, full-stack ground-up rewrite of the launcher surface.",
+			"title": "Influential Launcher — native Android rewrite",
+			"body": "Started over from scratch in pure Kotlin. Native Android launcher this time, no jailbreak — the same product idea, four years later, on a real platform.",
 			"tags": ["Kotlin", "Android", "Launcher"],
 			"links": [{ "label": "GitHub", "href": "https://github.com/paraskcd1315/InfluentialLauncher" }]
 		},

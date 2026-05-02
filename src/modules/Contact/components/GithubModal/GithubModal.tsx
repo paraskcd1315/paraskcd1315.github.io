@@ -2,29 +2,11 @@ import { useEffect, useMemo, useState } from "react";
 import PORTFOLIO_CONTENT from "../../../../content";
 import { Modal } from "../../../../shared/components";
 import { useGithubRepos } from "../../hooks";
-import type { RepoScope } from "../../hooks";
 import RepoCard from "./RepoCard";
 import RepoSkeleton from "./RepoSkeleton";
-import type { GithubModalProps } from "./GithubModal.types";
+import { INITIAL_VISIBLE, formatCountdown } from "./GithubModalUtils";
+import type { GithubModalProps, Tab } from "./GithubModal.types";
 import styles from "./GithubModal.module.scss";
-
-const INITIAL_VISIBLE = 12;
-
-function formatCountdown(ms: number): string {
-  if (ms <= 0) return "now";
-  const total = Math.ceil(ms / 1000);
-  const m = Math.floor(total / 60);
-  const s = total % 60;
-  if (m > 0) return `${m}m ${s.toString().padStart(2, "0")}s`;
-  return `${s}s`;
-}
-
-interface Tab {
-  key: string;
-  label: string;
-  scope: RepoScope;
-  account: string;
-}
 
 export default function GithubModal({
   open,

@@ -1,8 +1,5 @@
+import type { RepoSkeletonProps } from "./GithubModal.types";
 import styles from "./RepoSkeleton.module.scss";
-
-export interface RepoSkeletonProps {
-  count?: number;
-}
 
 export default function RepoSkeleton({
   count = 6,

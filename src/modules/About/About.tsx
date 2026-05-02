@@ -1,24 +1,24 @@
 import { type CSSProperties } from "react";
 import PORTFOLIO_CONTENT from "../../content";
-import { Avatar, SectionLabel } from "../../shared/components";
+import { Avatar, ScrollIndicator, SectionLabel } from "../../shared/components";
 import { useReveal } from "../../shared/hooks";
 import { getSectionMeta } from "../../sections";
 import styles from "./About.module.scss";
 import useAboutCardStack from "./hooks/useAboutCardStack";
+import {
+  aboutCardClass,
+  aboutCardState,
+  aboutLeaveProgress,
+} from "./AboutUtils";
 
 const meta = getSectionMeta("about");
-
-const STATE_CLASS: Record<"active" | "past" | "upcoming", string> = {
-  active: "isActive",
-  past: "isPast",
-  upcoming: "isUpcoming",
-};
 
 export default function About() {
   const ref = useReveal<HTMLElement>();
   const { profile, branding, about } = PORTFOLIO_CONTENT;
   const stories = about.stories;
   const { pinRef, active, progress } = useAboutCardStack(stories.length);
+  const leave = aboutLeaveProgress(progress, stories.length, active);
 
   return (
     <section id="about" className={styles.about} ref={ref}>
@@ -48,29 +48,13 @@ export default function About() {
           >
             <div
               className={styles.aboutStoriesStage}
-              style={
-                {
-                  "--leave": Math.max(
-                    0,
-                    Math.min(
-                      1,
-                      (Math.max(
-                        0,
-                        Math.min(1, progress * stories.length - active),
-                      ) -
-                        0.55) /
-                        0.45,
-                    ),
-                  ),
-                } as CSSProperties
-              }
+              style={{ "--leave": leave } as CSSProperties}
             >
               {stories.map((s, i) => {
-                const state =
-                  i === active ? "active" : i < active ? "past" : "upcoming";
+                const state = aboutCardState(i, active);
                 return (
                   <div
-                    className={`${styles.aboutStory} ${styles[STATE_CLASS[state]]} reveal`}
+                    className={`${styles.aboutStory} ${aboutCardClass(state)} reveal`}
                     data-index={i}
                     key={s.n}
                   >
@@ -80,6 +64,11 @@ export default function About() {
                   </div>
                 );
               })}
+              <ScrollIndicator
+                current={active + 1}
+                total={stories.length}
+                progress={progress}
+              />
             </div>
           </div>
         </div>

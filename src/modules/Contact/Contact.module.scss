@@ -58,12 +58,15 @@
   font-family: $f-mono;
   color: $fg;
   text-decoration: none;
+  border: 0;
   border-bottom: 1px solid $line-strong;
-  padding-bottom: 6px;
+  padding: 0 0 6px;
+  background: transparent;
+  cursor: none;
+  display: inline-block;
   transition:
     border-color 0.3s,
     color 0.3s;
-  cursor: none;
 
   &:hover {
     border-color: $accent;

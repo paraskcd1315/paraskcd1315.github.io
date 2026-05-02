@@ -4,3 +4,4 @@ export type {
   RepoScope,
   UseGithubReposState,
 } from "./useGithubRepos";
+export { default as useMailForm } from "./useMailForm";

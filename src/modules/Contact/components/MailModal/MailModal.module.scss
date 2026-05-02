@@ -1,0 +1,131 @@
+@use "../../../../styles/tokens" as *;
+@use "../../../../styles/mixins" as *;
+
+.form {
+  display: grid;
+  gap: $sp-4;
+
+  :global(section) {
+    padding: 0;
+  }
+}
+
+.row {
+  display: grid;
+  gap: 6px;
+}
+
+.label {
+  font-family: $f-mono;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: $fg-faint;
+}
+
+.input,
+.textarea {
+  width: 100%;
+  padding: 10px 12px;
+  background: color-mix(in oklab, $ink 60%, transparent);
+  border: 1px solid $line-strong;
+  border-radius: $r-md;
+  color: $fg;
+  font-family: $f-sans;
+  font-size: 14px;
+  line-height: 1.5;
+  transition:
+    border-color 0.2s,
+    background 0.2s;
+  cursor: none;
+
+  &:focus {
+    outline: none;
+    border-color: $accent;
+    background: color-mix(in oklab, $ink 50%, transparent);
+  }
+
+  &:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+  }
+
+  &[aria-invalid="true"] {
+    border-color: color-mix(in oklab, #ff6b6b 70%, $line-strong);
+  }
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 140px;
+}
+
+.metaRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: $sp-2;
+}
+
+.counter {
+  font-family: $f-mono;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: $fg-faint;
+}
+
+.error {
+  font-family: $f-mono;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: color-mix(in oklab, #ff6b6b 70%, $fg-dim);
+}
+
+.honeypot {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.turnstile {
+  min-height: 65px;
+  display: flex;
+  align-items: center;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: $sp-3;
+  padding-top: $sp-2;
+}
+
+.submit {
+  padding: 10px 20px;
+  border: 1px solid $accent;
+  border-radius: $r-pill;
+  background: color-mix(in oklab, $accent 16%, transparent);
+  color: $fg;
+  font-family: $f-mono;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: none;
+  transition:
+    background 0.2s,
+    border-color 0.2s,
+    color 0.2s,
+    opacity 0.2s;
+
+  &:hover:not(:disabled) {
+    background: color-mix(in oklab, $accent 26%, transparent);
+  }
+
+  &:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+}

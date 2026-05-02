@@ -106,8 +106,33 @@ export interface Tagline {
   rest: string;
 }
 
+export interface MailModalLabels {
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+}
+
+export interface MailModalCta {
+  send: string;
+  submitting: string;
+  retry: string;
+}
+
+export interface MailModalCopy {
+  title: string;
+  subtitle: string;
+  successHeading: string;
+  successBody: string;
+  errorHeading: string;
+  errorBody: string;
+  labels: MailModalLabels;
+  cta: MailModalCta;
+}
+
 export interface ContactContent {
   taglines: readonly Tagline[];
+  mailModal: MailModalCopy;
 }
 
 export interface IntroContent {

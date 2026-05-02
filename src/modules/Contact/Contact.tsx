@@ -5,6 +5,7 @@ import { useReveal } from "../../shared/hooks";
 import { getSectionMeta } from "../../sections";
 import GithubModal from "./components/GithubModal";
 import LinkedinModal from "./components/LinkedinModal";
+import MailModal from "./components/MailModal";
 import styles from "./Contact.module.scss";
 
 const meta = getSectionMeta("contact");
@@ -17,6 +18,7 @@ export default function Contact() {
     contact.taglines[0]!;
   const [githubOpen, setGithubOpen] = useState(false);
   const [linkedinOpen, setLinkedinOpen] = useState(false);
+  const [mailOpen, setMailOpen] = useState(false);
 
   return (
     <section id="contact" className={styles.contact} ref={ref}>
@@ -30,12 +32,13 @@ export default function Contact() {
           <br />
           {tagline.rest}
         </h2>
-        <a
+        <button
+          type="button"
           className={`${styles.email} reveal`}
-          href={`mailto:${profile.email}`}
+          onClick={() => setMailOpen(true)}
         >
           {profile.email}
-        </a>
+        </button>
         <div className={`${styles.socials} reveal`}>
           {socials.map((s) => {
             if (s.label === "GitHub") {
@@ -111,6 +114,7 @@ export default function Contact() {
         open={linkedinOpen}
         onClose={() => setLinkedinOpen(false)}
       />
+      <MailModal open={mailOpen} onClose={() => setMailOpen(false)} />
     </section>
   );
 }

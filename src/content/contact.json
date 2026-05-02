@@ -5,5 +5,24 @@
     { "verb": "Building", "rest": "worlds." },
     { "verb": "Rendering", "rest": "reality." },
     { "verb": "Compiling", "rest": "the cosmos." }
-  ]
+  ],
+  "mailModal": {
+    "title": "Send a message",
+    "subtitle": "Lands in dev@paraskcd.com",
+    "successHeading": "Sent.",
+    "successBody": "I'll get back to you within a day or two.",
+    "errorHeading": "Send failed.",
+    "errorBody": "Try again or email dev@paraskcd.com directly.",
+    "labels": {
+      "name": "Name",
+      "email": "Email",
+      "subject": "Subject",
+      "message": "Message"
+    },
+    "cta": {
+      "send": "Send",
+      "submitting": "Sending…",
+      "retry": "Retry"
+    }
+  }
 }

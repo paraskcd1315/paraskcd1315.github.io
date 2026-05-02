@@ -26,9 +26,13 @@ export default function useTimelineReveal(
     const tick = () => {
       if (pending.length > 0) {
         const ww = window.innerWidth;
+        const wh = window.innerHeight;
         pending = pending.filter((card) => {
           const r = card.getBoundingClientRect();
-          if (r.left < ww * ENTER_FRACTION && r.right > ww * EXIT_FRACTION) {
+          const inX =
+            r.left < ww * ENTER_FRACTION && r.right > ww * EXIT_FRACTION;
+          const inY = r.top < wh * 0.9 && r.bottom > wh * 0.05;
+          if (inX && inY) {
             card.classList.add(VISIBLE_CLASS);
             return false;
           }

@@ -13,6 +13,7 @@ const SECTIONS = [
   { id: "hero", navLabel: "Intro", sectionTitle: "Hero" },
   { id: "about", navLabel: "About", sectionTitle: "About" },
   { id: "timeline", navLabel: "Timeline", sectionTitle: "The path so far" },
+  { id: "skills", navLabel: "Skills", sectionTitle: "Skills" },
   { id: "projects", navLabel: "Work", sectionTitle: "Selected work" },
   { id: "photo", navLabel: "Lens", sectionTitle: "Lens" },
   { id: "watch", navLabel: "Watch", sectionTitle: "Watch" },

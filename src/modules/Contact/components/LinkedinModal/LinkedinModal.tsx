@@ -58,6 +58,7 @@ export default function LinkedinModal({
       onClose={onClose}
       title="LinkedIn"
       subtitle={header.headline}
+      maxWidth={720}
     >
       <div className={styles.body}>
         <header className={styles.header}>

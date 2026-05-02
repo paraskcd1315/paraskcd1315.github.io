@@ -3,22 +3,32 @@
 
 .body {
 	display: grid;
-	gap: $sp-5;
+	gap: $sp-4;
 }
 
 .header {
-	display: flex;
-	flex-direction: column;
+	display: grid;
+	grid-template-columns: auto 1fr;
 	align-items: center;
-	gap: $sp-3;
-	padding-bottom: $sp-4;
+	gap: $sp-4;
+	padding-bottom: $sp-3;
 	border-bottom: 1px solid $line;
+
+	@include mobile {
+		grid-template-columns: 1fr;
+		justify-items: center;
+		text-align: center;
+		gap: $sp-3;
+	}
 }
 
 .badge {
-	min-height: 280px;
 	display: flex;
-	justify-content: center;
+	justify-content: flex-start;
+
+	@include mobile {
+		justify-content: center;
+	}
 }
 
 .avatar {
@@ -61,7 +71,7 @@
 }
 
 .profileLink {
-	margin-top: 4px;
+	margin: 0;
 	font-family: $f-mono;
 	font-size: 11px;
 	letter-spacing: 0.04em;
@@ -81,7 +91,7 @@
 
 .section {
 	display: grid;
-	gap: $sp-3;
+	gap: $sp-2;
 }
 
 .sectionTitle {

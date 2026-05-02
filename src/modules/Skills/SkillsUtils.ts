@@ -13,6 +13,14 @@ const SKILL_ALIASES: Record<string, readonly string[]> = {
   ElectronJS: ["Electron"],
   ExpressJS: ["Express"],
   MongoDB: ["Mongoose"],
+  "Final Cut Pro": ["After Effects"],
+};
+
+// Explicit date overrides for skills with no clean tag mapping.
+const SKILL_SINCE_OVERRIDE: Record<string, string> = {
+  Figma: "2023-11",
+  AWS: "2021-09",
+  "Azure DevOps": "2023-11",
 };
 
 export function skillSearchTerms(skillName: string): readonly string[] {
@@ -23,6 +31,8 @@ export function findEarliestSkillDate(
   skillName: string,
   items: readonly TimelineEvent[],
 ): string | null {
+  const override = SKILL_SINCE_OVERRIDE[skillName];
+  if (override) return override;
   const terms = skillSearchTerms(skillName);
   let earliest: string | null = null;
   let earliestT = Infinity;

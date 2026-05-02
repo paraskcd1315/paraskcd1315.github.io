@@ -117,6 +117,7 @@ export interface MailModalCta {
   send: string;
   submitting: string;
   retry: string;
+  close: string;
 }
 
 export interface MailModalCopy {

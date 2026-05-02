@@ -129,3 +129,82 @@
     cursor: not-allowed;
   }
 }
+
+.status {
+  display: grid;
+  justify-items: center;
+  gap: $sp-3;
+  padding: $sp-4 0;
+  text-align: center;
+  animation: mailStatusIn 0.36s $ease-reveal both;
+}
+
+.statusIcon {
+  width: 56px;
+  height: 56px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  line-height: 1;
+  border: 1px solid $accent;
+  color: $accent;
+  background: color-mix(in oklab, $accent 14%, transparent);
+}
+
+.statusIconError {
+  border-color: color-mix(in oklab, #ff6b6b 70%, $line-strong);
+  color: color-mix(in oklab, #ff6b6b 80%, $fg);
+  background: color-mix(in oklab, #ff6b6b 12%, transparent);
+}
+
+.statusHeading {
+  margin: 0;
+  font-size: clamp(20px, 2.4vw, 26px);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: $fg;
+}
+
+.statusBody {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.55;
+  color: $fg-dim;
+  max-width: 36ch;
+}
+
+.statusDetail {
+  margin: 0;
+  font-family: $f-mono;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: $fg-faint;
+  word-break: break-word;
+  max-width: 48ch;
+}
+
+.statusActions {
+  display: flex;
+  justify-content: center;
+  gap: $sp-3;
+  padding-top: $sp-3;
+}
+
+@keyframes mailStatusIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .status {
+    animation: none;
+  }
+}

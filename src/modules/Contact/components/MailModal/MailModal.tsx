@@ -82,6 +82,66 @@ export default function MailModal({ open, onClose }: Readonly<MailModalProps>) {
 
   const submitting = form.status === "submitting";
 
+  if (form.status === "success") {
+    return (
+      <Modal
+        open={open}
+        onClose={onClose}
+        title={mailModal.title}
+        subtitle={mailModal.subtitle}
+        maxWidth={640}
+      >
+        <div className={styles.status}>
+          <div className={styles.statusIcon} aria-hidden="true">
+            ✓
+          </div>
+          <h3 className={styles.statusHeading}>{mailModal.successHeading}</h3>
+          <p className={styles.statusBody}>{mailModal.successBody}</p>
+          <div className={styles.statusActions}>
+            <button type="button" className={styles.submit} onClick={onClose}>
+              {mailModal.cta.close}
+            </button>
+          </div>
+        </div>
+      </Modal>
+    );
+  }
+
+  if (form.status === "error") {
+    return (
+      <Modal
+        open={open}
+        onClose={onClose}
+        title={mailModal.title}
+        subtitle={mailModal.subtitle}
+        maxWidth={640}
+      >
+        <div className={styles.status}>
+          <div
+            className={`${styles.statusIcon} ${styles.statusIconError}`}
+            aria-hidden="true"
+          >
+            ✗
+          </div>
+          <h3 className={styles.statusHeading}>{mailModal.errorHeading}</h3>
+          <p className={styles.statusBody}>{mailModal.errorBody}</p>
+          {form.errorMessage && (
+            <p className={styles.statusDetail}>{form.errorMessage}</p>
+          )}
+          <div className={styles.statusActions}>
+            <button
+              type="button"
+              className={styles.submit}
+              onClick={() => form.reset()}
+            >
+              {mailModal.cta.retry}
+            </button>
+          </div>
+        </div>
+      </Modal>
+    );
+  }
+
   return (
     <Modal
       open={open}

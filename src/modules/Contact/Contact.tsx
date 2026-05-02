@@ -4,6 +4,7 @@ import { SectionLabel } from "../../shared/components";
 import { useReveal } from "../../shared/hooks";
 import { getSectionMeta } from "../../sections";
 import GithubModal from "./components/GithubModal";
+import LinkedinModal from "./components/LinkedinModal";
 import styles from "./Contact.module.scss";
 
 const meta = getSectionMeta("contact");
@@ -15,6 +16,7 @@ export default function Contact() {
     contact.taglines[Math.floor(Math.random() * contact.taglines.length)] ??
     contact.taglines[0]!;
   const [githubOpen, setGithubOpen] = useState(false);
+  const [linkedinOpen, setLinkedinOpen] = useState(false);
 
   return (
     <section id="contact" className={styles.contact} ref={ref}>
@@ -43,6 +45,26 @@ export default function Contact() {
                   type="button"
                   className={styles.socialBtn}
                   onClick={() => setGithubOpen(true)}
+                >
+                  <span
+                    style={{
+                      width: 6,
+                      height: 6,
+                      borderRadius: 99,
+                      background: "var(--accent)",
+                    }}
+                  ></span>
+                  {s.label}
+                </button>
+              );
+            }
+            if (s.label === "LinkedIn") {
+              return (
+                <button
+                  key={s.label}
+                  type="button"
+                  className={styles.socialBtn}
+                  onClick={() => setLinkedinOpen(true)}
                 >
                   <span
                     style={{
@@ -85,6 +107,10 @@ export default function Contact() {
         <span>{profile.signature}</span>
       </footer>
       <GithubModal open={githubOpen} onClose={() => setGithubOpen(false)} />
+      <LinkedinModal
+        open={linkedinOpen}
+        onClose={() => setLinkedinOpen(false)}
+      />
     </section>
   );
 }

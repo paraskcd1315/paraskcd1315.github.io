@@ -1,7 +1,9 @@
+import { useState } from "react";
 import PORTFOLIO_CONTENT from "../../content";
 import { SectionLabel } from "../../shared/components";
 import { useReveal } from "../../shared/hooks";
 import { getSectionMeta } from "../../sections";
+import GithubModal from "./components/GithubModal";
 import styles from "./Contact.module.scss";
 
 const meta = getSectionMeta("contact");
@@ -12,6 +14,8 @@ export default function Contact() {
   const tagline =
     contact.taglines[Math.floor(Math.random() * contact.taglines.length)] ??
     contact.taglines[0]!;
+  const [githubOpen, setGithubOpen] = useState(false);
+
   return (
     <section id="contact" className={styles.contact} ref={ref}>
       <div className={styles.contactBg}></div>
@@ -31,24 +35,46 @@ export default function Contact() {
           {profile.email}
         </a>
         <div className={`${styles.socials} reveal`}>
-          {socials.map((s) => (
-            <a
-              key={s.label}
-              href={s.href}
-              target={s.href.startsWith("http") ? "_blank" : undefined}
-              rel="noopener noreferrer"
-            >
-              <span
-                style={{
-                  width: 6,
-                  height: 6,
-                  borderRadius: 99,
-                  background: "var(--accent)",
-                }}
-              ></span>
-              {s.label}
-            </a>
-          ))}
+          {socials.map((s) => {
+            if (s.label === "GitHub") {
+              return (
+                <button
+                  key={s.label}
+                  type="button"
+                  className={styles.socialBtn}
+                  onClick={() => setGithubOpen(true)}
+                >
+                  <span
+                    style={{
+                      width: 6,
+                      height: 6,
+                      borderRadius: 99,
+                      background: "var(--accent)",
+                    }}
+                  ></span>
+                  {s.label}
+                </button>
+              );
+            }
+            return (
+              <a
+                key={s.label}
+                href={s.href}
+                target={s.href.startsWith("http") ? "_blank" : undefined}
+                rel="noopener noreferrer"
+              >
+                <span
+                  style={{
+                    width: 6,
+                    height: 6,
+                    borderRadius: 99,
+                    background: "var(--accent)",
+                  }}
+                ></span>
+                {s.label}
+              </a>
+            );
+          })}
         </div>
       </div>
       <footer className={styles.footer} style={{ marginTop: 120 }}>
@@ -58,6 +84,7 @@ export default function Contact() {
         </span>
         <span>{profile.signature}</span>
       </footer>
+      <GithubModal open={githubOpen} onClose={() => setGithubOpen(false)} />
     </section>
   );
 }

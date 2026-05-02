@@ -78,7 +78,8 @@
   margin-top: 56px;
   flex-wrap: wrap;
 
-  a {
+  a,
+  .socialBtn {
     display: inline-flex;
     align-items: center;
     gap: 10px;
@@ -91,6 +92,7 @@
     font-size: 12px;
     letter-spacing: 0.04em;
     cursor: none;
+    background: transparent;
     transition:
       background 0.25s,
       color 0.25s,
@@ -104,6 +106,10 @@
       transform: translateY(-2px);
     }
   }
+}
+
+.socialBtn {
+  font: inherit;
 }
 
 .footer {

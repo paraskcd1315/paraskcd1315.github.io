@@ -11,3 +11,5 @@ export type {
 export { default as SideProgress } from "./SideProgress";
 export { default as VideoFrame } from "./VideoFrame";
 export type { VideoFrameProps } from "./VideoFrame/VideoFrame.types";
+export { default as Modal } from "./Modal";
+export type { ModalProps } from "./Modal/Modal.types";

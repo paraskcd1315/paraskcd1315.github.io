@@ -1,0 +1,9 @@
+@use "../../../../styles/tokens" as *;
+
+.placeholder {
+	font-family: $f-mono;
+	font-size: 13px;
+	color: $fg-faint;
+	padding: $sp-5 0;
+	text-align: center;
+}

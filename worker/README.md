@@ -14,9 +14,10 @@ CORS is restricted to `paraskcd.com`, `paraskcd1315.github.io`, and `localhost:3
 ```bash
 cd worker
 npm install
-npx wrangler login                       # opens browser, links Cloudflare account
-npx wrangler secret put NASA_KEY         # paste personal NASA key
-npx wrangler secret put TURNSTILE_SECRET # paste Turnstile site secret
+npx wrangler login                                   # opens browser, links Cloudflare account
+npx wrangler kv:namespace create RATE_LIMIT_KV       # paste printed id into wrangler.toml
+npx wrangler secret put NASA_KEY                     # paste personal NASA key
+npx wrangler secret put TURNSTILE_SECRET             # paste Turnstile site secret
 npx wrangler deploy
 ```
 
@@ -25,17 +26,49 @@ npx wrangler deploy
 - `REACT_APP_MAIL_WORKER_URL` → contact form fetches `${URL}/send-mail`
 - `Hero.jsx` constant → APOD proxy URL
 
-## Rotate a secret
+## Rate-limit (KV)
+
+`POST /send-mail` is rate-limited to **5 sends per hour per IP** via the `RATE_LIMIT_KV` namespace. The worker reads `CF-Connecting-IP`, looks up `mail:<ip>`, and stores `{ count, windowStart }` JSON with a 1-hour TTL. When the count hits 5 within the same window, the worker returns `429` with a `Retry-After` header.
+
+Create the namespace once:
 
 ```bash
-npx wrangler secret put NASA_KEY
-# or
-npx wrangler secret put TURNSTILE_SECRET
-# or
-npx wrangler secret put DKIM_PRIVATE_KEY
+npx wrangler kv:namespace create RATE_LIMIT_KV
 ```
 
-No redeploy required — the worker picks up the new value on its next cold start.
+The command prints something like:
+
+```
+{ binding = "RATE_LIMIT_KV", id = "abc123def456..." }
+```
+
+Paste the `id` into `wrangler.toml` (replacing `REPLACE_WITH_KV_NAMESPACE_ID`), then redeploy.
+
+If the KV binding is missing at runtime (e.g. local `wrangler dev` without the namespace), the worker **falls open** — rate-limit check is skipped and requests proceed. Production must keep the binding live.
+
+To clear a stuck IP manually:
+
+```bash
+npx wrangler kv:key delete --binding=RATE_LIMIT_KV "mail:<ip>"
+```
+
+## Rotate a secret
+
+All three rotations follow the same pattern — no redeploy needed. The worker picks up the new value on the next cold start (typically within seconds).
+
+```bash
+npx wrangler secret put NASA_KEY            # NASA APOD upstream
+npx wrangler secret put TURNSTILE_SECRET    # Turnstile siteverify
+npx wrangler secret put DKIM_PRIVATE_KEY    # MailChannels custom DKIM
+```
+
+When rotating `DKIM_PRIVATE_KEY`, regenerate the public key via `openssl rsa -in dkim.priv.pem -pubout -outform der | openssl base64 -A` and update the `mailchannels._domainkey.paraskcd.com` TXT record at the same time. Recommended cadence: yearly for `DKIM_PRIVATE_KEY`, immediately after suspected compromise for `TURNSTILE_SECRET`, opportunistic for `NASA_KEY`.
+
+To list which secrets are currently set (without revealing values):
+
+```bash
+npx wrangler secret list
+```
 
 ## Cloudflare Turnstile setup
 
@@ -152,6 +185,7 @@ Responses:
 | `400` | Validation failed (`{ error, fields }`) — invalid JSON, bad name/email/subject/message |
 | `403` | Origin denied OR Turnstile token missing/failed |
 | `405` | Wrong HTTP method |
+| `429` | Rate limit exceeded (`{ error, retryAfter }`) — 5 sends per IP per hour. `Retry-After` header set in seconds |
 | `502` | MailChannels relay failed (`{ error, detail }`) — usually a missing/wrong DNS record |
 
 ## Cost

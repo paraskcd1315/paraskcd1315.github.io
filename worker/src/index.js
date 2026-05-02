@@ -30,6 +30,9 @@ const MAIL_TO_NAME = "Paras KCD";
 const MAIL_FROM_EMAIL = "noreply@paraskcd.com";
 const MAIL_FROM_NAME = "paraskcd.com contact form";
 
+const RATE_LIMIT_MAX = 5;
+const RATE_LIMIT_WINDOW_SEC = 3600;
+
 function corsHeaders(req) {
   const origin = req.headers.get("Origin");
   const allow = ALLOWED_ORIGINS.includes(origin) ? origin : ALLOWED_ORIGINS[0];
@@ -52,6 +55,45 @@ function jsonResponse(status, body, req) {
 function originAllowed(req) {
   const origin = req.headers.get("Origin");
   return Boolean(origin) && ALLOWED_ORIGINS.includes(origin);
+}
+
+async function rateLimitCheck(req, env) {
+  if (!env.RATE_LIMIT_KV) return { ok: true };
+  const ip = req.headers.get("CF-Connecting-IP");
+  if (!ip) return { ok: true };
+  const key = `mail:${ip}`;
+  const now = Date.now();
+  const windowMs = RATE_LIMIT_WINDOW_SEC * 1000;
+  const raw = await env.RATE_LIMIT_KV.get(key);
+  let count = 0;
+  let windowStart = now;
+  if (raw) {
+    try {
+      const parsed = JSON.parse(raw);
+      if (
+        typeof parsed.windowStart === "number" &&
+        now - parsed.windowStart < windowMs
+      ) {
+        count = Number(parsed.count) || 0;
+        windowStart = parsed.windowStart;
+      }
+    } catch {
+      // corrupt entry — fall through and reset window
+    }
+  }
+  if (count >= RATE_LIMIT_MAX) {
+    const retryAfter = Math.max(
+      1,
+      Math.ceil((windowStart + windowMs - now) / 1000),
+    );
+    return { ok: false, retryAfter };
+  }
+  await env.RATE_LIMIT_KV.put(
+    key,
+    JSON.stringify({ count: count + 1, windowStart }),
+    { expirationTtl: RATE_LIMIT_WINDOW_SEC + 60 },
+  );
+  return { ok: true };
 }
 
 async function verifyTurnstile(token, env, req) {
@@ -156,6 +198,23 @@ async function handleSendMail(req, env) {
     typeof body.turnstileToken === "string" ? body.turnstileToken : "";
   if (!token) {
     return jsonResponse(403, { error: "Turnstile token missing" }, req);
+  }
+  const limit = await rateLimitCheck(req, env);
+  if (!limit.ok) {
+    return new Response(
+      JSON.stringify({
+        error: "Rate limit exceeded",
+        retryAfter: limit.retryAfter,
+      }),
+      {
+        status: 429,
+        headers: {
+          "content-type": "application/json",
+          "retry-after": String(limit.retryAfter),
+          ...corsHeaders(req),
+        },
+      },
+    );
   }
   const verified = await verifyTurnstile(token, env, req);
   if (!verified) {

@@ -24,6 +24,12 @@ const TURNSTILE_VERIFY_URL =
   "https://challenges.cloudflare.com/turnstile/v0/siteverify";
 const TURNSTILE_DEV_TOKEN = "dev-skip";
 
+const MAILCHANNELS_URL = "https://api.mailchannels.net/tx/v1/send";
+const MAIL_TO_EMAIL = "dev@paraskcd.com";
+const MAIL_TO_NAME = "Paras KCD";
+const MAIL_FROM_EMAIL = "noreply@paraskcd.com";
+const MAIL_FROM_NAME = "paraskcd.com contact form";
+
 function corsHeaders(req) {
   const origin = req.headers.get("Origin");
   const allow = ALLOWED_ORIGINS.includes(origin) ? origin : ALLOWED_ORIGINS[0];
@@ -72,6 +78,35 @@ async function verifyTurnstile(token, env, req) {
   }
 }
 
+async function sendViaMailChannels({ name, email, subject, message }) {
+  const plain = `From: ${name} <${email}>
+Subject: ${subject}
+
+${message}
+
+---
+Sent via paraskcd.com contact form.`;
+
+  const payload = {
+    personalizations: [{ to: [{ email: MAIL_TO_EMAIL, name: MAIL_TO_NAME }] }],
+    from: { email: MAIL_FROM_EMAIL, name: MAIL_FROM_NAME },
+    reply_to: { email, name },
+    subject: `[paraskcd.com] ${subject}`,
+    content: [{ type: "text/plain", value: plain }],
+  };
+
+  const res = await fetch(MAILCHANNELS_URL, {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify(payload),
+  });
+
+  if (!res.ok) {
+    const text = await res.text().catch(() => "");
+    throw new Error(`MailChannels ${res.status}: ${text.slice(0, 200)}`);
+  }
+}
+
 function validateMailFields(body) {
   const errors = {};
   const name = typeof body.name === "string" ? body.name.trim() : "";
@@ -100,7 +135,7 @@ async function handleSendMail(req, env) {
   if (typeof body.honeypot === "string" && body.honeypot.trim() !== "") {
     return new Response(null, { status: 204, headers: corsHeaders(req) });
   }
-  const { errors } = validateMailFields(body);
+  const { errors, normalized } = validateMailFields(body);
   if (Object.keys(errors).length > 0) {
     return jsonResponse(
       400,
@@ -117,6 +152,20 @@ async function handleSendMail(req, env) {
   if (!verified) {
     return jsonResponse(403, { error: "Turnstile verification failed" }, req);
   }
+
+  try {
+    await sendViaMailChannels(normalized);
+  } catch (err) {
+    return jsonResponse(
+      502,
+      {
+        error: "Mail relay failed",
+        detail: err instanceof Error ? err.message : String(err),
+      },
+      req,
+    );
+  }
+
   return new Response(null, { status: 204, headers: corsHeaders(req) });
 }
 

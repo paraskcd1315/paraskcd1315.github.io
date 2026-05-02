@@ -12,7 +12,7 @@ export interface SectionMeta extends Section {
 const SECTIONS = [
   { id: "hero", navLabel: "Intro", sectionTitle: "Hero" },
   { id: "about", navLabel: "About", sectionTitle: "About" },
-  { id: "skills", navLabel: "Skills", sectionTitle: "Skills" },
+  { id: "timeline", navLabel: "Path", sectionTitle: "The path so far" },
   { id: "projects", navLabel: "Work", sectionTitle: "Selected work" },
   { id: "photo", navLabel: "Lens", sectionTitle: "Lens" },
   { id: "watch", navLabel: "Watch", sectionTitle: "Watch" },

@@ -9,7 +9,7 @@ import {
   Intro,
   Photo,
   Projects,
-  Skills,
+  Timeline,
   Watch,
 } from "../modules";
 
@@ -40,7 +40,7 @@ export default function App() {
       <SideProgress />
       <Hero startReveal={heroRevealing} />
       <About />
-      <Skills />
+      <Timeline />
       <Projects />
       <Photo />
       <Watch />

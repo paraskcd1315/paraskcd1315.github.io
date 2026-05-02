@@ -6,5 +6,6 @@ export { default as Intro } from "./Intro";
 export type { IntroProps } from "./Intro/Intro.types";
 export { default as Photo } from "./Photo";
 export { default as Projects } from "./Projects";
-export { default as Skills } from "./Skills";
+export { default as Timeline } from "./Timeline";
+export type { TimelineProps } from "./Timeline/Timeline.types";
 export { default as Watch } from "./Watch";

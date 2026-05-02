@@ -1,0 +1,170 @@
+@use "../../styles/tokens" as *;
+@use "../../styles/mixins" as *;
+
+.timeline {
+  padding-top: 100px;
+  @include container;
+}
+
+.head {
+  max-width: 720px;
+  margin: 0 0 $sp-7;
+
+  h2 {
+    font-size: clamp(36px, 4.4vw, 60px);
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+    margin: 0 0 16px;
+  }
+
+  p {
+    color: $fg-dim;
+    font-size: 17px;
+    line-height: 1.6;
+    margin: 0;
+  }
+}
+
+.track {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: relative;
+
+  // rose-accent vertical spine
+  &::before {
+    content: "";
+    position: absolute;
+    left: 7px;
+    top: 8px;
+    bottom: 8px;
+    width: 2px;
+    background: linear-gradient(
+      to bottom,
+      transparent 0%,
+      color-mix(in oklab, $accent 60%, transparent) 8%,
+      color-mix(in oklab, $accent 60%, transparent) 92%,
+      transparent 100%
+    );
+    border-radius: 2px;
+    pointer-events: none;
+  }
+}
+
+.event {
+  position: relative;
+  padding-left: 44px;
+  padding-bottom: $sp-7;
+
+  &:last-child {
+    padding-bottom: 0;
+  }
+}
+
+.marker {
+  position: absolute;
+  left: 0;
+  top: 6px;
+  width: 16px;
+  height: 16px;
+  border-radius: 999px;
+  background: $ink;
+  border: 2px solid $accent;
+  box-shadow:
+    0 0 0 4px color-mix(in oklab, $accent 18%, transparent),
+    0 0 12px color-mix(in oklab, $accent 50%, transparent);
+}
+
+.card {
+  display: grid;
+  gap: 10px;
+  padding: $sp-4 $sp-5;
+  background: color-mix(in oklab, $ink-2 70%, transparent);
+  border: 1px solid $line;
+  border-radius: $r-md;
+  transition: border-color $dur-med $ease-reveal,
+    transform $dur-med $ease-reveal;
+
+  &:hover {
+    border-color: color-mix(in oklab, $accent 40%, $line);
+    transform: translateY(-2px);
+  }
+}
+
+.title {
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  margin: 0;
+  color: $fg;
+}
+
+.body {
+  margin: 0;
+  color: $fg-dim;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 4px;
+
+  a {
+    color: $accent;
+    text-decoration: none;
+    font-family: $f-mono;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    border-bottom: 1px solid color-mix(in oklab, $accent 40%, transparent);
+    padding-bottom: 2px;
+    transition: color $dur-fast $ease-reveal,
+      border-color $dur-fast $ease-reveal;
+
+    &:hover {
+      color: $fg;
+      border-bottom-color: $fg;
+    }
+  }
+}
+
+@include mobile {
+  .head h2 {
+    font-size: clamp(28px, 8vw, 40px);
+  }
+
+  .track::before {
+    left: 5px;
+  }
+
+  .event {
+    padding-left: 30px;
+    padding-bottom: $sp-5;
+  }
+
+  .marker {
+    width: 12px;
+    height: 12px;
+    top: 4px;
+  }
+
+  .card {
+    padding: $sp-3 $sp-4;
+  }
+
+  .title {
+    font-size: 18px;
+  }
+}

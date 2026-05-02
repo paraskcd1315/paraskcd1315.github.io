@@ -8,16 +8,17 @@
 
 .header {
 	display: flex;
-	gap: $sp-4;
+	flex-direction: column;
 	align-items: center;
+	gap: $sp-3;
 	padding-bottom: $sp-4;
 	border-bottom: 1px solid $line;
+}
 
-	@include mobile {
-		flex-direction: column;
-		text-align: center;
-		gap: $sp-3;
-	}
+.badge {
+	min-height: 280px;
+	display: flex;
+	justify-content: center;
 }
 
 .avatar {
@@ -33,6 +34,7 @@
 	display: grid;
 	gap: 4px;
 	min-width: 0;
+	text-align: center;
 }
 
 .name {
@@ -70,11 +72,6 @@
 	width: fit-content;
 	cursor: none;
 	transition: color 0.2s, border-color 0.2s;
-
-	@include mobile {
-		margin-left: auto;
-		margin-right: auto;
-	}
 
 	&:hover {
 		color: $fg;

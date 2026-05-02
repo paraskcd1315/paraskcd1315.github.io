@@ -1,7 +1,35 @@
+import { useEffect } from "react";
 import PORTFOLIO_CONTENT from "../../../../content";
 import { Modal } from "../../../../shared/components";
 import type { LinkedinModalProps } from "./LinkedinModal.types";
 import styles from "./LinkedinModal.module.scss";
+
+const BADGE_SCRIPT_ID = "linkedin-badge-script";
+const BADGE_SCRIPT_SRC = "https://platform.linkedin.com/badges/js/profile.js";
+
+function ensureBadgeScript(): Promise<void> {
+  return new Promise((resolve) => {
+    const existing = document.getElementById(
+      BADGE_SCRIPT_ID,
+    ) as HTMLScriptElement | null;
+    if (existing) {
+      resolve();
+      return;
+    }
+    const s = document.createElement("script");
+    s.id = BADGE_SCRIPT_ID;
+    s.src = BADGE_SCRIPT_SRC;
+    s.async = true;
+    s.defer = true;
+    s.onload = () => resolve();
+    document.body.appendChild(s);
+  });
+}
+
+function deriveVanity(profileUrl: string): string {
+  const m = profileUrl.match(/linkedin\.com\/in\/([^/?#]+)/i);
+  return m?.[1] ?? "";
+}
 
 export default function LinkedinModal({
   open,
@@ -10,6 +38,19 @@ export default function LinkedinModal({
   const { linkedin } = PORTFOLIO_CONTENT;
   const { header, about, experience, education, skills, recommendations } =
     linkedin;
+  const vanity = deriveVanity(header.profileUrl);
+
+  useEffect(() => {
+    if (!open || !vanity) return;
+    let cancelled = false;
+    ensureBadgeScript().then(() => {
+      if (cancelled) return;
+      window.LIRenderAll?.();
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [open, vanity]);
 
   return (
     <Modal
@@ -20,26 +61,31 @@ export default function LinkedinModal({
     >
       <div className={styles.body}>
         <header className={styles.header}>
-          {header.photoPath && (
-            <img
-              src={header.photoPath}
-              alt={header.name}
-              className={styles.avatar}
+          {vanity ? (
+            <div
+              className={`${styles.badge} LI-profile-badge`}
+              data-locale="en_US"
+              data-size="large"
+              data-theme="dark"
+              data-type="VERTICAL"
+              data-vanity={vanity}
+              data-version="v1"
             />
+          ) : (
+            <div className={styles.headerText}>
+              <h3 className={styles.name}>{header.name}</h3>
+              <p className={styles.headline}>{header.headline}</p>
+              <p className={styles.location}>{header.location}</p>
+            </div>
           )}
-          <div className={styles.headerText}>
-            <h3 className={styles.name}>{header.name}</h3>
-            <p className={styles.headline}>{header.headline}</p>
-            <p className={styles.location}>{header.location}</p>
-            <a
-              className={styles.profileLink}
-              href={header.profileUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              View on LinkedIn ↗
-            </a>
-          </div>
+          <a
+            className={styles.profileLink}
+            href={header.profileUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            View full profile on LinkedIn ↗
+          </a>
         </header>
 
         {about && (

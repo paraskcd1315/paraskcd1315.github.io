@@ -78,7 +78,7 @@ async function verifyTurnstile(token, env, req) {
   }
 }
 
-async function sendViaMailChannels({ name, email, subject, message }) {
+async function sendViaMailChannels({ name, email, subject, message }, env) {
   const plain = `From: ${name} <${email}>
 Subject: ${subject}
 
@@ -87,8 +87,17 @@ ${message}
 ---
 Sent via paraskcd.com contact form.`;
 
+  const personalization = {
+    to: [{ email: MAIL_TO_EMAIL, name: MAIL_TO_NAME }],
+  };
+  if (env.DKIM_DOMAIN && env.DKIM_SELECTOR && env.DKIM_PRIVATE_KEY) {
+    personalization.dkim_domain = env.DKIM_DOMAIN;
+    personalization.dkim_selector = env.DKIM_SELECTOR;
+    personalization.dkim_private_key = env.DKIM_PRIVATE_KEY;
+  }
+
   const payload = {
-    personalizations: [{ to: [{ email: MAIL_TO_EMAIL, name: MAIL_TO_NAME }] }],
+    personalizations: [personalization],
     from: { email: MAIL_FROM_EMAIL, name: MAIL_FROM_NAME },
     reply_to: { email, name },
     subject: `[paraskcd.com] ${subject}`,
@@ -154,7 +163,7 @@ async function handleSendMail(req, env) {
   }
 
   try {
-    await sendViaMailChannels(normalized);
+    await sendViaMailChannels(normalized, env);
   } catch (err) {
     return jsonResponse(
       502,

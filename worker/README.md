@@ -31,6 +31,8 @@ npx wrangler deploy
 npx wrangler secret put NASA_KEY
 # or
 npx wrangler secret put TURNSTILE_SECRET
+# or
+npx wrangler secret put DKIM_PRIVATE_KEY
 ```
 
 No redeploy required — the worker picks up the new value on its next cold start.
@@ -48,11 +50,73 @@ No redeploy required — the worker picks up the new value on its next cold star
 
 If `REACT_APP_TURNSTILE_SITE_KEY` is unset, the form auto-submits a `dev-skip` token. The worker accepts that token **only when `Origin` starts with `http://localhost`** — never in production.
 
+## DNS records (MailChannels)
+
+Three TXT records on `paraskcd.com` so MailChannels accepts and signs outgoing mail. Add them in **Cloudflare dashboard → DNS → Records**.
+
+### 1. SPF — authorize MailChannels relay
+
+| Field | Value |
+|-------|-------|
+| Type | `TXT` |
+| Name | `paraskcd.com` (root, "@") |
+| Content | `v=spf1 a mx include:relay.mailchannels.net ~all` |
+| TTL | Auto |
+
+If a SPF record already exists, *merge* the include — never duplicate. Multiple SPF TXT records on the same name break SPF entirely.
+
+### 2. Domain lockdown — block other Cloudflare accounts from spoofing
+
+MailChannels honors a per-domain TXT record listing which Cloudflare account subdomains are allowed to send as `paraskcd.com`. Find your account subdomain in the Workers & Pages dashboard ("Subdomain" — looks like `paraskhanchandani1315.workers.dev`).
+
+| Field | Value |
+|-------|-------|
+| Type | `TXT` |
+| Name | `_mailchannels.paraskcd.com` |
+| Content | `v=mc1 cfid=paraskhanchandani1315.workers.dev` |
+| TTL | Auto |
+
+### 3. DKIM — let receivers verify the signature
+
+Generate a 2048-bit RSA keypair (one-time):
+
+```bash
+openssl genrsa 2048 -out dkim.priv.pem
+openssl rsa -in dkim.priv.pem -pubout -outform der | openssl base64 -A > dkim.pub.b64
+```
+
+`dkim.priv.pem` → goes into the worker secret `DKIM_PRIVATE_KEY` (paste the body **between** `-----BEGIN…-----` and `-----END…-----`, on a single line, no line breaks).
+
+`dkim.pub.b64` → goes into a TXT record:
+
+| Field | Value |
+|-------|-------|
+| Type | `TXT` |
+| Name | `mailchannels._domainkey.paraskcd.com` |
+| Content | `v=DKIM1; p=<paste contents of dkim.pub.b64>` |
+| TTL | Auto |
+
+Then set the worker secrets:
+
+```bash
+npx wrangler secret put DKIM_DOMAIN          # paraskcd.com
+npx wrangler secret put DKIM_SELECTOR        # mailchannels
+npx wrangler secret put DKIM_PRIVATE_KEY     # single-line key body
+```
+
+When all three are set, the worker passes them to MailChannels' `personalizations[0].dkim_*` so the message is signed by `mailchannels._domainkey.paraskcd.com`. When any of them is unset, MailChannels falls back to its Cloudflare-default DKIM identity (still delivers — just shows "via mailchannels.net" in some clients).
+
+**Cleanup:** delete `dkim.priv.pem` and `dkim.pub.b64` from your local disk after pasting. They're never needed again — rotate by generating a new keypair and updating both the secret and the TXT record.
+
 ## Local dev
 
 ```bash
 echo 'NASA_KEY="<key>"' > .dev.vars       # gitignored
 echo 'TURNSTILE_SECRET="<secret>"' >> .dev.vars
+# Optional, only if you want to test custom DKIM locally:
+# echo 'DKIM_DOMAIN="paraskcd.com"' >> .dev.vars
+# echo 'DKIM_SELECTOR="mailchannels"' >> .dev.vars
+# echo 'DKIM_PRIVATE_KEY="<single-line-key>"' >> .dev.vars
 npx wrangler dev
 # worker now runs at http://localhost:8787
 ```
@@ -84,11 +148,12 @@ Responses:
 
 | Status | Meaning |
 |--------|---------|
-| `204` | Accepted (real send wires in PORT-130 / MailChannels) |
+| `204` | Accepted and relayed to MailChannels |
 | `400` | Validation failed (`{ error, fields }`) — invalid JSON, bad name/email/subject/message |
 | `403` | Origin denied OR Turnstile token missing/failed |
 | `405` | Wrong HTTP method |
+| `502` | MailChannels relay failed (`{ error, detail }`) — usually a missing/wrong DNS record |
 
 ## Cost
 
-Free. Cloudflare Workers free tier: 100,000 requests/day. MailChannels (Step 3) is free for Workers traffic.
+Free. Cloudflare Workers free tier: 100,000 requests/day. MailChannels is free for traffic originating from Cloudflare Workers.

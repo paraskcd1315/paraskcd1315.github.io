@@ -3,9 +3,18 @@ main = "src/index.js"
 compatibility_date = "2026-04-29"
 
 # Secrets — stored encrypted by Cloudflare, NOT plain vars.
-#   NASA_KEY         → for /  (APOD proxy)
-#   TURNSTILE_SECRET → for /send-mail (Cloudflare Turnstile siteverify)
-# Set or rotate each via:
-#   wrangler secret put NASA_KEY
-#   wrangler secret put TURNSTILE_SECRET
+#
+#   NASA_KEY            → /  (APOD proxy)
+#   TURNSTILE_SECRET    → /send-mail (Cloudflare Turnstile siteverify)
+#   DKIM_DOMAIN         → /send-mail (custom DKIM domain, e.g. paraskcd.com)
+#   DKIM_SELECTOR       → /send-mail (custom DKIM selector, e.g. mailchannels)
+#   DKIM_PRIVATE_KEY    → /send-mail (RSA private key, single-line PEM body)
+#
+# Set or rotate via:
+#   wrangler secret put <NAME>
 # No redeploy required after rotation.
+#
+# DKIM_* are optional. When all three are set, MailChannels signs the
+# outgoing message with the custom domain key. When unset, MailChannels
+# falls back to its own Cloudflare-default DKIM identity (still
+# delivers — just shows "via mailchannels.net" in some clients).

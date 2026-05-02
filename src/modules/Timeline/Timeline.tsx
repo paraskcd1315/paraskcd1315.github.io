@@ -10,6 +10,7 @@ import { useHorizontalPin } from "../../shared/hooks";
 import { getSectionMeta } from "../../sections";
 import styles from "./Timeline.module.scss";
 import useTimelineReveal from "./hooks/useTimelineReveal";
+import { eventGapPx } from "./TimelineUtils";
 
 const meta = getSectionMeta("timeline");
 
@@ -49,7 +50,12 @@ export default function Timeline() {
               <article
                 className={`${styles.event} timeline-event`}
                 key={`${event.date}-${i}`}
-                style={{ "--i": i } as CSSProperties}
+                style={
+                  {
+                    "--i": i,
+                    "--gap": `${eventGapPx(items[i - 1]?.date ?? null, event.date)}px`,
+                  } as CSSProperties
+                }
               >
                 <div className={styles.marker} aria-hidden="true" />
                 <div className={styles.connector} aria-hidden="true" />

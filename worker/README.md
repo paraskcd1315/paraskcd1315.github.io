@@ -15,7 +15,7 @@ CORS is restricted to `paraskcd.com`, `paraskcd1315.github.io`, and `localhost:3
 cd worker
 npm install
 npx wrangler login                                   # opens browser, links Cloudflare account
-npx wrangler kv:namespace create RATE_LIMIT_KV       # paste printed id into wrangler.toml
+npx wrangler kv namespace create RATE_LIMIT_KV       # paste printed id into wrangler.toml
 npx wrangler secret put NASA_KEY                     # paste personal NASA key
 npx wrangler secret put TURNSTILE_SECRET             # paste Turnstile site secret
 npx wrangler deploy
@@ -33,7 +33,7 @@ npx wrangler deploy
 Create the namespace once:
 
 ```bash
-npx wrangler kv:namespace create RATE_LIMIT_KV
+npx wrangler kv namespace create RATE_LIMIT_KV
 ```
 
 The command prints something like:
@@ -49,7 +49,7 @@ If the KV binding is missing at runtime (e.g. local `wrangler dev` without the n
 To clear a stuck IP manually:
 
 ```bash
-npx wrangler kv:key delete --binding=RATE_LIMIT_KV "mail:<ip>"
+npx wrangler kv key delete --binding=RATE_LIMIT_KV "mail:<ip>"
 ```
 
 ## Rotate a secret

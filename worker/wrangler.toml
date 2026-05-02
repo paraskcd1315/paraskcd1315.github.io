@@ -4,7 +4,7 @@ compatibility_date = "2026-04-29"
 
 # KV namespace — per-IP rate-limit counter for /send-mail (5 sends/hr).
 # Create once, paste the printed id below:
-#   wrangler kv:namespace create RATE_LIMIT_KV
+#   wrangler kv namespace create RATE_LIMIT_KV
 #
 # When the binding is absent the worker falls open (no rate-limit) — useful
 # for local dev. In production, keep the binding live.

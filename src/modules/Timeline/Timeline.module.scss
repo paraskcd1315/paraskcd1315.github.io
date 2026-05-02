@@ -86,32 +86,9 @@
   }
 }
 
-.track {
-  display: flex;
-  align-items: stretch;
-  gap: 28px;
-  padding: 0 8vw;
-  position: relative;
-  will-change: transform;
-  width: max-content;
-
-  @include mobile {
-    transform: none !important;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    padding: 0 7vw;
-    gap: 20px;
-    width: auto;
-    -webkit-overflow-scrolling: touch;
-
-    &::-webkit-scrollbar {
-      display: none;
-    }
-  }
-}
-
-// Horizontal rose-accent spine pinned to the bottom of the stage area —
-// markers sit on this line, cards rise above it.
+// Horizontal rose-accent spine — fixed inside the stage so it stays put
+// in the viewport during the camera pan. Cards translate over it,
+// markers sit on it.
 .spine {
   position: absolute;
   left: 0;
@@ -133,20 +110,44 @@
   }
 }
 
+.track {
+  display: flex;
+  align-items: stretch;
+  gap: 28px;
+  padding: 0 8vw;
+  position: relative;
+  will-change: transform;
+  width: max-content;
+  height: 100%;
+
+  @include mobile {
+    transform: none !important;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding: 0 7vw;
+    gap: 20px;
+    width: auto;
+    height: auto;
+    -webkit-overflow-scrolling: touch;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}
+
 .event {
   flex: 0 0 360px;
   position: relative;
-  height: calc(100vh - 60px);
   display: flex;
   flex-direction: column;
-  justify-content: flex-end; // anchor card content to the bottom (above spine)
-  padding-bottom: 18vh; // leaves room below for spine + marker
+  justify-content: flex-end; // anchor card to the bottom (above spine)
+  padding-bottom: calc(18vh + 40px); // spine + marker + connector gap
   scroll-snap-align: center;
 
   @include mobile {
     flex: 0 0 80vw;
     max-width: 320px;
-    height: auto;
     padding-bottom: 0;
     justify-content: flex-start;
   }
@@ -189,7 +190,7 @@
 .connector {
   position: absolute;
   left: 50%;
-  bottom: calc(18vh + 1px);
+  bottom: calc(18vh + 10px); // sits between card bottom and marker top
   width: 1px;
   height: 30px;
   background: linear-gradient(
@@ -214,7 +215,7 @@
 .marker {
   position: absolute;
   left: 50%;
-  bottom: calc(18vh - 9px);
+  bottom: calc(18vh - 8px); // centers the 18px marker on the 2px spine
   transform: translate(-50%, 0) scale(0.4);
   width: 18px;
   height: 18px;

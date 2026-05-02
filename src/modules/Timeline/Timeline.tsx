@@ -43,8 +43,8 @@ export default function Timeline() {
         style={{ "--event-count": items.length } as CSSProperties}
       >
         <div className={styles.stage}>
+          <div className={styles.spine} aria-hidden="true" />
           <div className={styles.track} ref={trackRef}>
-            <div className={styles.spine} aria-hidden="true" />
             {items.map((event, i) => (
               <article
                 className={`${styles.event} timeline-event`}

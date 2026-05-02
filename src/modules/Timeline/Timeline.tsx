@@ -5,7 +5,7 @@ import { useHorizontalPin } from '../../shared/hooks';
 import { getSectionMeta } from '../../sections';
 import styles from './Timeline.module.scss';
 import useTimelineReveal from './hooks/useTimelineReveal';
-import { eventGapPx } from './TimelineUtils';
+import { deriveTimelineEras, eventGapPx } from './TimelineUtils';
 
 const meta = getSectionMeta('timeline');
 
@@ -15,6 +15,8 @@ export default function Timeline() {
 	useTimelineReveal(trackRef);
 	const items = timeline.items;
 	const current = Math.min(items.length, Math.floor(progress * items.length) + 1);
+	const meta = getSectionMeta('timeline');
+	const eras = deriveTimelineEras(PORTFOLIO_CONTENT.timeline.items);
 
 	return (
 		<section id='timeline' className={styles.timeline}>
@@ -32,6 +34,23 @@ export default function Timeline() {
 			</div>
 			<div className={styles.pin} ref={pinRef} style={{ '--event-count': items.length } as CSSProperties}>
 				<div className={styles.stage} style={{ '--progress': progress } as CSSProperties}>
+					<div className={styles.eras} aria-hidden='true'>
+						{eras.map(({ year, x }) => (
+							<span
+								key={year}
+								className={styles.era}
+								style={
+									{
+										left: `${x}%`,
+										'--anchor': x < 10 ? '0%' : x > 90 ? '-100%' : '-50%'
+									} as CSSProperties
+								}
+							>
+								{year}
+							</span>
+						))}
+					</div>
+
 					<div className={styles.spine} aria-hidden='true' />
 					<div className={styles.track} ref={trackRef}>
 						{items.map((event, i) => (

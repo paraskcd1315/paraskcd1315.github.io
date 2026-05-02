@@ -94,9 +94,9 @@
 	right: 0;
 	bottom: 18vh;
 	height: 2px;
-	background: linear-gradient(to right, transparent 0%, color-mix(in oklab, $accent 22%, transparent) 4%, color-mix(in oklab, $accent 22%, transparent) 96%, transparent 100%);
+	background: linear-gradient(to right, transparent 0%, color-mix(in oklab, $accent 70%, transparent) 2%, color-mix(in oklab, $accent 70%, transparent) 98%, transparent 100%);
 	pointer-events: none;
-	z-index: 0;
+	z-index: 2;
 
 	&::after {
 		content: '';
@@ -106,12 +106,44 @@
 		height: 100%;
 		width: calc(var(--progress, 0) * 100%);
 		background: linear-gradient(to right, transparent 0%, color-mix(in oklab, $accent 90%, transparent) 4%, color-mix(in oklab, $accent 90%, transparent) 100%);
+
 		box-shadow: 0 0 12px color-mix(in oklab, $accent 70%, transparent);
 		transition: width 0.08s linear;
 	}
 
 	@include mobile {
 		display: none;
+	}
+}
+
+.eras {
+	position: absolute;
+	inset: 0;
+	pointer-events: none;
+	z-index: 0;
+	transform: translate3d(calc(var(--progress, 0) * -40vw), 0, 0);
+	will-change: transform;
+
+	@include mobile {
+		display: none;
+	}
+}
+
+.era {
+	position: absolute;
+	top: 14%;
+	font-family: $f-mono;
+	font-size: clamp(56px, 7vw, 120px);
+	font-weight: 700;
+	letter-spacing: -0.03em;
+	line-height: 0.9;
+	color: color-mix(in oklab, $fg 7%, transparent);
+	user-select: none;
+	white-space: nowrap;
+	transform: translateX(var(--anchor, -50%));
+
+	&:nth-child(even) {
+		top: 26%;
 	}
 }
 

@@ -133,6 +133,51 @@ export interface TimelineContent {
   items: readonly TimelineEvent[];
 }
 
+export interface GithubContent {
+  personal: string;
+  orgs: readonly string[];
+}
+
+export interface LinkedinHeader {
+  name: string;
+  headline: string;
+  location: string;
+  photoPath?: string;
+  profileUrl: string;
+}
+
+export interface LinkedinExperience {
+  company: string;
+  title: string;
+  dateRange: string;
+  location?: string;
+  description?: string;
+  bullets?: readonly string[];
+}
+
+export interface LinkedinEducation {
+  school: string;
+  degree?: string;
+  field?: string;
+  dateRange: string;
+}
+
+export interface LinkedinRecommendation {
+  author: string;
+  authorRole: string;
+  body: string;
+  date: string;
+}
+
+export interface LinkedinContent {
+  header: LinkedinHeader;
+  about: string;
+  experience: readonly LinkedinExperience[];
+  education: readonly LinkedinEducation[];
+  skills: readonly string[];
+  recommendations: readonly LinkedinRecommendation[];
+}
+
 export interface PortfolioContent {
   profile: Profile;
   branding: Branding;
@@ -146,4 +191,6 @@ export interface PortfolioContent {
   contact: ContactContent;
   intro: IntroContent;
   timeline: TimelineContent;
+  github: GithubContent;
+  linkedin: LinkedinContent;
 }

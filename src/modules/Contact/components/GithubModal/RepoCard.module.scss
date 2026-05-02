@@ -1,0 +1,72 @@
+@use "../../../../styles/tokens" as *;
+
+.card {
+	display: grid;
+	gap: 8px;
+	padding: $sp-4;
+	border: 1px solid $line;
+	border-radius: $r-md;
+	background: color-mix(in oklab, $ink 55%, transparent);
+	color: inherit;
+	text-decoration: none;
+	cursor: none;
+	transition:
+		border-color 0.2s,
+		transform 0.2s,
+		background 0.2s;
+
+	&:hover {
+		border-color: color-mix(in oklab, $accent 50%, $line);
+		background: color-mix(in oklab, $ink 35%, transparent);
+		transform: translateY(-2px);
+
+		.name {
+			color: $accent;
+		}
+	}
+}
+
+.name {
+	margin: 0;
+	font-size: 16px;
+	font-weight: 500;
+	letter-spacing: -0.01em;
+	color: $fg;
+	transition: color 0.2s;
+}
+
+.desc {
+	margin: 0;
+	font-size: 13px;
+	line-height: 1.5;
+	color: $fg-dim;
+	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+}
+
+.meta {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 14px;
+	margin-top: 4px;
+	font-family: $f-mono;
+	font-size: 11px;
+	letter-spacing: 0.04em;
+	color: $fg-faint;
+}
+
+.metaItem {
+	display: inline-flex;
+	align-items: center;
+	gap: 5px;
+}
+
+.langDot {
+	display: inline-block;
+	width: 8px;
+	height: 8px;
+	border-radius: 999px;
+	background: var(--accent);
+}

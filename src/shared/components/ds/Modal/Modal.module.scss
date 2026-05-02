@@ -1,0 +1,145 @@
+@use "../../../../styles/tokens" as *;
+@use "../../../../styles/mixins" as *;
+
+.backdrop {
+	position: fixed;
+	inset: 0;
+	z-index: 90;
+	background: color-mix(in oklab, $ink 78%, transparent);
+	backdrop-filter: blur(14px);
+	-webkit-backdrop-filter: blur(14px);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: $sp-5;
+	cursor: none;
+	animation: modalFadeIn 0.22s $ease-reveal both;
+
+	@include mobile {
+		padding: 0;
+	}
+}
+
+.panel {
+	position: relative;
+	width: 100%;
+	max-width: var(--modal-max-width, 1100px);
+	max-height: 86vh;
+	background: $ink-2;
+	border: 1px solid $line-strong;
+	border-radius: $r-lg;
+	box-shadow:
+		0 30px 80px rgba(0, 0, 0, 0.5),
+		0 0 0 1px color-mix(in oklab, $accent 20%, transparent);
+	display: grid;
+	grid-template-rows: auto 1fr;
+	overflow: hidden;
+	outline: none;
+	animation: modalPanelIn 0.32s $ease-reveal both;
+	cursor: none;
+
+	@include mobile {
+		max-width: 100%;
+		max-height: 100vh;
+		border-radius: 0;
+		height: 100vh;
+	}
+}
+
+.head {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	gap: $sp-4;
+	padding: $sp-5 $sp-6;
+	border-bottom: 1px solid $line;
+
+	@include mobile {
+		padding: $sp-4 $sp-5;
+	}
+}
+
+.headText {
+	display: grid;
+	gap: 4px;
+	min-width: 0;
+}
+
+.title {
+	margin: 0;
+	font-size: clamp(20px, 2.4vw, 28px);
+	font-weight: 500;
+	letter-spacing: -0.01em;
+	color: $fg;
+}
+
+.subtitle {
+	margin: 0;
+	font-family: $f-mono;
+	font-size: 12px;
+	letter-spacing: 0.04em;
+	color: $fg-faint;
+	text-transform: uppercase;
+}
+
+.close {
+	flex: 0 0 auto;
+	width: 36px;
+	height: 36px;
+	border-radius: 999px;
+	border: 1px solid $line-strong;
+	background: transparent;
+	color: $fg;
+	font-size: 22px;
+	line-height: 1;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	cursor: none;
+	transition:
+		border-color 0.2s,
+		color 0.2s,
+		background 0.2s;
+
+	&:hover {
+		border-color: $accent;
+		color: $accent;
+		background: color-mix(in oklab, $accent 10%, transparent);
+	}
+}
+
+.body {
+	overflow: auto;
+	padding: $sp-5 $sp-6;
+
+	@include mobile {
+		padding: $sp-4 $sp-5;
+	}
+}
+
+@keyframes modalFadeIn {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+@keyframes modalPanelIn {
+	from {
+		opacity: 0;
+		transform: translateY(20px) scale(0.97);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0) scale(1);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.backdrop,
+	.panel {
+		animation: none;
+	}
+}

@@ -25,6 +25,8 @@ export { default as LinkArrow } from "./LinkArrow";
 export type { LinkArrowProps } from "./LinkArrow/LinkArrow.types";
 export { default as MetaRow } from "./MetaRow";
 export type { MetaRowProps } from "./MetaRow/MetaRow.types";
+export { default as Modal } from "./Modal";
+export type { ModalProps } from "./Modal/Modal.types";
 export { default as RoleBadge } from "./RoleBadge";
 export type { RoleBadgeProps } from "./RoleBadge/RoleBadge.types";
 export { default as ScrollIndicator } from "./ScrollIndicator";

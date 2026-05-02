@@ -1,0 +1,206 @@
+@use "../../../../styles/tokens" as *;
+@use "../../../../styles/mixins" as *;
+
+.body {
+	display: grid;
+	gap: $sp-3;
+
+	:global(section) {
+		padding: 0;
+	}
+}
+
+.header {
+	display: grid;
+	grid-template-columns: auto 1fr;
+	align-items: center;
+	gap: $sp-4;
+	padding-bottom: $sp-3;
+	border-bottom: 1px solid $line;
+
+	@include mobile {
+		grid-template-columns: 1fr;
+		justify-items: center;
+		text-align: center;
+		gap: $sp-3;
+	}
+}
+
+.badge {
+	display: flex;
+	justify-content: flex-start;
+
+	@include mobile {
+		justify-content: center;
+	}
+}
+
+.avatar {
+	width: 80px;
+	height: 80px;
+	border-radius: 999px;
+	object-fit: cover;
+	border: 2px solid color-mix(in oklab, $accent 40%, $line);
+	flex: 0 0 auto;
+}
+
+.headerText {
+	display: grid;
+	gap: 4px;
+	min-width: 0;
+	text-align: center;
+}
+
+.name {
+	margin: 0;
+	font-size: 22px;
+	font-weight: 500;
+	letter-spacing: -0.01em;
+	color: $fg;
+}
+
+.headline {
+	margin: 0;
+	font-size: 14px;
+	color: $fg-dim;
+}
+
+.location {
+	margin: 0;
+	font-family: $f-mono;
+	font-size: 11px;
+	letter-spacing: 0.04em;
+	color: $fg-faint;
+	text-transform: uppercase;
+}
+
+.profileLink {
+	margin: 0;
+	font-family: $f-mono;
+	font-size: 11px;
+	letter-spacing: 0.04em;
+	color: $accent;
+	text-decoration: none;
+	border-bottom: 1px solid color-mix(in oklab, $accent 40%, transparent);
+	padding-bottom: 2px;
+	width: fit-content;
+	cursor: none;
+	transition: color 0.2s, border-color 0.2s;
+
+	&:hover {
+		color: $fg;
+		border-bottom-color: $fg;
+	}
+}
+
+.section {
+	display: grid;
+	gap: $sp-2;
+}
+
+.sectionTitle {
+	margin: 0;
+	font-family: $f-mono;
+	font-size: 11px;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+	color: $fg-faint;
+}
+
+.about {
+	margin: 0;
+	font-size: 14px;
+	line-height: 1.6;
+	color: $fg-dim;
+}
+
+.list {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: grid;
+	gap: $sp-3;
+}
+
+.item {
+	padding: $sp-3 0;
+	border-top: 1px solid $line;
+
+	&:first-child {
+		border-top: 0;
+		padding-top: 0;
+	}
+}
+
+.itemHead {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	gap: 8px;
+}
+
+.itemTitle {
+	font-size: 15px;
+	font-weight: 500;
+	color: $fg;
+}
+
+.itemCompany {
+	font-size: 13px;
+	color: $accent;
+}
+
+.itemMeta {
+	margin-top: 2px;
+	font-family: $f-mono;
+	font-size: 11px;
+	letter-spacing: 0.04em;
+	color: $fg-faint;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+}
+
+.itemBody {
+	margin: 8px 0 0;
+	font-size: 13px;
+	line-height: 1.55;
+	color: $fg-dim;
+}
+
+.bullets {
+	margin: 6px 0 0;
+	padding-left: 18px;
+	color: $fg-dim;
+	font-size: 13px;
+	line-height: 1.6;
+
+	li {
+		margin-bottom: 2px;
+	}
+}
+
+.skills {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+}
+
+.skillChip {
+	padding: 6px 12px;
+	border: 1px solid $line-strong;
+	border-radius: $r-pill;
+	font-family: $f-mono;
+	font-size: 11px;
+	letter-spacing: 0.04em;
+	color: $fg;
+	background: color-mix(in oklab, $ink 55%, transparent);
+}
+
+.recBody {
+	margin: 0;
+	font-size: 14px;
+	line-height: 1.55;
+	color: $fg-dim;
+	font-style: italic;
+}

@@ -1,0 +1,151 @@
+@use "../../../../styles/tokens" as *;
+@use "../../../../styles/mixins" as *;
+
+.tabsBar {
+	display: flex;
+	gap: 4px;
+	overflow-x: auto;
+	scrollbar-width: thin;
+	margin-bottom: $sp-4;
+	padding-bottom: 4px;
+	border-bottom: 1px solid $line;
+
+	@include mobile {
+		gap: 2px;
+	}
+}
+
+.tab {
+	flex: 0 0 auto;
+	background: transparent;
+	border: 0;
+	padding: 10px 14px;
+	font-family: $f-mono;
+	font-size: 12px;
+	letter-spacing: 0.04em;
+	color: $fg-faint;
+	text-transform: uppercase;
+	cursor: none;
+	border-bottom: 2px solid transparent;
+	transition:
+		color 0.2s,
+		border-color 0.2s;
+
+	&:hover {
+		color: $fg;
+	}
+}
+
+.tabActive {
+	color: $fg;
+	border-bottom-color: $accent;
+}
+
+.tabBody {
+	min-height: 240px;
+}
+
+.grid {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: $sp-3;
+
+	@include mobile {
+		grid-template-columns: 1fr;
+	}
+}
+
+.showMoreWrap {
+	display: flex;
+	justify-content: center;
+	margin-top: $sp-4;
+}
+
+.showMore {
+	background: transparent;
+	border: 1px solid $line-strong;
+	border-radius: $r-pill;
+	padding: 10px 18px;
+	font-family: $f-mono;
+	font-size: 11px;
+	letter-spacing: 0.04em;
+	color: $fg;
+	text-transform: uppercase;
+	cursor: none;
+	transition:
+		background 0.2s,
+		color 0.2s,
+		border-color 0.2s;
+
+	&:hover {
+		background: $fg;
+		color: $ink;
+		border-color: $fg;
+	}
+}
+
+.errorBox {
+	display: grid;
+	gap: 10px;
+	justify-items: center;
+	padding: $sp-6 $sp-4;
+	border: 1px dashed color-mix(in oklab, $accent 30%, $line);
+	border-radius: $r-md;
+	text-align: center;
+}
+
+.errorTitle {
+	margin: 0;
+	font-size: 16px;
+	font-weight: 500;
+	color: $fg;
+}
+
+.errorBody {
+	margin: 0;
+	font-family: $f-mono;
+	font-size: 12px;
+	color: $fg-faint;
+	letter-spacing: 0.04em;
+}
+
+.retryBtn {
+	margin-top: 4px;
+	background: transparent;
+	border: 1px solid $accent;
+	border-radius: $r-pill;
+	padding: 8px 16px;
+	font-family: $f-mono;
+	font-size: 11px;
+	letter-spacing: 0.04em;
+	color: $accent;
+	text-transform: uppercase;
+	cursor: none;
+	transition:
+		background 0.2s,
+		color 0.2s,
+		opacity 0.2s;
+
+	&:hover:not(:disabled) {
+		background: $accent;
+		color: $accent-ink;
+	}
+
+	&:disabled {
+		opacity: 0.4;
+		cursor: not-allowed;
+	}
+}
+
+.placeholder {
+	font-family: $f-mono;
+	font-size: 13px;
+	color: $fg-faint;
+	padding: $sp-5 0;
+	text-align: center;
+
+	code {
+		color: $accent;
+		font-family: inherit;
+	}
+}

@@ -28,6 +28,10 @@ export default function useSkillsCounter(
       raf = requestAnimationFrame(tick);
     };
 
+    // Fire only when the section overlaps the middle 20% of the viewport
+    // (rootMargin shrinks the IO root to a center band) — keeps the
+    // count-up tied to the user actually being on Skills, not just
+    // peeking at it from below.
     const io = new IntersectionObserver(
       (entries) => {
         if (started) return;
@@ -37,7 +41,7 @@ export default function useSkillsCounter(
           start();
         }
       },
-      { threshold: 0.2 },
+      { rootMargin: "-40% 0px -40% 0px", threshold: 0 },
     );
     io.observe(el);
 

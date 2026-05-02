@@ -11,6 +11,7 @@ import contact from "./contact.json";
 import intro from "./intro.json";
 import timeline from "./timeline.json";
 import github from "./github.json";
+import linkedin from "./linkedin.json";
 import type {
   AboutContent,
   Branding,
@@ -18,6 +19,7 @@ import type {
   GithubContent,
   HeroContent,
   IntroContent,
+  LinkedinContent,
   PhotosContent,
   PortfolioContent,
   Profile,
@@ -42,6 +44,7 @@ const PORTFOLIO_CONTENT: PortfolioContent = {
   intro: intro as IntroContent,
   timeline: timeline as TimelineContent,
   github: github as GithubContent,
+  linkedin: linkedin as LinkedinContent,
 };
 
 export default PORTFOLIO_CONTENT;

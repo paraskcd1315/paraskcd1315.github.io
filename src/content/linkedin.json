@@ -1,0 +1,60 @@
+{
+	"header": {
+		"name": "Paras Khanchandani",
+		"headline": "Fullstack Developer at Unimedia Technology",
+		"location": "Castelldefels, Catalonia, Spain",
+		"profileUrl": "https://www.linkedin.com/in/parakcd/"
+	},
+	"about": "Software Engineer building scalable Web and Mobile applications with C# .NET, Blazor WASM, ReactJS, NextJS, Swift, Kotlin, and Jetpack Compose. I sketch in Figma before I touch the editor. I self-host platforms on a home server, and I'm fluent across the full stack — DevOps, backend, frontend, native mobile.",
+	"experience": [
+		{
+			"company": "Unimedia Technology",
+			"title": "Fullstack Developer",
+			"dateRange": "Nov 2023 — Present",
+			"location": "Castelldefels, Catalonia, Spain",
+			"description": "Building Web and Mobile applications across multiple stacks.",
+			"bullets": [
+				"Angular + .NET API + PHP + Ionic across client projects",
+				"DevOps on Azure DevOps, AWS, Docker, CI/CD pipelines"
+			]
+		},
+		{
+			"company": "Vidhema Technologies",
+			"title": "Software Engineer",
+			"dateRange": "Sep 2021 — Dec 2021",
+			"description": "Node.js, React, Angular — first production stack experience.",
+			"bullets": []
+		}
+	],
+	"education": [
+		{
+			"school": "Indira Gandhi National Open University (IGNOU)",
+			"degree": "Bachelor's",
+			"field": "Computer Applications",
+			"dateRange": "2016 — 2019"
+		}
+	],
+	"skills": [
+		".NET Core",
+		"C#",
+		"Blazor WASM",
+		"ReactJS",
+		"NextJS",
+		"AngularJS",
+		"TypeScript",
+		"Swift",
+		"SwiftUI",
+		"Kotlin",
+		"Jetpack Compose",
+		"Node.js",
+		"Express",
+		"MongoDB",
+		"Docker",
+		"Azure DevOps",
+		"AWS",
+		"Figma",
+		"Photoshop",
+		"After Effects"
+	],
+	"recommendations": []
+}

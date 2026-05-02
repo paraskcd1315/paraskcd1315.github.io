@@ -2,8 +2,6 @@ import { useEffect, useState, type RefObject } from "react";
 
 const DEFAULT_DURATION_MS = 1400;
 
-// Returns 0..1 progress that ramps up (ease-out cubic) the first time the
-// referenced element enters the viewport. One-shot — never resets.
 export default function useSkillsCounter(
   ref: RefObject<HTMLElement | null>,
   durationMs: number = DEFAULT_DURATION_MS,
@@ -28,10 +26,6 @@ export default function useSkillsCounter(
       raf = requestAnimationFrame(tick);
     };
 
-    // Fire only when the section overlaps the middle 20% of the viewport
-    // (rootMargin shrinks the IO root to a center band) — keeps the
-    // count-up tied to the user actually being on Skills, not just
-    // peeking at it from below.
     const io = new IntersectionObserver(
       (entries) => {
         if (started) return;

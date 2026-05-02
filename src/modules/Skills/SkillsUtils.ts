@@ -1,8 +1,6 @@
 import type { TimelineEvent } from "../../content";
 import { parseTimelineDate } from "../Timeline/TimelineUtils";
 
-// Maps a skills.json `name` to one or more timeline tag aliases. Skills
-// not listed here match the timeline tag of the same name verbatim.
 const SKILL_ALIASES: Record<string, readonly string[]> = {
   ".NET Core": [".NET", ".NET 10"],
   "C#": [".NET", ".NET 10"],
@@ -16,8 +14,6 @@ const SKILL_ALIASES: Record<string, readonly string[]> = {
   "Final Cut Pro": ["After Effects"],
 };
 
-// Explicit date overrides for skills with no clean tag mapping or where
-// the timeline-derived date undershoots the actual experience start.
 const SKILL_SINCE_OVERRIDE: Record<string, string> = {
   Figma: "2023-11",
   AWS: "2021-09",

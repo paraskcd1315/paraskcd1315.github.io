@@ -1,15 +1,9 @@
 import { useEffect, type RefObject } from "react";
 
 const VISIBLE_CLASS = "isVisible";
-const ENTER_FRACTION = 0.85; // card.left must cross past 85% of viewport width
-const EXIT_FRACTION = 0.05; // card.right must still be past 5% of viewport
+const ENTER_FRACTION = 0.85;
+const EXIT_FRACTION = 0.05;
 
-// Marks each `.timeline-event` with `isVisible` once it crosses into the
-// viewport during the horizontal camera pan. One-way (never removes the
-// class) so the drop-in animation plays exactly once per card.
-//
-// IO with a transformed root is unreliable on transform-only translate
-// changes — we use a rAF loop reading getBoundingClientRect instead.
 export default function useTimelineReveal(
   trackRef: RefObject<HTMLDivElement | null>,
 ) {

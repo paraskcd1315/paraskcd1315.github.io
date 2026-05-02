@@ -48,12 +48,13 @@ export default function RepoCard({ repo }: Readonly<RepoCardProps>) {
   const langColor = repo.language ? LANG_COLORS[repo.language] : null;
 
   return (
-    <article className={styles.card}>
-      <h3 className={styles.name}>
-        <a href={repo.html_url} target="_blank" rel="noopener noreferrer">
-          {repo.name}
-        </a>
-      </h3>
+    <a
+      className={styles.card}
+      href={repo.html_url}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <h3 className={styles.name}>{repo.name}</h3>
       {repo.description && <p className={styles.desc}>{repo.description}</p>}
       <div className={styles.meta}>
         {repo.language && (
@@ -93,6 +94,6 @@ export default function RepoCard({ repo }: Readonly<RepoCardProps>) {
           <time dateTime={repo.pushed_at}>{relativeTime(repo.pushed_at)}</time>
         </span>
       </div>
-    </article>
+    </a>
   );
 }

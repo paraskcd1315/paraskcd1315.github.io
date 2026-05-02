@@ -7,13 +7,22 @@
 	border: 1px solid $line;
 	border-radius: $r-md;
 	background: color-mix(in oklab, $ink 55%, transparent);
+	color: inherit;
+	text-decoration: none;
+	cursor: none;
 	transition:
 		border-color 0.2s,
-		transform 0.2s;
+		transform 0.2s,
+		background 0.2s;
 
 	&:hover {
 		border-color: color-mix(in oklab, $accent 50%, $line);
+		background: color-mix(in oklab, $ink 35%, transparent);
 		transform: translateY(-2px);
+
+		.name {
+			color: $accent;
+		}
 	}
 }
 
@@ -22,16 +31,8 @@
 	font-size: 16px;
 	font-weight: 500;
 	letter-spacing: -0.01em;
-
-	a {
-		color: $fg;
-		text-decoration: none;
-		cursor: none;
-
-		&:hover {
-			color: $accent;
-		}
-	}
+	color: $fg;
+	transition: color 0.2s;
 }
 
 .desc {

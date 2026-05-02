@@ -1,362 +1,455 @@
-@use "../../styles/tokens" as *;
-@use "../../styles/mixins" as *;
+@use '../../styles/tokens' as *;
+@use '../../styles/mixins' as *;
 
 .timeline {
-  padding-top: 100px;
+	padding-top: 100px;
 }
 
 .head {
-  @include container;
-  display: grid;
-  grid-template-columns: 1fr auto;
-  align-items: end;
-  gap: 32px;
-  margin-bottom: $sp-7;
+	@include container;
+	display: grid;
+	grid-template-columns: 1fr auto;
+	align-items: end;
+	gap: 32px;
+	margin-bottom: $sp-7;
 
-  h2 {
-    font-size: clamp(36px, 4.4vw, 60px);
-    font-weight: 500;
-    letter-spacing: -0.03em;
-    line-height: 1.05;
-    margin: 12px 0 0;
-  }
+	h2 {
+		font-size: clamp(36px, 4.4vw, 60px);
+		font-weight: 500;
+		letter-spacing: -0.03em;
+		line-height: 1.05;
+		margin: 12px 0 0;
+	}
 
-  @include mobile {
-    grid-template-columns: 1fr;
-    align-items: start;
-    gap: 16px;
-  }
+	@include mobile {
+		grid-template-columns: 1fr;
+		align-items: start;
+		gap: 16px;
+	}
 }
 
 .headMeta {
-  text-align: right;
-  font-family: $f-mono;
-  font-size: 12px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: $fg-dim;
-  display: grid;
-  gap: 6px;
+	text-align: right;
+	font-family: $f-mono;
+	font-size: 12px;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+	color: $fg-dim;
+	display: grid;
+	gap: 6px;
 
-  strong {
-    color: $accent;
-    font-weight: 500;
-    font-size: 16px;
-  }
+	strong {
+		color: $accent;
+		font-weight: 500;
+		font-size: 16px;
+	}
 
-  div:last-child {
-    text-transform: none;
-    letter-spacing: 0;
-    font-family: $f-sans;
-    font-size: 14px;
-    color: $fg-faint;
-    max-width: 380px;
-    margin-left: auto;
-  }
+	div:last-child {
+		text-transform: none;
+		letter-spacing: 0;
+		font-family: $f-sans;
+		font-size: 14px;
+		color: $fg-faint;
+		max-width: 380px;
+		margin-left: auto;
+	}
 
-  @include mobile {
-    text-align: left;
-    div:last-child {
-      margin-left: 0;
-    }
-  }
+	@include mobile {
+		text-align: left;
+		div:last-child {
+			margin-left: 0;
+		}
+	}
 }
 
 .pin {
-  position: relative;
-  height: calc(var(--event-count, 8) * 60vh + 100vh);
+	position: relative;
+	height: calc(var(--event-count, 8) * 60vh + 100vh);
 
-  @include mobile {
-    height: auto !important;
-  }
+	@include mobile {
+		height: auto !important;
+	}
 }
 
 .stage {
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  overflow: hidden;
-  display: flex;
-  align-items: stretch;
+	position: sticky;
+	top: 0;
+	height: 100vh;
+	overflow: hidden;
+	display: flex;
+	align-items: stretch;
 
-  @include mobile {
-    position: relative !important;
-    height: auto;
-    padding: 20px 0 60px;
-    overflow: visible;
-    display: block;
-  }
+	@include mobile {
+		position: relative !important;
+		height: auto;
+		padding: 20px 0 60px;
+		overflow: visible;
+		display: block;
+	}
 }
 
 .spine {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 18vh;
-  height: 2px;
-  background: linear-gradient(
-    to right,
-    transparent 0%,
-    color-mix(in oklab, $accent 70%, transparent) 4%,
-    color-mix(in oklab, $accent 70%, transparent) 96%,
-    transparent 100%
-  );
-  pointer-events: none;
-  z-index: 0;
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 18vh;
+	height: 2px;
+	background: linear-gradient(to right, transparent 0%, color-mix(in oklab, $accent 70%, transparent) 2%, color-mix(in oklab, $accent 70%, transparent) 98%, transparent 100%);
+	pointer-events: none;
+	z-index: 2;
 
-  @include mobile {
-    display: none;
-  }
+	&::after {
+		content: '';
+		position: absolute;
+		left: 0;
+		top: 0;
+		height: 100%;
+		width: calc(var(--progress, 0) * 100%);
+		background: linear-gradient(to right, transparent 0%, color-mix(in oklab, $accent 90%, transparent) 4%, color-mix(in oklab, $accent 90%, transparent) 100%);
+
+		box-shadow: 0 0 12px color-mix(in oklab, $accent 70%, transparent);
+		transition: width 0.08s linear;
+	}
+
+	@include mobile {
+		display: none;
+	}
+}
+
+.eras {
+	position: absolute;
+	inset: 0;
+	pointer-events: none;
+	z-index: 0;
+	transform: translate3d(calc(var(--progress, 0) * -40vw), 0, 0);
+	will-change: transform;
+
+	@include mobile {
+		display: none;
+	}
+}
+
+.era {
+	position: absolute;
+	top: 14%;
+	font-family: $f-mono;
+	font-size: clamp(56px, 7vw, 120px);
+	font-weight: 700;
+	letter-spacing: -0.03em;
+	line-height: 0.9;
+	color: color-mix(in oklab, $fg 7%, transparent);
+	user-select: none;
+	white-space: nowrap;
+	transform: translateX(var(--anchor, -50%));
+
+	&:nth-child(even) {
+		top: 26%;
+	}
 }
 
 .track {
-  display: flex;
-  align-items: stretch;
-  gap: 28px;
-  padding: 0 8vw;
-  position: relative;
-  will-change: transform;
-  width: max-content;
-  height: 100%;
+	display: flex;
+	align-items: stretch;
+	gap: 28px;
+	padding: 0 8vw;
+	position: relative;
+	will-change: transform;
+	width: max-content;
+	height: 100%;
 
-  @include mobile {
-    transform: none !important;
-    display: block;
-    padding: 0 $sp-4;
-    width: auto;
-    height: auto;
+	@include mobile {
+		transform: none !important;
+		display: block;
+		padding: 0 $sp-4;
+		width: auto;
+		height: auto;
 
-    &::before {
-      content: "";
-      position: absolute;
-      left: calc($sp-4 + 22px);
-      top: 12px;
-      bottom: 12px;
-      width: 1px;
-      background: linear-gradient(
-        180deg,
-        color-mix(in oklab, $accent 70%, transparent) 0%,
-        color-mix(in oklab, $accent 20%, transparent) 60%,
-        transparent 100%
-      );
-      pointer-events: none;
-    }
-  }
+		&::before {
+			content: '';
+			position: absolute;
+			left: calc($sp-4 + 22px);
+			top: 12px;
+			bottom: 12px;
+			width: 1px;
+			background: linear-gradient(180deg, color-mix(in oklab, $accent 70%, transparent) 0%, color-mix(in oklab, $accent 20%, transparent) 60%, transparent 100%);
+			pointer-events: none;
+		}
+	}
 }
 
 .event {
-  flex: 0 0 360px;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding-bottom: calc(18vh + 40px);
-  margin-left: var(--gap, 0);
-  scroll-snap-align: center;
+	flex: 0 0 360px;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	padding-bottom: calc(18vh + 40px);
+	margin-left: var(--gap, 0);
+	scroll-snap-align: center;
 
-  @include mobile {
-    flex: none;
-    max-width: none;
-    width: auto;
-    padding-bottom: 0;
-    padding-left: 56px;
-    margin-left: 0;
-    margin-bottom: 56px;
-    justify-content: flex-start;
+	@include mobile {
+		flex: none;
+		max-width: none;
+		width: auto;
+		padding-bottom: 0;
+		padding-left: 56px;
+		margin-left: 0;
+		margin-bottom: 56px;
+		justify-content: flex-start;
 
-    &:last-child {
-      margin-bottom: 0;
-    }
+		&:last-child {
+			margin-bottom: 0;
+		}
 
-    &::before {
-      content: "";
-      position: absolute;
-      left: 16px;
-      top: 8px;
-      width: 14px;
-      height: 14px;
-      border-radius: 999px;
-      background: $ink;
-      border: 2px solid $accent;
-      box-shadow:
-        0 0 0 3px color-mix(in oklab, $accent 18%, transparent),
-        0 0 10px color-mix(in oklab, $accent 50%, transparent);
-      z-index: 2;
-    }
+		&::before {
+			content: '';
+			position: absolute;
+			left: 16px;
+			top: 8px;
+			width: 14px;
+			height: 14px;
+			border-radius: 999px;
+			background: $ink;
+			border: 2px solid $accent;
+			box-shadow:
+				0 0 0 3px color-mix(in oklab, $accent 18%, transparent),
+				0 0 10px color-mix(in oklab, $accent 50%, transparent);
+			z-index: 2;
+		}
 
-    transform: translateY(40px) translateX(-24px);
-    opacity: 0;
-    transition:
-      transform 0.6s cubic-bezier(0.2, 0.7, 0.3, 1),
-      opacity 0.5s ease;
+		transform: translateY(40px) translateX(-24px);
+		opacity: 0;
+		transition:
+			transform 0.6s cubic-bezier(0.2, 0.7, 0.3, 1),
+			opacity 0.5s ease;
 
-    &:nth-child(even) {
-      transform: translateY(40px) translateX(24px);
-    }
+		&:nth-child(even) {
+			transform: translateY(40px) translateX(24px);
+		}
 
-    &:global(.isVisible) {
-      transform: translateY(0) translateX(0);
-      opacity: 1;
-    }
-  }
+		&:global(.isVisible) {
+			transform: translateY(0) translateX(0);
+			opacity: 1;
+		}
+	}
 }
 
 .card {
-  display: grid;
-  gap: 10px;
-  padding: $sp-4 $sp-5;
-  background: color-mix(in oklab, $ink-2 75%, transparent);
-  border: 1px solid $line;
-  border-radius: $r-md;
-  position: relative;
-  z-index: 2;
+	display: grid;
+	gap: 10px;
+	padding: $sp-4 $sp-5;
+	position: relative;
+	z-index: 2;
 
-  transform: translateY(-40px);
-  opacity: 0;
-  transition:
-    transform 0.7s cubic-bezier(0.2, 0.7, 0.3, 1),
-    opacity 0.5s ease,
-    border-color $dur-med $ease-reveal;
+	transform: translateY(-40px);
+	opacity: 0;
+	transition:
+		transform 0.7s cubic-bezier(0.2, 0.7, 0.3, 1),
+		opacity 0.5s ease;
 
-  &:hover {
-    border-color: color-mix(in oklab, $accent 40%, $line);
-  }
+	.event:global(.isVisible) & {
+		transform: translateY(0);
+		opacity: 1;
+	}
 
-  .event:global(.isVisible) & {
-    transform: translateY(0);
-    opacity: 1;
-  }
-
-  @include mobile {
-    transform: none;
-    opacity: 1;
-  }
+	@include mobile {
+		transform: none;
+		opacity: 1;
+	}
 }
 
 .connector {
-  position: absolute;
-  left: 50%;
-  bottom: calc(18vh + 10px);
-  width: 1px;
-  height: 30px;
-  background: linear-gradient(
-    to bottom,
-    color-mix(in oklab, $accent 20%, transparent) 0%,
-    color-mix(in oklab, $accent 70%, transparent) 100%
-  );
-  transform: translateX(-50%);
-  z-index: 1;
-  opacity: 0;
-  transition: opacity 0.5s ease 0.15s;
+	position: absolute;
+	left: 50%;
+	bottom: calc(18vh + 10px);
+	width: 1px;
+	height: 30px;
+	background: linear-gradient(to bottom, color-mix(in oklab, $accent 20%, transparent) 0%, color-mix(in oklab, $accent 70%, transparent) 100%);
+	transform: translateX(-50%);
+	z-index: 1;
+	opacity: 0;
+	transition: opacity 0.5s ease 0.15s;
 
-  .event:global(.isVisible) & {
-    opacity: 1;
-  }
+	.event:global(.isVisible) & {
+		opacity: 1;
+	}
 
-  @include mobile {
-    display: none;
-  }
+	@include mobile {
+		display: none;
+	}
 }
 
 .marker {
-  position: absolute;
-  left: 50%;
-  bottom: calc(18vh - 8px);
-  transform: translate(-50%, 0) scale(0.4);
-  width: 18px;
-  height: 18px;
-  border-radius: 999px;
-  background: $ink;
-  border: 2px solid $accent;
-  box-shadow:
-    0 0 0 4px color-mix(in oklab, $accent 18%, transparent),
-    0 0 14px color-mix(in oklab, $accent 60%, transparent);
-  z-index: 2;
-  opacity: 0;
-  transition:
-    transform 0.5s cubic-bezier(0.2, 0.7, 0.3, 1) 0.1s,
-    opacity 0.4s ease 0.1s;
+	position: absolute;
+	left: 50%;
+	bottom: calc(18vh - 8px);
+	transform: translate(-50%, 0) scale(0.4);
+	width: 18px;
+	height: 18px;
+	border-radius: 999px;
+	background: $ink;
+	border: 2px solid $accent;
+	box-shadow:
+		0 0 0 4px color-mix(in oklab, $accent 18%, transparent),
+		0 0 14px color-mix(in oklab, $accent 60%, transparent);
+	z-index: 2;
+	opacity: 0;
+	transition:
+		transform 0.5s cubic-bezier(0.2, 0.7, 0.3, 1) 0.1s,
+		opacity 0.4s ease 0.1s,
+		background 0.3s ease,
+		box-shadow 0.3s ease;
 
-  .event:global(.isVisible) & {
-    transform: translate(-50%, 0) scale(1);
-    opacity: 1;
-  }
+	.event:global(.isVisible) & {
+		transform: translate(-50%, 0) scale(1);
+		opacity: 1;
+	}
 
-  @include mobile {
-    display: none;
-  }
+	.event[data-active='true'] & {
+		background: color-mix(in oklab, $accent 35%, $ink);
+		box-shadow:
+			0 0 0 5px color-mix(in oklab, $accent 28%, transparent),
+			0 0 22px color-mix(in oklab, $accent 90%, transparent);
+	}
+
+	@include mobile {
+		display: none;
+	}
 }
 
 .title {
-  font-size: 22px;
-  font-weight: 500;
-  letter-spacing: -0.01em;
-  line-height: 1.2;
-  margin: 0;
-  color: $fg;
+	font-size: 22px;
+	font-weight: 500;
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	margin: 0;
+	color: $fg;
 }
 
 .body {
-  margin: 0;
-  color: $fg-dim;
-  font-size: 15px;
-  line-height: 1.6;
+	margin: 0;
+	color: $fg-dim;
+	font-size: 15px;
+	line-height: 1.6;
 }
 
 .tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-top: 4px;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+	margin-top: 4px;
 }
 
 .links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 14px;
-  margin-top: 4px;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 14px;
+	margin-top: 4px;
 
-  a {
-    color: $accent;
-    text-decoration: none;
-    font-family: $f-mono;
-    font-size: 12px;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    border-bottom: 1px solid color-mix(in oklab, $accent 40%, transparent);
-    padding-bottom: 2px;
-    transition:
-      color $dur-fast $ease-reveal,
-      border-color $dur-fast $ease-reveal;
+	a {
+		color: $accent;
+		text-decoration: none;
+		font-family: $f-mono;
+		font-size: 12px;
+		letter-spacing: 0.04em;
+		text-transform: uppercase;
+		border-bottom: 1px solid color-mix(in oklab, $accent 40%, transparent);
+		padding-bottom: 2px;
+		transition:
+			color $dur-fast $ease-reveal,
+			border-color $dur-fast $ease-reveal;
 
-    &:hover {
-      color: $fg;
-      border-bottom-color: $fg;
-    }
-  }
-}
-
-.scrollIndicator {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 6vh;
-  display: flex;
-  justify-content: center;
-  pointer-events: none;
-  z-index: 3;
-
-  @include mobile {
-    display: none;
-  }
+		&:hover {
+			color: $fg;
+			border-bottom-color: $fg;
+		}
+	}
 }
 
 @include mobile {
-  .title {
-    font-size: 18px;
-  }
+	.title {
+		font-size: 18px;
+	}
 
-  .card {
-    padding: $sp-3 $sp-4;
-  }
+	.card {
+		padding: $sp-3 $sp-4;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.pin {
+		height: auto !important;
+	}
+
+	.stage {
+		position: relative !important;
+		height: auto;
+		padding: 20px 0 60px;
+		overflow: visible;
+		display: block;
+	}
+
+	.spine,
+	.eras,
+	.connector,
+	.marker {
+		display: none;
+	}
+
+	.track {
+		transform: none !important;
+		display: block;
+		padding: 0 $sp-4;
+		width: auto;
+		height: auto;
+
+		&::before {
+			content: '';
+			position: absolute;
+			left: calc($sp-4 + 22px);
+			top: 12px;
+			bottom: 12px;
+			width: 1px;
+			background: linear-gradient(180deg, color-mix(in oklab, $accent 70%, transparent) 0%, color-mix(in oklab, $accent 20%, transparent) 60%, transparent 100%);
+			pointer-events: none;
+		}
+	}
+
+	.event {
+		flex: none;
+		max-width: none;
+		width: auto;
+		padding-bottom: 0;
+		padding-left: 56px;
+		margin-left: 0;
+		margin-bottom: 56px;
+		justify-content: flex-start;
+		transform: none;
+		opacity: 1;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+
+		&::before {
+			content: '';
+			position: absolute;
+			left: 16px;
+			top: 8px;
+			width: 14px;
+			height: 14px;
+			border-radius: 999px;
+			background: $ink;
+			border: 2px solid $accent;
+			box-shadow:
+				0 0 0 3px color-mix(in oklab, $accent 18%, transparent),
+				0 0 10px color-mix(in oklab, $accent 50%, transparent);
+			z-index: 2;
+		}
+	}
+
+	.card {
+		transform: none;
+		opacity: 1;
+	}
 }

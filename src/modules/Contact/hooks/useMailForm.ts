@@ -9,6 +9,9 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const MAX_NAME = 80;
 const MAX_SUBJECT = 120;
 const MAX_MESSAGE = 4000;
+const WORKER_URL =
+  process.env.REACT_APP_MAIL_WORKER_URL ??
+  "https://apod-proxy.paraskhanchandani1315.workers.dev";
 
 const INITIAL_FIELDS: MailFormFields = {
   name: "",
@@ -86,13 +89,36 @@ export default function useMailForm() {
     setStatus("submitting");
     setErrorMessage("");
     try {
-      await new Promise((r) => setTimeout(r, 600));
-      setStatus("success");
+      const res = await fetch(`${WORKER_URL}/send-mail`, {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          name: fields.name.trim(),
+          email: fields.email.trim(),
+          subject: fields.subject.trim(),
+          message: fields.message.trim(),
+          honeypot: fields.honeypot,
+          turnstileToken,
+        }),
+      });
+      if (res.ok) {
+        setStatus("success");
+        return;
+      }
+      let detail = "Send failed.";
+      try {
+        const data = (await res.json()) as { error?: string };
+        if (data?.error) detail = data.error;
+      } catch {
+        // non-JSON error body — fall through with default detail
+      }
+      setStatus("error");
+      setErrorMessage(detail);
     } catch (err) {
       setStatus("error");
-      setErrorMessage(err instanceof Error ? err.message : "Send failed.");
+      setErrorMessage(err instanceof Error ? err.message : "Network error.");
     }
-  }, [isValid, status]);
+  }, [isValid, status, fields, turnstileToken]);
 
   return {
     fields,

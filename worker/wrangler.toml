@@ -2,6 +2,10 @@ name = "apod-proxy"
 main = "src/index.js"
 compatibility_date = "2026-04-29"
 
-# NASA_KEY is stored as an encrypted secret, NOT a plain var.
-# Set it once with: wrangler secret put NASA_KEY
-# Rotate it the same way — no redeploy required.
+# Secrets — stored encrypted by Cloudflare, NOT plain vars.
+#   NASA_KEY         → for /  (APOD proxy)
+#   TURNSTILE_SECRET → for /send-mail (Cloudflare Turnstile siteverify)
+# Set or rotate each via:
+#   wrangler secret put NASA_KEY
+#   wrangler secret put TURNSTILE_SECRET
+# No redeploy required after rotation.

@@ -1,10 +1,13 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import PORTFOLIO_CONTENT from "../../../../content";
 import { Modal } from "../../../../shared/components";
 import { useGithubRepos } from "../../hooks";
 import type { RepoScope } from "../../hooks";
+import RepoCard from "./RepoCard";
 import type { GithubModalProps } from "./GithubModal.types";
 import styles from "./GithubModal.module.scss";
+
+const INITIAL_VISIBLE = 12;
 
 interface Tab {
   key: string;
@@ -40,12 +43,20 @@ export default function GithubModal({
     [personalTab, github.orgs],
   );
   const [activeKey, setActiveKey] = useState<string>(personalTab.key);
+  const [visibleCount, setVisibleCount] = useState<number>(INITIAL_VISIBLE);
   const active = tabs.find((t) => t.key === activeKey) ?? personalTab;
   const { repos, loading, error, retryAt } = useGithubRepos(
     active.scope,
     active.account,
     open,
   );
+
+  useEffect(() => {
+    setVisibleCount(INITIAL_VISIBLE);
+  }, [activeKey]);
+
+  const visibleRepos = repos ? repos.slice(0, visibleCount) : null;
+  const hasMore = repos ? repos.length > visibleCount : false;
 
   return (
     <Modal
@@ -80,11 +91,28 @@ export default function GithubModal({
         {error && error !== "rate-limit" && (
           <p className={styles.placeholder}>Fetch error: {error}</p>
         )}
-        {repos && (
-          <p className={styles.placeholder}>
-            <code>{active.account}</code> — {repos.length} repos. Card layout
-            arrives in PORT-122.
-          </p>
+        {visibleRepos?.length === 0 && (
+          <p className={styles.placeholder}>No public repos here.</p>
+        )}
+        {visibleRepos && visibleRepos.length > 0 && (
+          <>
+            <div className={styles.grid}>
+              {visibleRepos.map((r) => (
+                <RepoCard key={r.id} repo={r} />
+              ))}
+            </div>
+            {hasMore && (
+              <div className={styles.showMoreWrap}>
+                <button
+                  type="button"
+                  className={styles.showMore}
+                  onClick={() => setVisibleCount((n) => n + INITIAL_VISIBLE)}
+                >
+                  Show more ({(repos?.length ?? 0) - visibleCount} remaining)
+                </button>
+              </div>
+            )}
+          </>
         )}
       </div>
     </Modal>

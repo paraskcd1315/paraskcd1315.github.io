@@ -103,22 +103,9 @@
 }
 
 .glyph {
-  width: 44px;
-  height: 44px;
-  display: grid;
-  place-items: center;
-  border: 1px solid $line-strong;
-  border-radius: 8px;
-  overflow: hidden;
   transition:
     border-color 0.3s,
     transform $dur-med $ease-reveal;
-
-  img {
-    width: 76%;
-    height: 76%;
-    object-fit: contain;
-  }
 }
 
 .name {

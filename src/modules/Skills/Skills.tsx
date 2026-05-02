@@ -1,6 +1,6 @@
 import { useRef, type MouseEvent } from "react";
 import PORTFOLIO_CONTENT from "../../content";
-import { SectionLabel } from "../../shared/components";
+import { IconCircle, SectionLabel } from "../../shared/components";
 import { getSectionMeta } from "../../sections";
 import styles from "./Skills.module.scss";
 import { findEarliestSkillDate, yearsExperience } from "./SkillsUtils";
@@ -36,9 +36,9 @@ export default function Skills() {
         <div className={styles.skillsGrid}>
           {skillsWithYears.map((s) => (
             <div className={styles.skill} key={s.name} onMouseMove={onMove}>
-              <div className={styles.glyph}>
+              <IconCircle size={44} borderRadius={8} className={styles.glyph}>
                 <img src={s.icon} alt={s.name} loading="lazy" />
-              </div>
+              </IconCircle>
               <div>
                 <div className={styles.name}>{s.name}</div>
                 <div className={styles.cat}>{s.cat}</div>

@@ -133,6 +133,11 @@ export interface TimelineContent {
   items: readonly TimelineEvent[];
 }
 
+export interface GithubContent {
+  personal: string;
+  orgs: readonly string[];
+}
+
 export interface PortfolioContent {
   profile: Profile;
   branding: Branding;
@@ -146,4 +151,5 @@ export interface PortfolioContent {
   contact: ContactContent;
   intro: IntroContent;
   timeline: TimelineContent;
+  github: GithubContent;
 }

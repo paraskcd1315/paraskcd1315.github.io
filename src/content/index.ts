@@ -10,10 +10,12 @@ import videos from "./videos.json";
 import contact from "./contact.json";
 import intro from "./intro.json";
 import timeline from "./timeline.json";
+import github from "./github.json";
 import type {
   AboutContent,
   Branding,
   ContactContent,
+  GithubContent,
   HeroContent,
   IntroContent,
   PhotosContent,
@@ -39,6 +41,7 @@ const PORTFOLIO_CONTENT: PortfolioContent = {
   contact: contact as ContactContent,
   intro: intro as IntroContent,
   timeline: timeline as TimelineContent,
+  github: github as GithubContent,
 };
 
 export default PORTFOLIO_CONTENT;

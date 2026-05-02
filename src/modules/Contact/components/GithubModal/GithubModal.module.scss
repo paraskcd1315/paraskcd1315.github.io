@@ -1,4 +1,49 @@
 @use "../../../../styles/tokens" as *;
+@use "../../../../styles/mixins" as *;
+
+.tabsBar {
+	display: flex;
+	gap: 4px;
+	overflow-x: auto;
+	scrollbar-width: thin;
+	margin-bottom: $sp-4;
+	padding-bottom: 4px;
+	border-bottom: 1px solid $line;
+
+	@include mobile {
+		gap: 2px;
+	}
+}
+
+.tab {
+	flex: 0 0 auto;
+	background: transparent;
+	border: 0;
+	padding: 10px 14px;
+	font-family: $f-mono;
+	font-size: 12px;
+	letter-spacing: 0.04em;
+	color: $fg-faint;
+	text-transform: uppercase;
+	cursor: none;
+	border-bottom: 2px solid transparent;
+	transition:
+		color 0.2s,
+		border-color 0.2s;
+
+	&:hover {
+		color: $fg;
+	}
+}
+
+.tabActive {
+	color: $fg;
+	border-bottom-color: $accent;
+}
+
+.tabBody {
+	min-height: 240px;
+}
 
 .placeholder {
 	font-family: $f-mono;
@@ -6,4 +51,9 @@
 	color: $fg-faint;
 	padding: $sp-5 0;
 	text-align: center;
+
+	code {
+		color: $accent;
+		font-family: inherit;
+	}
 }

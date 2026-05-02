@@ -10,7 +10,7 @@ compatibility_date = "2026-04-29"
 # for local dev. In production, keep the binding live.
 [[kv_namespaces]]
 binding = "RATE_LIMIT_KV"
-id = "REPLACE_WITH_KV_NAMESPACE_ID"
+id = "5d4414a96b364a09b130942c44afd559"
 
 # Secrets — stored encrypted by Cloudflare, NOT plain vars.
 #

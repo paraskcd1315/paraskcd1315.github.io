@@ -7,8 +7,6 @@ import styles from './Timeline.module.scss';
 import useTimelineReveal from './hooks/useTimelineReveal';
 import { deriveTimelineEras, eventGapPx } from './TimelineUtils';
 
-const meta = getSectionMeta('timeline');
-
 export default function Timeline() {
 	const { timeline } = PORTFOLIO_CONTENT;
 	const { pinRef, trackRef, progress } = useHorizontalPin();

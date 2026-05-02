@@ -3,7 +3,11 @@
 
 .body {
 	display: grid;
-	gap: $sp-4;
+	gap: $sp-3;
+
+	:global(section) {
+		padding: 0;
+	}
 }
 
 .header {

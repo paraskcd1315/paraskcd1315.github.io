@@ -16,11 +16,13 @@ const SKILL_ALIASES: Record<string, readonly string[]> = {
   "Final Cut Pro": ["After Effects"],
 };
 
-// Explicit date overrides for skills with no clean tag mapping.
+// Explicit date overrides for skills with no clean tag mapping or where
+// the timeline-derived date undershoots the actual experience start.
 const SKILL_SINCE_OVERRIDE: Record<string, string> = {
   Figma: "2023-11",
   AWS: "2021-09",
   "Azure DevOps": "2023-11",
+  TypeScript: "2021-09",
 };
 
 export function skillSearchTerms(skillName: string): readonly string[] {

@@ -8,7 +8,7 @@ const PHONE_MOCKS = {
     alt: "KCD Search",
   },
   influential: {
-    shots: ["/assets/influential-1.png", "/assets/influential-2.png"],
+    shots: ["/assets/influential-1.png?v=20261123", "/assets/influential-2.png?v=20261123"],
     background: "linear-gradient(160deg, #0a0d18, #06080f)",
     alt: "Influential Launcher",
     phoneWidth: 200,
@@ -18,9 +18,9 @@ const PHONE_MOCKS = {
   },
   spotlight: {
     shots: [
-      "/assets/spotlight-1.png",
-      "/assets/spotlight-2.png",
-      "/assets/spotlight-3.png",
+      "/assets/spotlight-1.png?v=20261123",
+      "/assets/spotlight-2.png?v=20261123",
+      "/assets/spotlight-3.png?v=20261123",
     ],
     background: "linear-gradient(160deg, #0d1018, #14171f)",
     alt: "Spotlight Search",
@@ -36,15 +36,15 @@ const PHONE_MOCKS = {
   },
   tvtrack: {
     shots: [
-      "/assets/tvtrack-1.png",
-      "/assets/tvtrack-2.png",
-      "/assets/tvtrack-3.png",
+      "/assets/tvtrack-1.png?v=20261123",
+      "/assets/tvtrack-2.png?v=20261123",
+      "/assets/tvtrack-3.png?v=20261123",
     ],
     background: "linear-gradient(160deg, #1f1708, #0d0a05)",
     alt: "TVTrack",
   },
   ccremote: {
-    shots: ["/assets/ccremote-1.png", "/assets/ccremote-2.png"],
+    shots: ["/assets/ccremote-1.png?v=20261123", "/assets/ccremote-2.png?v=20261123"],
     background: "linear-gradient(160deg, #1f0a12, #0d0508)",
     alt: "CC Remote",
     phoneWidth: 200,

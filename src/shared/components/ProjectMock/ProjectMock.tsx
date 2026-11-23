@@ -34,6 +34,24 @@ const PHONE_MOCKS = {
     background: "linear-gradient(160deg, #1a0f1f, #0d0716)",
     alt: "United Walls",
   },
+  tvtrack: {
+    shots: [
+      "/assets/tvtrack-1.png",
+      "/assets/tvtrack-2.png",
+      "/assets/tvtrack-3.png",
+    ],
+    background: "linear-gradient(160deg, #1f1708, #0d0a05)",
+    alt: "TVTrack",
+  },
+  ccremote: {
+    shots: ["/assets/ccremote-1.png", "/assets/ccremote-2.png"],
+    background: "linear-gradient(160deg, #1f0a12, #0d0508)",
+    alt: "CC Remote",
+    phoneWidth: 200,
+    phoneMaxHeight: 440,
+    borderRadius: 26,
+    gap: "28px",
+  },
 };
 
 export default function ProjectMock({ kind }: Readonly<ProjectMockProps>) {

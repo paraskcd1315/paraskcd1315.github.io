@@ -15,10 +15,13 @@ export type IntroStage = "logo-in" | "logo-hold" | "morph" | "zoom";
 export default function useIntroStages(
   onReveal?: () => void,
   onDone?: () => void,
+  ready = true,
 ): IntroStage {
   const [stage, setStage] = useState<IntroStage>("logo-in");
 
   useEffect(() => {
+    if (!ready) return;
+
     const reduceMotion = !!globalThis.window?.matchMedia?.(
       "(prefers-reduced-motion: reduce)",
     ).matches;
@@ -42,7 +45,7 @@ export default function useIntroStages(
       setTimeout(() => onDone?.(), TOTAL_MS),
     ];
     return () => timers.forEach(clearTimeout);
-  }, [onReveal, onDone]);
+  }, [onReveal, onDone, ready]);
 
   return stage;
 }

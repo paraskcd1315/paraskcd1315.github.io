@@ -17,10 +17,14 @@ export default function PhoneTrio({
   const isDuo = shots.length === 2;
   const tilts = isDuo ? TWO_PHONE_TILT : TRIO_TILT;
   const yOffsets = isDuo ? DUO_Y_OFFSET : TRIO_Y_OFFSET;
+  const backdrop = shots[Math.floor(shots.length / 2)];
   return (
     <div
       className="project-mock"
       style={{
+        position: "absolute",
+        inset: 0,
+        overflow: "hidden",
         background,
         display: "flex",
         justifyContent: "center",
@@ -29,6 +33,18 @@ export default function PhoneTrio({
         padding: "30px",
       }}
     >
+      <div
+        aria-hidden="true"
+        style={{
+          position: "absolute",
+          inset: "-10%",
+          backgroundImage: `url(${backdrop})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          filter: "blur(48px) saturate(1.3) brightness(0.55)",
+          transform: "scale(1.1)",
+        }}
+      />
       {shots.map((src, i) => (
         <div
           key={src}
@@ -42,6 +58,8 @@ export default function PhoneTrio({
             boxShadow: "0 30px 80px rgba(0,0,0,0.5)",
             transform: `translateY(${yOffsets[i]}px) rotate(${tilts[i]}deg)`,
             background: "#000",
+            position: "relative",
+            flexShrink: 0,
           }}
         >
           <img

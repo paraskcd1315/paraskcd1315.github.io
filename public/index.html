@@ -48,6 +48,43 @@
 		<script>
 			if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 		</script>
+		<link rel="preload" as="image" href="%PUBLIC_URL%/kcd-logo-transparent.png" />
+		<style>
+			html,
+			body {
+				background: #0a0a0b;
+			}
+			#splash {
+				position: fixed;
+				inset: 0;
+				z-index: 10000;
+				display: grid;
+				place-items: center;
+				background: #0a0a0b;
+				pointer-events: none;
+			}
+			#splash img {
+				width: clamp(200px, 26vw, 320px);
+				height: auto;
+				filter: drop-shadow(0 0 30px oklch(0.72 0.16 20 / 0.6)) drop-shadow(0 0 80px oklch(0.72 0.16 20 / 0.35));
+				animation: splash-in 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+			}
+			@keyframes splash-in {
+				from {
+					opacity: 0;
+					transform: scale(0.86);
+				}
+				to {
+					opacity: 1;
+					transform: scale(1);
+				}
+			}
+			@media (prefers-reduced-motion: reduce) {
+				#splash img {
+					animation: none;
+				}
+			}
+		</style>
 	</head>
 	<body>
 		<noscript>
@@ -319,6 +356,7 @@
 
 			<p><small>This is a static SEO fallback. The interactive site requires JavaScript.</small></p>
 		</noscript>
+		<div id="splash" aria-hidden="true"><img src="%PUBLIC_URL%/kcd-logo-transparent.png" alt="" /></div>
 		<div id="root"></div>
 	</body>
 </html>

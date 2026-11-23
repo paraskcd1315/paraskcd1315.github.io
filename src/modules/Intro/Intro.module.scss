@@ -12,6 +12,12 @@
   overflow: hidden;
 }
 
+.solid {
+  position: absolute;
+  inset: 0;
+  background: $ink;
+}
+
 .cutoutOverlay {
   position: absolute;
   inset: 0;
@@ -48,6 +54,10 @@
 .logoIn .logo {
   opacity: 1;
   transform: scale(1);
+}
+
+.shown.logoIn .logo {
+  transition: none;
 }
 
 .logoHold .logo {

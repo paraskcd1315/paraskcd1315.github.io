@@ -2,7 +2,7 @@
 	"header": {
 		"name": "Paras Khanchandani",
 		"headline": "Fullstack Developer at Unimedia Technology",
-		"location": "Castelldefels, Catalonia, Spain",
+		"location": "Calafell, Catalonia, Spain",
 		"profileUrl": "https://www.linkedin.com/in/parakcd/"
 	},
 	"about": "Software Engineer building scalable Web and Mobile applications with C# .NET, Blazor WASM, ReactJS, NextJS, Swift, Kotlin, and Jetpack Compose. I sketch in Figma before I touch the editor. I self-host platforms on a home server, and I'm fluent across the full stack — DevOps, backend, frontend, native mobile.",
@@ -11,7 +11,7 @@
 			"company": "Unimedia Technology",
 			"title": "Fullstack Developer",
 			"dateRange": "Nov 2023 — Present",
-			"location": "Castelldefels, Catalonia, Spain",
+			"location": "Calafell, Catalonia, Spain",
 			"description": "Building Web and Mobile applications across multiple stacks.",
 			"bullets": [
 				"Angular + .NET API + PHP + Ionic across client projects",

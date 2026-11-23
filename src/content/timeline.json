@@ -143,6 +143,41 @@
 			"title": "Started MeetingMonitor",
 			"body": "Native macOS Swift app for monitoring meeting state — small, focused tool built around the daily-work pain point of context switching during calls.",
 			"tags": ["Swift", "macOS"]
+		},
+		{
+			"date": "2026-07",
+			"title": "Started TVTrack",
+			"body": "TV-show tracker built spec-first: an Angular PWA on an ASP.NET Core API with EF Core + PostgreSQL, a background worker that keeps the TMDB catalogue fresh, and a native Jetpack Compose Android app. Runs in production, with notifications when a followed episode airs.",
+			"tags": ["Angular", "PWA", "ASP.NET Core", "EF Core", "PostgreSQL", "Jetpack Compose", "TMDB"]
+		},
+		{
+			"date": "2026-08",
+			"title": "Started KCDBar",
+			"body": "Windows-style taskbar and Start menu for macOS that replaces the Dock — a taskbar button minimizes and restores its window the way Windows does, with live window previews and deep customization. My daily driver, still in alpha.",
+			"tags": ["Swift", "SwiftUI", "AppKit", "macOS"],
+			"links": [{ "label": "GitHub", "href": "https://github.com/paraskcd1315/kcdbar" }]
+		},
+		{
+			"date": "2026-10",
+			"title": "Built AudioCombiner",
+			"body": "Plays one audio stream on every speaker in the house at once — PC speakers, a USB speaker, the TV over HDMI and the Mac — kept in sync within microseconds by a self-adapting delay. A Rust core behind a Windows tray app in C# and a Mac menu-bar app in Swift.",
+			"tags": ["Rust", "C#", ".NET 10", "Swift", "Audio"]
+		},
+		{
+			"date": "2026-10",
+			"title": "Built CouchRemote",
+			"body": "Couch control for a PC on the TV: the Android TV remote drives the PC's mouse and keys, and a TV dashboard opens the library and YouTube subscriptions. Both halves talk UDP on the LAN, every packet signed with HMAC-SHA256.",
+			"tags": ["C#", ".NET 10", "WinUI 3", "Kotlin", "Compose for TV", "UDP"]
+		},
+		{
+			"date": "2026-10",
+			"title": "Built Soundscape",
+			"body": "Endless generative music in the browser — styles, presets and a live visualizer. Own synth voices and a drum kit rendered at startup on the raw Web Audio API: no samples, no UI framework, zero runtime dependencies.",
+			"tags": ["TypeScript", "Vite", "Web Audio API"],
+			"links": [
+				{ "label": "Live", "href": "https://paraskcd.com/Soundscape/" },
+				{ "label": "GitHub", "href": "https://github.com/paraskcd1315/Soundscape" }
+			]
 		}
 	]
 }

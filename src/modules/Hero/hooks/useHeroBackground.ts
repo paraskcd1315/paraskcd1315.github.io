@@ -6,12 +6,22 @@ import {
 } from "../../../constants";
 
 const APOD_PROXY_URL = "https://apod-proxy.paraskhanchandani1315.workers.dev";
+const APOD_IMAGE_HOST = "apod.nasa.gov";
 
 function randomApodDate() {
   const daysAgo = Math.floor(Math.random() * APOD_LOOKBACK_DAYS);
   const d = new Date();
   d.setDate(d.getDate() - daysAgo);
   return d.toISOString().slice(0, 10);
+}
+
+function isApodPhoto(data: { media_type?: string; url?: string }) {
+  if (data.media_type !== "image" || !data.url) return false;
+  try {
+    return new URL(data.url).hostname === APOD_IMAGE_HOST;
+  } catch {
+    return false;
+  }
 }
 
 function picsumFallback() {
@@ -40,7 +50,8 @@ export default function useHeroBackground(): string {
           const res = await fetch(`${APOD_PROXY_URL}?date=${date}`);
           if (!res.ok) continue;
           const data = await res.json();
-          if (data.media_type !== "image" || !data.url) continue;
+          if (data.media_type === "image" && !isApodPhoto(data)) break;
+          if (!isApodPhoto(data)) continue;
           await preload(data.url);
           if (!cancelled) setBgUrl(data.url);
           return;

@@ -2,8 +2,10 @@ import type { PhoneTrioProps } from "./PhoneTrio.types";
 
 const TWO_PHONE_TILT = [-3, 3];
 const TRIO_TILT = [-3, 0, 3];
+const QUAD_TILT = [-4, -1.5, 1.5, 4];
 const TRIO_Y_OFFSET = [12, -12, 12];
 const DUO_Y_OFFSET = [14, -14];
+const QUAD_Y_OFFSET = [14, -8, -8, 14];
 
 export default function PhoneTrio({
   shots,
@@ -15,8 +17,9 @@ export default function PhoneTrio({
   gap = "20px",
 }: Readonly<PhoneTrioProps>) {
   const isDuo = shots.length === 2;
-  const tilts = isDuo ? TWO_PHONE_TILT : TRIO_TILT;
-  const yOffsets = isDuo ? DUO_Y_OFFSET : TRIO_Y_OFFSET;
+  const isQuad = shots.length === 4;
+  const tilts = isDuo ? TWO_PHONE_TILT : isQuad ? QUAD_TILT : TRIO_TILT;
+  const yOffsets = isDuo ? DUO_Y_OFFSET : isQuad ? QUAD_Y_OFFSET : TRIO_Y_OFFSET;
   const backdrop = shots[Math.floor(shots.length / 2)];
   return (
     <div

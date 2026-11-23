@@ -8,13 +8,16 @@ const PHONE_MOCKS = {
     alt: "KCD Search",
   },
   influential: {
-    shots: ["/assets/influential-1.png?v=20261123", "/assets/influential-2.png?v=20261123"],
+    shots: [
+      "/assets/influential-1.png?v=20261123",
+      "/assets/influential-2.png?v=20261123",
+      "/assets/influential-3.png?v=20261123",
+      "/assets/influential-4.png?v=20261123",
+    ],
     background: "linear-gradient(160deg, #0a0d18, #06080f)",
     alt: "Influential Launcher",
-    phoneWidth: 200,
-    phoneMaxHeight: 440,
-    borderRadius: 26,
-    gap: "28px",
+    phoneWidth: 170,
+    phoneMaxHeight: 400,
   },
   spotlight: {
     shots: [
